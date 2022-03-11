@@ -138,7 +138,6 @@ export const query = graphql`
       id
       title
       description
-      weight
       options {
         id
         title
