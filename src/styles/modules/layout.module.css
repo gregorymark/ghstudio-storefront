@@ -1,0 +1,6 @@
+@import "../parts/variables.css";
+
+.main {
+  max-width: var(--max-site-width);
+  margin: 0 auto;
+}

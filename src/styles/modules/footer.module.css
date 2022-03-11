@@ -1,4 +1,6 @@
 .footer {
+  max-width: var(--max-site-width);
+  margin: 0 auto;
   margin-top: 60px;
   border-top: 1px solid var(--border-slate);
   padding-top: 5px;

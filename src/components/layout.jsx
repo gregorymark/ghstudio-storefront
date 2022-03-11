@@ -5,6 +5,7 @@ import "../styles/main.css"
 import Footer from "./footer"
 import Header from "./header"
 import { useCart } from "../hooks/use-cart"
+import {main} from "../styles/modules/layout.module.css"
 
 const Layout = ({ path, children }) => {
   const { cart } = useCart()
@@ -23,7 +24,7 @@ const Layout = ({ path, children }) => {
   return (
     <>
       <Header showShopNav={showShopNav} />
-      <main>{children}</main>
+      <main className={main}>{children}</main>
       <Footer />
     </>
   )
