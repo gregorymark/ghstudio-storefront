@@ -7,17 +7,18 @@ import {
   tray,
   trayIsOpen,
   trayFooter,
-  trayClose
+  trayClose,
 } from "../styles/modules/cart-tray.module.css"
 
 const CartTray = () => {
   const { cart } = useCart()
   const [open, setOpen] = useState(false)
+  const cartCount = cart.items.reduce((sum, i) => sum + i.quantity, 0)
 
   return (
     <>
       <button className={trayOpen} onClick={() => setOpen(true)}>
-        Cart <sup>{cart.items.reduce((sum, i) => sum + i.quantity, 0)}</sup>
+        Cart {cartCount > 0 && <sup>{cartCount}</sup>}
       </button>
       <div className={`${tray} ${open ? trayIsOpen : ""}`}>
         <button className={trayClose} onClick={() => setOpen(false)}>

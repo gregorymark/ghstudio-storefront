@@ -8,6 +8,7 @@
     "@medusajs/medusa-js": "^1.0.7",
     "@stripe/react-stripe-js": "^1.6.0",
     "@stripe/stripe-js": "^1.21.2",
+    "embla-carousel-react": "^6.2.0",
     "formik": "^2.2.9",
     "gatsby": "^4.9.3",
     "gatsby-plugin-image": "^2.0.0",
