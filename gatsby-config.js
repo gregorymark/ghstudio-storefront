@@ -28,12 +28,7 @@ module.exports = {
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
-    {
-      resolve: `gatsby-plugin-postcss`,
-      options: {
-        postCssPlugins: [require("autoprefixer")],
-      },
-    },
+    `gatsby-plugin-postcss`,
     {
       resolve: `gatsby-source-medusa`,
       options: {
