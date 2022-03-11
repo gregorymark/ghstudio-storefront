@@ -1,11 +1,15 @@
 import { graphql, useStaticQuery } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
-import "../styles/theme.css"
+import "../styles/main.css"
 import Footer from "./footer"
-import Header from "./header/index"
+import Header from "./header"
+import { useCart } from "../hooks/use-cart"
 
-const Layout = ({ children }) => {
+const Layout = ({ path, children }) => {
+  const { cart } = useCart()
+  const cartHasItems = cart.items.length > 0
+  const showShopNav = path.startsWith("/shop") || cartHasItems
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -17,11 +21,11 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <div>
-      <Header siteTitle={data.site.siteMetadata.title} />
+    <>
+      <Header showShopNav={showShopNav} />
       <main>{children}</main>
       <Footer />
-    </div>
+    </>
   )
 }
 

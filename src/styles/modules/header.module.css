@@ -1,0 +1,143 @@
+@import "../parts/custom-media.css";
+@import "../parts/variables.css";
+.header {
+  max-width: var(--max-site-width);
+  margin: 0 auto 60px;
+  line-height: 1;
+  display: flex;
+  align-items: flex-end;
+
+  & a:after {
+    display: none;
+  }
+}
+.mainNav,
+.navHomeLink {
+  font-family: var(--display-font-stack);
+}
+.navHomeLink {
+  color: var(--pink);
+}
+@media (--mobile-only) {
+  .navWrap {
+    position: fixed;
+    bottom: 100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--pale-peach);
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0s 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .navIsOpen {
+    opacity: 1;
+    transform: translateY(100%);
+    transition: opacity 0.3s, transform 0s;
+  }
+  .navToggle {
+    composes: noButton from "../parts/typography.css";
+    margin-left: auto;
+  }
+  .navClose {
+    composes: noButton from "../parts/typography.css";
+    position: absolute;
+    top: 34px;
+    right: var(--pad-side-mobile);
+    width: 30px;
+    height: 30px;
+    text-indent: -99999em;
+    overflow: hidden;
+
+    &:before,
+    &:after {
+      content: " ";
+      position: absolute;
+      width: 130%;
+      height: 1px;
+      top: 50%;
+      left: -15%;
+      background: var(--dark-slate);
+    }
+    &:before {
+      transform: rotate(45deg);
+    }
+    &:after {
+      transform: rotate(-45deg);
+    }
+  }
+  .mainNav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 26px;
+    line-height: 1.5;
+  }
+  .shopNav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+    border-top: 1px solid var(--border-slate);
+    padding-top: 13px;
+  }
+}
+@media (--tablet) {
+  .header {
+    margin-bottom: 80px;
+  }
+  .navHomeLink {
+    font-size: 60px;
+  }
+  .navToggle {
+    display: none;
+  }
+  .navWrap {
+    margin-left: auto;
+    font-size: inherit;
+    position: relative;
+    margin-bottom: 6px;
+  }
+  .mainNav,
+  .shopNav {
+    & > a,
+    & > button {
+      &:not(:first-child) {
+        position: relative;
+        margin-left: 1em;
+
+        &:before {
+          content: "/";
+          position: absolute;
+          top: 0;
+          left: -0.7em;
+        }
+      }
+      &[aria-current="page"] {
+        color: inherit;
+
+        &:after {
+          display: block;
+        }
+      }
+    }
+  }
+  .mainNav {
+    display: flex;
+    font-size: 28px; 
+  }
+  .shopNav {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    font-size: 24px;
+    margin-top: 10px;
+  }
+  .navClose {
+    display: none;
+  }
+}

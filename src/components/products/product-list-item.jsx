@@ -2,7 +2,13 @@ import { GatsbyImage } from "gatsby-plugin-image"
 import React, { useMemo } from "react"
 import { usePrice } from "../../hooks/use-price"
 import { useRegion } from "../../hooks/use-region"
-import RegionalLink from "../utility/regional-link"
+import ProductLink from "../utility/product-link"
+import { productListItem } from "../../styles/modules/product-list.module.css"
+import {
+  price,
+  productInfo,
+  productLink,
+} from "../../styles/modules/product-list-item.module.css"
 
 const ProductListItem = ({ product }) => {
   const {
@@ -17,25 +23,23 @@ const ProductListItem = ({ product }) => {
   }, [product, region?.currency_code])
 
   return (
-    <RegionalLink to={product.handle} className="font-normal">
-      <div key={product.id} className="group relative">
-        <div className="w-full min-h-auto bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
-          <GatsbyImage
-            image={product.thumbnail?.childImageSharp?.gatsbyImageData}
-            alt={product.title}
-            className="w-auto h-full object-center object-cover"
-          />
-        </div>
-        <div className="mt-4 flex justify-between">
-          <h3 className="text-sm text-gray-700">
-            <p className="font-normal">{product.title}</p>
-          </h3>
-          <p className="text-sm font-semibold text-gray-900">
-            from {fromPrice}
-          </p>
-        </div>
+    <div className={productListItem}>
+      <ProductLink to={product.handle}>
+        <GatsbyImage
+          image={product.thumbnail?.childImageSharp?.gatsbyImageData}
+          alt={product.title}
+        />
+      </ProductLink>
+      <div className={productInfo}>
+        <h3>
+          <ProductLink to={product.handle}>{product.title}</ProductLink>
+        </h3>
+        <div className={price}>from {fromPrice}</div>
+        <ProductLink to={product.handle} className={productLink}>
+          See more
+        </ProductLink>
       </div>
-    </RegionalLink>
+    </div>
   )
 }
 

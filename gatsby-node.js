@@ -157,12 +157,11 @@ exports.createPages = async function ({ actions, graphql }) {
 
   data.allMedusaRegions.edges.forEach(({ node }) => {
     const { id, name, currency_code, tax_rate } = node
-    const kebabCasedName = toKebabCase(name)
 
     data.allMedusaProducts.edges.forEach(({ node }) => {
       const handle = node.handle
       actions.createPage({
-        path: `${kebabCasedName}/${handle}`,
+        path: `/shop/${handle}`,
         component: require.resolve(`./src/templates/product.js`),
         context: {
           handle: handle,

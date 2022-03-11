@@ -1,0 +1,9 @@
+.selector {
+}
+.button {
+  composes: noButton from "../parts/typography.css";
+  font-size: 130%;
+}
+.quantityText {
+  margin: 0 8px;
+}

@@ -1,6 +1,6 @@
 import React from "react"
 import { useCart } from "../../hooks/use-cart"
-import RegionalLink from "../utility/regional-link"
+import ProductLink from "../utility/product-link"
 
 const OrderHistoryItem = ({ item, currencyCode }) => {
   const {
@@ -38,9 +38,9 @@ const OrderHistoryItem = ({ item, currencyCode }) => {
         </div>
         <div>
           <div className="flex items-center text-sm font-medium">
-            <RegionalLink to={item.variant.product.handle}>
+            <ProductLink to={item.variant.product.handle}>
               View Product
-            </RegionalLink>
+            </ProductLink>
             <div className="bg-ui-dark h-4 w-px mx-4" />
             <button
               className="text-gray-500 hover:text-gray-700 font-medium"

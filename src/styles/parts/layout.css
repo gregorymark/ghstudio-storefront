@@ -1,0 +1,37 @@
+@import "./variables.css";
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+body {
+  background: var(--pale-peach);
+}
+body:before {
+  content: "mobile";
+  position: fixed;
+  top: -20em;
+  left: 0;
+  opacity: 0;
+}
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+body {
+  padding: 40px 20px;
+}
+@media (--tablet) {
+  body:before {
+    content: "tablet";
+  }
+}
+@media (--desktop) {
+  body:before {
+    content: "desktop";
+  }
+}

@@ -1,0 +1,50 @@
+@import "../parts/custom-media.css";
+@import "../parts/variables.css";
+
+.trayOpen {
+  composes: noButton from "../parts/typography.css";
+
+  & sup {
+    font-family: var(--def-font-stack);
+    font-size: 0.6em;
+    position: relative;
+    top: -0.6em;
+    font-weight: bold;
+    color: var(--pink);
+  }
+}
+.tray {
+  position: fixed;
+  top: 0;
+  left: 100%;
+  width: 100%;
+  height: 100%;
+  background: var(--pale-peach);
+  z-index: 11;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 100px 40px 60px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.trayIsOpen {
+  transform: translateX(-100%);
+}
+.trayItem {
+  display: flex;
+  margin-bottom: 30px;
+}
+.trayClose {
+  composes: crossButton from "../parts/typography.css";
+  position: absolute;
+  top: 40px;
+  right: 40px;
+}
+.trayFooter {
+  margin-top: auto;
+}
+@media (--tablet) {
+  .tray {
+    width: 50%;
+    max-width: 500px;
+  }
+}

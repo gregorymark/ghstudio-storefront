@@ -1,0 +1,15 @@
+:root {
+    /* Colours */
+    --pale-peach: #fff8ed;
+    --dark-slate: #30515a;
+    --border-slate: #969c9e;
+    --pink: #ae546e;
+    --orange: #fbaf5d;
+    /* Fonts */
+    --def-font-stack: "mr-eaves-modern", sans-serif;
+    --display-font-stack: "orpheuspro", serif;
+    --small-font-stack: "mr-eaves-xl-modern", sans-serif;
+    /* Dimensions */
+    --max-site-width: 1200px;
+    --pad-side-mobile: 40px;
+}

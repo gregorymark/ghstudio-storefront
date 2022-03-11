@@ -1,0 +1,24 @@
+.thumbWrap {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  margin-right: 20px;
+
+  & img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+.itemInfo {
+  font-size: 20px;
+}
+.removeItemButton {
+  composes: noButton from "../parts/typography.css";
+}
+.itemQuantity {
+
+}

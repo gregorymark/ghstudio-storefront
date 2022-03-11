@@ -1,0 +1,99 @@
+@import "./custom-media.css";
+@import "./variables.css";
+body {
+  font-family: var(--def-font-stack);
+  font-size: 20px;
+  line-height: 1.7143;
+  color: var(--dark-slate);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+a {
+  color: var(--dark-slate);
+  text-decoration: none;
+  position: relative;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+a:after {
+  content: " ";
+  position: absolute;
+  top: 0.7em;
+  left: -2%;
+  width: 104%;
+  height: 0.3em;
+  background: var(--pink);
+  opacity: 0.2;
+}
+p {
+  margin-bottom: 1.5em;
+}
+blockquote {
+  font-size: 26px;
+  margin-bottom: 1em;
+  font-weight: 500;
+  font-family: var(--display-font-stack);
+}
+.noButton {
+  border: 0;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+  line-height: inherit;
+}
+.crossButton {
+  composes: noButton;
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  text-indent: -99999em;
+  overflow: hidden;
+}
+/* 
+ * .crossButton is used with cssmodule composes, 
+ * which doesn't like CSS nesting, so we have to 
+ * keep these unnested 
+ */
+.crossButton:before,
+.crossButton:after {
+  content: " ";
+  position: absolute;
+  width: 130%;
+  height: 1px;
+  top: 50%;
+  left: -15%;
+  background: var(--dark-slate);
+}
+.crossButton:before {
+  transform: rotate(45deg);
+}
+.crossButton:after {
+  transform: rotate(-45deg);
+}
+@media (--tablet) {
+  body {
+    font-size: 28px;
+  }
+  blockquote {
+    font-size: 36px;
+  }
+}
+@media (--desktop) {
+  a {
+    &:after {
+      transition: opacity 0.3s;
+    }
+    &:hover {
+      &:after {
+        opacity: 0.4;
+      }
+    }
+  }
+}
