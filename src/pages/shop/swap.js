@@ -1,12 +1,12 @@
 import { navigate } from "gatsby"
 import React, { useEffect, useState } from "react"
-import ShippingOptions from "../components/shipping/shipping-options"
-import SwapItem from "../components/swaps/swap-item"
-import Divider from "../components/utility/divider"
-import ErrorMessage from "../components/utility/error-message"
-import SearchEngineOptimization from "../components/utility/seo"
-import { useMedusa } from "../hooks/use-medusa"
-import { formatPrice } from "../utils/format-price"
+import ShippingOptions from "../../components/shipping/shipping-options"
+import SwapItem from "../../components/swaps/swap-item"
+import Divider from "../../components/utility/divider"
+import ErrorMessage from "../../components/utility/error-message"
+import SearchEngineOptimization from "../../components/utility/seo"
+import { useMedusa } from "../../hooks/use-medusa"
+import { formatPrice } from "../../utils/format-price"
 
 const Swap = ({ location }) => {
   const [swap, setSwap] = useState(undefined)

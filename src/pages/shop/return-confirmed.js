@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
-import ReturnCompletedItem from "../components/returns/return-completed.item"
-import SearchEngineOptimization from "../components/utility/seo"
-import { useRetrieveOrder } from "../hooks/use-order"
-import { formatPrice } from "../utils/format-price"
+import ReturnCompletedItem from "../../components/returns/return-completed.item"
+import SearchEngineOptimization from "../../components/utility/seo"
+import { useRetrieveOrder } from "../../hooks/use-order"
+import { formatPrice } from "../../utils/format-price"
 
 const ReturnConfirmed = ({ location }) => {
   const [confirmedReturn, setConfirmedReturn] = useState(undefined)

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react"
-import CartItem from "../components/cart/cart-item"
-import CartReview from "../components/cart/cart-review"
-import ProductListItem from "../components/products/product-list-item"
-import Grid from "../components/utility/grid"
-import SearchEngineOptimization from "../components/utility/seo"
-import { useCart } from "../hooks/use-cart"
-import { useSuggestions } from "../hooks/use-suggestions"
+import CartItem from "../../components/cart/cart-item"
+import CartReview from "../../components/cart/cart-review"
+import ProductListItem from "../../components/products/product-list-item"
+import Grid from "../../components/utility/grid"
+import SearchEngineOptimization from "../../components/utility/seo"
+import { useCart } from "../../hooks/use-cart"
+import { useSuggestions } from "../../hooks/use-suggestions"
 
 const ShoppingBag = () => {
   const [related, setRelated] = useState([])

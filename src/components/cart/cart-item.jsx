@@ -1,59 +1,55 @@
 import React from "react"
+import { trayItem } from "../../styles/modules/cart-tray.module.css"
+import {
+  thumbWrap,
+  itemInfo,
+  itemQuantity,
+  removeItemButton,
+} from "../../styles/modules/cart-item.module.css"
 import { useCart } from "../../hooks/use-cart"
-import { classNames } from "../../utils/class-names"
-import { formatPrice } from "../../utils/format-price"
 import QuantitySelector from "../products/quantity-selector"
 
-const CartItem = ({ item, currencyCode, showDescription = true }) => {
+const CartItem = ({ item, currencyCode, isInteractive = true }) => {
   const {
     actions: { removeItem, updateQuantity },
   } = useCart()
 
   return (
-    <div className="flex mb-6 last:mb-0">
-      <div className="bg-ui rounded-md overflow-hidden mr-4 max-w-1/4">
-        <img
-          className="h-auto w-full object-cover"
-          src={item.thumbnail}
-          alt={item.title}
-        />
+    <div className={trayItem}>
+      <div className={thumbWrap}>
+        <img src={item.thumbnail} alt={item.title} />
       </div>
-      <div className="flex text-sm flex-grow py-2">
-        <div className="flex flex-col justify-between w-full flex-grow">
-          <div className="flex flex-col">
-            <p className="font-semibold mb-2">{item.title}</p>
-            <p
-              className={classNames(
-                showDescription && "lg:block mb-4",
-                "hidden font-light"
-              )}
+      <div className={itemInfo}>
+        <h3>{item.title}</h3>
+        <div>{item.description}</div>
+        <div>
+          <strong>Price</strong> {(item.unit_price / 100) * item.quantity}{" "}
+          {currencyCode.toUpperCase()}
+        </div>
+        {isInteractive ? (
+          <>
+            <QuantitySelector
+              className={itemQuantity}
+              quantity={item.quantity}
+              increment={() =>
+                updateQuantity({ id: item.id, quantity: item.quantity + 1 })
+              }
+              decrement={() =>
+                updateQuantity({ id: item.id, quantity: item.quantity - 1 })
+              }
+            />
+            <button
+              className={removeItemButton}
+              onClick={() => removeItem(item.id)}
             >
-              {item.variant?.product?.description}
-            </p>
-            <p>
-              <span className="text-ui-dark">Variant:</span> {item.description}
-            </p>
-          </div>
-          <p className="font-semibold">
-            {formatPrice(item.unit_price, currencyCode, item.quantity)}
-          </p>
-        </div>
-        <div className="flex flex-col justify-between">
-          <div className="flex justify-end w-full">
-            <button onClick={async () => await removeItem(item.id)}>
-              &times;
+              Remove
             </button>
+          </>
+        ) : (
+          <div>
+            <strong>Quantity</strong> {item.quantity}
           </div>
-          <QuantitySelector
-            quantity={item.quantity}
-            increment={() =>
-              updateQuantity({ id: item.id, quantity: item.quantity + 1 })
-            }
-            decrement={() =>
-              updateQuantity({ id: item.id, quantity: item.quantity - 1 })
-            }
-          />
-        </div>
+        )}
       </div>
     </div>
   )

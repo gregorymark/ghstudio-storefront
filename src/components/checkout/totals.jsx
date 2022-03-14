@@ -17,42 +17,42 @@ const Totals = ({
   const totalPrice = shipping ? total + shipping : total + estimatedShipping
 
   return (
-    <div className="font-light text-sm">
-      <div className="flex items-center justify-between mb-2">
-        <p>Subtotal (incl. taxes)</p>
-        <p className="font-medium">{formatPrice(subtotal, currencyCode)}</p>
+    <div>
+      <div>
+        <h4>Subtotal (incl. taxes)</h4>
+        <div>{formatPrice(subtotal, currencyCode)}</div>
       </div>
       {shipping && (
-        <div className="flex items-center justify-between mb-2">
-          <p>Shipping</p>
-          <p className="font-medium">{formatPrice(shipping, currencyCode)}</p>
+        <div>
+          <h4>Shipping</h4>
+          <div>{formatPrice(shipping, currencyCode)}</div>
         </div>
       )}
       {!shipping && estimatedShipping && (
-        <div className="flex items-center justify-between mb-2">
-          <p>Estimated shipping</p>
-          <p className="font-medium">
+        <div>
+          <h4>Estimated shipping</h4>
+          <div>
             {formatPrice(estimatedShipping, currencyCode)}
-          </p>
+          </div>
         </div>
       )}
       {appliedDiscount ? (
-        <div className="flex items-center justify-between mb-2">
-          <div className="inline-flex items-center">
-            <p>Discount</p>
-            <span className="text-2xs py-1 px-3 rounded-2xl bg-ui-medium ml-2 font-medium">
+        <div>
+          <div>
+            <h4>Discount</h4>
+            <span>
               {discount.code}
             </span>
           </div>
-          <p className="font-medium">
+          <div>
             {formatPrice(discount.amount, currencyCode)}
-          </p>
+          </div>
         </div>
       ) : null}
-      <div className="h-px w-full bg-ui-medium mb-2" />
-      <div className="flex items-center justify-between">
-        <p>Total</p>
-        <p className="font-medium">{formatPrice(totalPrice, currencyCode)}</p>
+      <div />
+      <div>
+        <h4>Total</h4>
+        <div>{formatPrice(totalPrice, currencyCode)}</div>
       </div>
     </div>
   )

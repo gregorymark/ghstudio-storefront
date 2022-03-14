@@ -1,11 +1,11 @@
 import { useFormik } from "formik"
 import React from "react"
 import * as Yup from "yup"
-import AccountLayout from "../../components/account/account-layout"
-import Field from "../../components/forms/field"
-import FormContainer from "../../components/forms/form-container"
-import SearchEngineOptimization from "../../components/utility/seo"
-import { useCustomer } from "../../hooks/use-customer"
+import AccountLayout from "../../../components/account/account-layout"
+import Input from "../../../components/forms/input"
+import FormContainer from "../../../components/forms/form-container"
+import SearchEngineOptimization from "../../../components/utility/seo"
+import { useCustomer } from "../../../hooks/use-customer"
 
 const Account = () => {
   const {
@@ -68,7 +68,7 @@ const Account = () => {
           handleSubmit={contactForm.handleSubmit}
         >
           <div className="flex items-center mb-4">
-            <Field
+            <Input
               label="First name"
               autocomplete="given-name"
               name="first_name"
@@ -76,7 +76,7 @@ const Account = () => {
               defaultValue={contactForm.values.first_name}
             />
             <div className="mx-2" />
-            <Field
+            <Input
               label="Last name"
               autocomplete="family-name"
               name="last_name"
@@ -85,7 +85,7 @@ const Account = () => {
             />
           </div>
           <div className="flex items-center">
-            <Field
+            <Input
               label="Email"
               autocomplete="email"
               name="email"
@@ -93,7 +93,7 @@ const Account = () => {
               defaultValue={contactForm.values.email}
             />
             <div className="mx-2" />
-            <Field
+            <Input
               label="Phone (optional)"
               autocomplete="tel"
               name="phone"
@@ -110,7 +110,7 @@ const Account = () => {
           handleSubmit={passwordForm.handleSubmit}
         >
           <div className="flex items-center">
-            <Field
+            <Input
               label="New Password"
               type="password"
               autocomplete="new-password"
@@ -119,7 +119,7 @@ const Account = () => {
               defaultValue={passwordForm.values.password}
             />
             <div className="mx-2" />
-            <Field
+            <Input
               label="Confirm Password"
               type="password"
               autocomplete="new-password"

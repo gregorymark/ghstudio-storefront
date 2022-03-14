@@ -1,10 +1,10 @@
 import React from "react"
-import Field from "../forms/field"
+import Input from "../forms/input"
 
 const CheckoutContact = ({ controller }) => {
   return (
     <div className="mt-3 mb-6">
-      <Field
+      <Input
         formik={controller}
         name={"email"}
         defaultValue={controller.values.email}

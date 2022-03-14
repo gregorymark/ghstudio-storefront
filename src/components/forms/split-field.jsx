@@ -2,7 +2,7 @@ import React, { Fragment } from "react"
 
 const SplitField = ({ children }) => {
   return (
-    <div className="flex items-baseline mt-4 w-full">
+    <div>
       {children.map((child, index) => {
         return (
           <Fragment key={index}>

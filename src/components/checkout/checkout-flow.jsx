@@ -5,7 +5,6 @@ import { useCheckoutFlow } from "../../hooks/use-checkout-flow"
 import { useContactForm } from "../../hooks/use-contact-form"
 import { useShippingAddressForm } from "../../hooks/use-shipping-address-form"
 import { useShippingOptionForm } from "../../hooks/use-shipping-option-form"
-import ChevronLeft from "../../icons/chevron-left.svg"
 import Payment from "../payment"
 import CheckoutAddress from "./checkout-address"
 import CheckoutContact from "./checkout-contact"
@@ -13,6 +12,7 @@ import CheckoutDelivery from "./checkout-delivery"
 import CheckoutLayout from "./checkout-layout"
 import CheckoutStepContainer from "./checkout-step-container"
 import CheckoutSummary from "./checkout-summary"
+import { checkoutStepFooter } from "../../styles/modules/checkout.module.css"
 
 const CheckoutFlow = () => {
   const {
@@ -97,7 +97,7 @@ const CheckoutFlow = () => {
 
   return (
     <CheckoutLayout>
-      <div className="flex flex-col">
+      <div>
         {steps.map(step => {
           return (
             <CheckoutStepContainer
@@ -109,26 +109,14 @@ const CheckoutFlow = () => {
               isCompleted={step.completed}
             >
               {step.children}
-              <div className="flex items-center justify-between">
+              <div className={checkoutStepFooter}>
                 {step.key !== 0 && (
-                  <button
-                    className="text-gray-700 flex items-center"
-                    onClick={() => update(step.key - 1)}
-                  >
-                    <img
-                      src={ChevronLeft}
-                      alt=""
-                      aria-hidden="true"
-                      className="w-3 h-3 mr-2"
-                    />
-                    <span>Go back</span>
-                  </button>
+                  <button onClick={() => update(step.key - 1)}>Go back</button>
                 )}
                 <div />
                 {step.key !== steps.length - 1 && (
                   <button
                     type="submit"
-                    className="btn-ui"
                     onClick={step.handleSubmit}
                     disabled={step.controller.isSubmitting}
                   >

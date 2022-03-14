@@ -1,6 +1,7 @@
 @media (--tablet) {
   .article {
     display: flex;
+    font-size: 28px;
   }
   .articleContent {
     width: 55%;

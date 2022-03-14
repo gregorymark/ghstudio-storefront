@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react"
-import Field from "../components/forms/field"
-import SplitField from "../components/forms/split-field"
-import OrderBulletin from "../components/orders/order-bulletin"
-import ReturnSummary from "../components/returns/return-summary"
-import SelectExchangeItem from "../components/returns/select-exchange-item"
-import SelectReturnItem from "../components/returns/select-return-item"
-import SelectReturnQuantity from "../components/returns/select-return-quantity"
-import ShippingOptions from "../components/shipping/shipping-options"
-import Divider from "../components/utility/divider"
-import ErrorMessage from "../components/utility/error-message"
-import Grid from "../components/utility/grid"
-import SearchEngineOptimization from "../components/utility/seo"
-import { useReturn } from "../hooks/use-return"
-import { classNames } from "../utils/class-names"
+import Input from "../../components/forms/input"
+import SplitFieldset from "../../components/forms/split-fieldset"
+import OrderBulletin from "../../components/orders/order-bulletin"
+import ReturnSummary from "../../components/returns/return-summary"
+import SelectExchangeItem from "../../components/returns/select-exchange-item"
+import SelectReturnItem from "../../components/returns/select-return-item"
+import SelectReturnQuantity from "../../components/returns/select-return-quantity"
+import ShippingOptions from "../../components/shipping/shipping-options"
+import Divider from "../../components/utility/divider"
+import ErrorMessage from "../../components/utility/error-message"
+import Grid from "../../components/utility/grid"
+import SearchEngineOptimization from "../../components/utility/seo"
+import { useReturn } from "../../hooks/use-return"
+import { classNames } from "../../utils/class-names"
 
 const CreateReturn = ({ location }) => {
   const [initialValues, setInitialValues] = useState(null)
@@ -70,37 +70,32 @@ const CreateReturn = ({ location }) => {
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between border-b border-ui-medium pb-8">
         <div>
           <h1>Create Return</h1>
-          <p className="mt-2">
-            Use this form to create returns and exchange items
-          </p>
+          <p>Use this form to create returns and exchange items</p>
         </div>
-        <div className="flex flex-col mt-4 lg:mt-0 lg:flex-row lg:items-baseline lg:w-1/2">
-          <SplitField>
-            <Field
-              placeholder="Order number"
-              formik={fetchOrderForm}
-              name="display_id"
-              defaultValue={fetchOrderForm.values.display_id}
-            />
-            <Field
-              placeholder="Email"
-              formik={fetchOrderForm}
-              name="email"
-              autocomplete="email"
-              defaultValue={fetchOrderForm.values.email}
-            />
-          </SplitField>
-          <div className="my-3 lg:my-0 lg:mx-2" />
-          <button
-            className="btn-ui"
-            onClick={e => {
-              e.preventDefault()
-              fetchOrderForm.submitForm()
-            }}
-          >
-            Retrieve
-          </button>
-        </div>
+        <SplitFieldset>
+          <Input
+            placeholder="Order number"
+            formik={fetchOrderForm}
+            name="display_id"
+            defaultValue={fetchOrderForm.values.display_id}
+          />
+          <Input
+            placeholder="Email"
+            formik={fetchOrderForm}
+            name="email"
+            autocomplete="email"
+            defaultValue={fetchOrderForm.values.email}
+          />
+        </SplitFieldset>
+        <button
+          className="btn-ui"
+          onClick={e => {
+            e.preventDefault()
+            fetchOrderForm.submitForm()
+          }}
+        >
+          Retrieve
+        </button>
       </div>
       {order ? (
         <div className="flex flex-col lg:flex-row">

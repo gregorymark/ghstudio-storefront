@@ -9,7 +9,7 @@ const ShopNav = ({ setOpen }) => {
   return (
     <div className={shopNav}>
       {/* Region toggle is here on original starter */}
-      <Link to="/sign-in" onClick={() => setOpen(false)}>
+      <Link to="/shop/sign-in" onClick={() => setOpen(false)}>
         Account
       </Link>
       <CartTray />

@@ -1,7 +1,7 @@
 import { Link } from "gatsby"
 import React, { useState } from "react"
 import { useCart } from "../hooks/use-cart"
-import CartTrayItem from "./cart-tray-item"
+import CartItem from "./cart/cart-item"
 import {
   trayOpen,
   tray,
@@ -25,7 +25,7 @@ const CartTray = () => {
           Close
         </button>
         {cart.items < 1 ? (
-          <div className="flex justify-center">
+          <div>
             <p>Your cart is empty</p>
           </div>
         ) : (
@@ -33,20 +33,16 @@ const CartTray = () => {
             {cart.items.map((item, i) => {
               return (
                 <div key={i}>
-                  <CartTrayItem
+                  <CartItem
                     item={item}
                     currencyCode={cart.region.currency_code}
-                    cart={cart}
                   />
                 </div>
               )
             })}
             <div className={trayFooter}>
-              <Link to="/checkout">
-                <button>Checkout</button>
-              </Link>
-              <Link to="/shopping-bag">
-                <button>View Shopping Bag</button>
+              <Link to="/shop/checkout">
+                <button onClick={() => setOpen(false)}>Checkout</button>
               </Link>
             </div>
           </>

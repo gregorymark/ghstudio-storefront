@@ -1,7 +1,7 @@
 import { graphql } from "gatsby"
 import React from "react"
-import ProductList from "../components/products/product-list"
-import SearchEngineOptimization from "../components/utility/seo"
+import ProductList from "../../components/products/product-list"
+import SearchEngineOptimization from "../../components/utility/seo"
 
 const ShopPage = ({ data }) => {
   const products = data.allMedusaProducts.edges.map(edge => edge.node)

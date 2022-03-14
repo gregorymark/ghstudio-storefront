@@ -1,10 +1,10 @@
 import React from "react"
-import CheckoutFlow from "../components/checkout/checkout-flow"
-import SearchEngineOptimization from "../components/utility/seo"
+import CheckoutFlow from "../../components/checkout/checkout-flow"
+import SearchEngineOptimization from "../../components/utility/seo"
 
 const Checkout = () => {
   return (
-    <div className="bg-ui">
+    <div>
       <SearchEngineOptimization title="Checkout" />
       <CheckoutFlow />
     </div>

@@ -2,7 +2,7 @@ import { useFormik } from "formik"
 import React, { Fragment, useEffect, useState } from "react"
 import * as Yup from "yup"
 import { useCart } from "../../hooks/use-cart"
-import Field from "../forms/field"
+import Input from "../forms/input"
 
 const DiscountField = () => {
   const [code, setCode] = useState()
@@ -51,7 +51,7 @@ const DiscountField = () => {
       <div className="flex items-start">
         {!code ? (
           <Fragment>
-            <Field
+            <Input
               name={"discount_code"}
               defaultValue={discountForm.values.discount_code}
               formik={discountForm}
@@ -64,7 +64,7 @@ const DiscountField = () => {
         ) : (
           <Fragment>
             <div className="pointer-events-none w-full">
-              <Field
+              <Input
                 name={"discount_code"}
                 defaultValue={code}
                 formik={discountForm}

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
-import AccountLayout from "../../components/account/account-layout"
-import OrderHistoryEntry from "../../components/orders/order-history-entry"
-import SearchEngineOptimization from "../../components/utility/seo"
-import { useCustomer } from "../../hooks/use-customer"
+import AccountLayout from "../../../components/account/account-layout"
+import OrderHistoryEntry from "../../../components/orders/order-history-entry"
+import SearchEngineOptimization from "../../../components/utility/seo"
+import { useCustomer } from "../../../hooks/use-customer"
 
 const OrderHistory = () => {
   const [orders, setOrders] = useState([])
