@@ -10,9 +10,9 @@ const shortcodes = { Link, Expandable, Spacing }
 
 const Mdx = ({ data: { mdx } }) => {
   return (
-    <div className="layout-base max-w-screen-md mx-auto my-12">
+    <div>
       <SearchEngineOptimization title={mdx.frontmatter.title} />
-      <h1 className="text-4xl mb-3">{mdx.frontmatter.title}</h1>
+      <h1>{mdx.frontmatter.title}</h1>
       <MDXProvider components={shortcodes}>
         <MDXRenderer frontmatter={mdx.frontmatter}>{mdx.body}</MDXRenderer>
       </MDXProvider>

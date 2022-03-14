@@ -10,11 +10,11 @@ const Footer = () => {
     },
     {
       name: "FAQ",
-      to: "/faq",
+      to: "/info/faq",
     },
     {
       name: "Terms & Conditions",
-      to: "/terms-and-conditions",
+      to: "/info/terms-and-conditions",
     },
   ]
 
