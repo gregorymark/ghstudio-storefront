@@ -1,5 +1,3 @@
-@import "./custom-media.css";
-@import "./variables.css";
 body {
   font-family: var(--def-font-stack);
   font-size: 20px;

@@ -1,6 +1,3 @@
-@import "../parts/custom-media.css";
-@import "../parts/variables.css";
-
 .trayOpen {
   composes: noButton from "../parts/typography.css";
 

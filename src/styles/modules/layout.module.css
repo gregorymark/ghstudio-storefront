@@ -1,4 +1,4 @@
-@import "../parts/variables.css";
+@import "../main.css";
 
 .main {
   max-width: var(--max-site-width);

@@ -1,0 +1,19 @@
+@media (--tablet) {
+  .article {
+    display: flex;
+  }
+  .articleContent {
+    width: 55%;
+
+    & blockquote {
+      margin-left: 15%;
+    }
+    & > p {
+      margin-right: 20%;
+    }
+  }
+  .articleImageWrap {
+    width: 33.33333%;
+    margin-left: auto;
+  }
+}

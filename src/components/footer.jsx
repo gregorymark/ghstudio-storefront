@@ -23,12 +23,12 @@ const Footer = () => {
       <div>
         {internals.map((internal, index) => {
           return (
-            <>
+            <React.Fragment key={internal.name}>
               {index !== 0 && " / "}
-              <Link to={internal.to} key={internal.name}>
+              <Link to={internal.to}>
                 {internal.name}
               </Link>
-            </>
+            </React.Fragment>
           )
         })}
       </div>

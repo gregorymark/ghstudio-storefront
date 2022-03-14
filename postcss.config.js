@@ -7,8 +7,11 @@ module.exports = () => ({
     postcssPresetEnv({
       features: {
         'nesting-rules': true,
-        'custom-media-queries': true
-      }
+        'custom-media-queries': {
+          importFrom: 'src/styles/parts/custom-media.css'
+        }
+      },
+      importFrom: 'src/styles/parts/variables.css'
     }),
   ]
 })

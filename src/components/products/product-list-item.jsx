@@ -1,4 +1,4 @@
-import { GatsbyImage } from "gatsby-plugin-image"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import React, { useMemo } from "react"
 import { usePrice } from "../../hooks/use-price"
 import { useRegion } from "../../hooks/use-region"
@@ -17,6 +17,8 @@ const ProductListItem = ({ product }) => {
 
   const { region } = useRegion()
 
+  const imageData = getImage(product.thumbnail)
+
   const fromPrice = useMemo(() => {
     return getFromPrice(product, region?.currency_code)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -26,7 +28,7 @@ const ProductListItem = ({ product }) => {
     <div className={productListItem}>
       <ProductLink to={product.handle}>
         <GatsbyImage
-          image={product.thumbnail?.childImageSharp?.gatsbyImageData}
+          image={imageData}
           alt={product.title}
         />
       </ProductLink>

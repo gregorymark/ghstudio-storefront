@@ -1,0 +1,19 @@
+@media (--tablet) {
+  .imageFlow {
+    display: flex;
+    margin-left: 10%;
+  }
+  .imageFlowColumn {
+    &:first-child {
+      width: 60%;
+      padding-top: 20%;
+    }
+    &:last-child {
+      margin-left: auto;
+      width: 30%;
+    }
+  }
+  .imageFlowImage {
+    margin-bottom: 13vw;
+  }
+}

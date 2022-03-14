@@ -21,12 +21,20 @@ module.exports = {
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        name: "info",
+        name: "content",
         path: `${__dirname}/src/content/`,
       },
     },
     `gatsby-plugin-image`,
-    `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-plugin-sharp`,
+      options: {
+        defaults: {
+          placeholder: `none`,
+          backgroundColor: `#FEE9D2`
+        },
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-postcss`,
     {

@@ -1,5 +1,3 @@
-@import "../parts/custom-media.css";
-
 .productListItem {
   display: flex;
   flex-direction: column;
