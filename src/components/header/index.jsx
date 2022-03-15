@@ -10,11 +10,14 @@ import {
   navHomeLink,
   mainNav,
   shopNav,
+  cartIconMobile,
 } from "../../styles/modules/header.module.css"
-import ShopNav from "./shop-nav"
+import CartIcon from "../cart/cart-icon"
+import CartTray from "../cart-tray"
 
 const Header = ({ showShopNav }) => {
-  const [open, setOpen] = useState(false)
+  const [navOpen, setNavOpen] = useState(false)
+  const [cartOpen, setCartOpen] = useState(false)
 
   return (
     <>
@@ -23,22 +26,44 @@ const Header = ({ showShopNav }) => {
         <Link to="/" title="Home" className={navHomeLink}>
           Greg Hannan
         </Link>
-        <button className={navToggle} onClick={() => setOpen(true)}>
+        <button className={navToggle} onClick={() => setNavOpen(true)}>
           Menu
         </button>
-        <nav className={`${navWrap} ${open ? navIsOpen : ""}`}>
+        {showShopNav && (
+          <CartIcon className={cartIconMobile} setOpen={setCartOpen} />
+        )}
+        <nav className={`${navWrap} ${navOpen ? navIsOpen : ""}`}>
           <div className={mainNav}>
-            <Link to="/" onClick={() => setOpen(false)}>Work</Link>
-            <Link to="/about" onClick={() => setOpen(false)}>About</Link>
-            <Link to="/commissions" onClick={() => setOpen(false)}>Commissions</Link>
-            <Link to="/shop" onClick={() => setOpen(false)}>Shop</Link>
+            <Link to="/" onClick={() => setNavOpen(false)}>
+              Work
+            </Link>
+            <Link to="/about" onClick={() => setNavOpen(false)}>
+              About
+            </Link>
+            <Link to="/commissions" onClick={() => setNavOpen(false)}>
+              Commissions
+            </Link>
+            <Link to="/shop" onClick={() => setNavOpen(false)}>
+              Shop
+            </Link>
+            <button className={navClose} onClick={() => setNavOpen(false)}>
+              Close
+            </button>
           </div>
-          {showShopNav && <ShopNav className={shopNav} setOpen={setOpen} />}
-          <button className={navClose} onClick={() => setOpen(false)}>
-            Close
-          </button>
+          {showShopNav && (
+            <div className={shopNav}>
+              <Link
+                to="/shop/account/sign-in"
+                onClick={() => setNavOpen(false)}
+              >
+                Account
+              </Link>
+              <CartIcon setOpen={setCartOpen} />
+            </div>
+          )}
         </nav>
       </header>
+      <CartTray open={cartOpen} setOpen={setCartOpen} />
     </>
   )
 }

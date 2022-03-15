@@ -1,23 +1,23 @@
-import { Link } from "gatsby"
 import React from "react"
-import Totals from "../checkout/totals"
+import { Link } from "gatsby"
+import {
+  cartReview,
+  cartTotal,
+} from "../../styles/modules/cart-tray.module.css"
+import { formatPrice } from "../../utils/format-price"
 
-const CartReview = ({ cart }) => {
+const CartReview = ({ cart, setOpen }) => {
   return (
-    <div className="bg-white rounded-md shadow px-8 py-6 w-full sticky top-28">
-      <h3 className="font-semibold mb-4">Order Summary</h3>
-      <div className="mb-4">
-        <Totals
-          subtotal={cart.subtotal}
-          total={cart.total}
-          currencyCode={cart.region?.currency_code}
-          cartId={cart.id}
-        />
+      <div className={cartReview}>
+        <div className={cartTotal}>
+          <h4>Total</h4>
+          <div>{formatPrice(cart.total, cart.region?.currency_code)}</div>
+        </div>
+        <Link to="/shop/checkout">
+          <button onClick={() => setOpen(false)}>Checkout</button>
+        </Link>
+        <small>Shipping calculated at checkout</small>
       </div>
-      <Link to="/checkout">
-        <button className="btn-ui w-full">Checkout</button>
-      </Link>
-    </div>
   )
 }
 

@@ -87,6 +87,9 @@ blockquote {
 .crossButton:after {
   transform: rotate(-45deg);
 }
+small {
+  font-size: 0.7em;
+}
 @media (--tablet) {
   body {
     font-size: 22px;

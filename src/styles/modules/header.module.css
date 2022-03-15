@@ -52,6 +52,7 @@
   .mainNav {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     font-size: 26px;
     line-height: 1.5;
@@ -60,9 +61,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 15px;
+    margin-top: 10px;
     border-top: 1px solid var(--border-slate);
-    padding-top: 13px;
+    padding-top: 12px;
+
+    & button {
+      display: none;
+    }
   }
 }
 @media (--tablet) {
@@ -75,14 +80,16 @@
   .navToggle {
     display: none;
   }
+  .cartIconMobile {
+    display: none;
+  }
   .navWrap {
     margin-left: auto;
     font-size: inherit;
     position: relative;
     margin-bottom: 6px;
   }
-  .mainNav,
-  .shopNav {
+  .mainNav {
     & > a,
     & > button {
       &:not(:first-child) {
@@ -130,9 +137,15 @@
     margin-top: 10px;
 
     & a {
+      position: relative;
+      top: -3px;
+
       &[aria-current="page"] {
         text-decoration-line: underline;
       }
+    }
+    & button {
+      margin-left: 15px;
     }
   }
   .navClose {

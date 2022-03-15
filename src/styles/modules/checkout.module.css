@@ -1,13 +1,5 @@
 .checkoutWrap {
   display: flex;
-  flex-direction: column;
-
-    & > div {
-      &:first-child {
-        order: 1;
-        margin-top: 30px;
-      }
-    }
 }
 .checkoutStep {
   background: var(--peach);
@@ -21,6 +13,9 @@
 }
 .checkoutStepIsOpen {
   border: 1px solid var(--orange);
+}
+.checkoutStepIsClickable {
+  cursor: pointer;
 }
 .checkoutStepTitle {
   display: flex;
@@ -39,12 +34,28 @@
     display: none;
   }
 }
+.checkoutStepContent {
+  margin-top: 20px;
+}
 .checkoutStepFooter {
   margin-top: 30px;
   display: flex;
 
   & button {
     margin-right: 10px;
+    background: var(--orange);
+  }
+}
+@media (--mobil-only) {
+  .checkoutWrap {
+    flex-direction: column;
+
+    & > div {
+      &:first-child {
+        order: 1;
+        margin-top: 30px;
+      }
+    }
   }
 }
 @media (--tablet) {

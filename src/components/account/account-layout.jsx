@@ -8,7 +8,7 @@ const AccountLayout = ({ children }) => {
 
   useEffect(() => {
     if (!loading && !customer) {
-      navigate("/sign-in")
+      navigate("/shop/account/sign-in")
     }
   }, [loading, customer])
 

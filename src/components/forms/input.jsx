@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
-import { inputWrap, inputError, errorMessage } from "../../styles/modules/forms.module.css"
+import { inputWrap, inputError } from "../../styles/modules/forms.module.css"
+import ErrorMessage from "../utility/error-message"
 
 const Input = ({
   label,
@@ -14,7 +15,7 @@ const Input = ({
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    if (formik.errors?.[name] && formik.touched?.[name]) {
+    if (formik.touched?.[name]) {
       setError(formik.errors[name])
     }
   }, [formik, name])
@@ -31,11 +32,7 @@ const Input = ({
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
       />
-      {error && (
-        <div role="alert" className={errorMessage}>
-          {error}
-        </div>
-      )}
+      {error && <ErrorMessage error={error} />}
     </div>
   )
 }

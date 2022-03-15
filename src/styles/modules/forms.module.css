@@ -11,38 +11,81 @@ button {
   outline: none;
   transition: background 0.3s;
 }
-.inputWrap {
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="number"],
+input[type="password"],
+input[type="url"],
+input[type="tel"],
+input[type="search"],
+select {
+  appearance: none;
+  background: transparent;
+  font-family: var(--def-font-stack);
+  font-size: 0.8em;
+  padding: 0 0 5px;
+  color: var(--dark-slate);
+  border-width: 0 0 2px 0;
+  border-color: var(--semi-o-pink);
+  border-style: solid;
+  width: 100%;
+  outline: none;
+}
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="number"],
+input[type="password"],
+input[type="url"],
+input[type="tel"],
+input[type="search"] {
+  &::placeholder {
+    color: var(--dark-slate);
+    opacity: 0.7;
+  }
+}
+select {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 10 8'%3E%3Cpolyline fill='none' stroke='%23ae546e' stroke-width='0.7' points='0 0 4 4 8 0' transform='translate(1 1)'/%3E%3C/svg%3E");
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+.inputWrap,
+.selectWrap {
   margin-bottom: 20px;
 
-  & input {
-    background: transparent;
-    font-family: var(--def-font-stack);
-    font-size: 80%;
-    padding: 0 0 5px;
-    color: var(--dark-slate);
-    border-width: 0 0 2px 0;
-    border-color: var(--semi-o-pink);
-    border-style: solid;
-    width: 100%;
-    outline: none;
-
-    &::placeholder {
-      color: var(--dark-slate);
-      opacity: 0.7;
-    }
-  }
   &:last-child {
     margin-bottom: 0;
   }
 }
+.radioWrap {
+  & label {
+    cursor: pointer;
+  }
+  & input[type="radio"] {
+    margin-right: 10px;
+  }
+}
 .inputError {
-  & input {
+  & input,
+  & select {
     border-color: var(--pink);
   }
 }
 .errorMessage {
   font-size: 18px;
   color: var(--pink);
+}
+.stripeCardForm {}
+.stripeCardElementWrap {
+  padding-bottom: 5px;
+  border-bottom: 2px solid var(--semi-o-pink);  
+}
+.stripeCardFormSubmit {
+  margin-top: 30px;
 }
 @media (--tablet) {
   button {

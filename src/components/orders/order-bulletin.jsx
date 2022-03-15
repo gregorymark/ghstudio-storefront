@@ -74,7 +74,7 @@ const OrderBulletin = ({ order, cta = true }) => {
           className={classNames(
             !isReturnable ? "pointer-events-none opacity-50" : ""
           )}
-          to="/create-return"
+          to="/shop/create-return"
           state={{ order: order }}
         >
           <button className="btn-ui">

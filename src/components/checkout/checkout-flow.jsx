@@ -1,5 +1,5 @@
-import _ from "lodash"
 import React, { useEffect, useState } from "react"
+import _ from "lodash"
 import { useCart } from "../../hooks/use-cart"
 import { useCheckoutFlow } from "../../hooks/use-checkout-flow"
 import { useContactForm } from "../../hooks/use-contact-form"
@@ -12,13 +12,14 @@ import CheckoutDelivery from "./checkout-delivery"
 import CheckoutLayout from "./checkout-layout"
 import CheckoutStepContainer from "./checkout-step-container"
 import CheckoutSummary from "./checkout-summary"
-import { checkoutStepFooter } from "../../styles/modules/checkout.module.css"
+import { Link } from "gatsby"
 
 const CheckoutFlow = () => {
   const {
     cart,
     actions: { getCartShippingOptions },
   } = useCart()
+
   const { state, setState } = useCheckoutFlow()
   const [shippingOptions, setShippingOptions] = useState([])
 
@@ -47,13 +48,13 @@ const CheckoutFlow = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart.id])
 
-  const update = step => {
-    setState(step)
-  }
-
   const contactForm = useContactForm(setState)
   const shippingAddressForm = useShippingAddressForm(setState)
   const shippingOptionController = useShippingOptionForm(setState)
+
+  if (cart.items.length < 1) {
+    return <p>Your cart is empty. Return to the <Link to="/shop">shop</Link>?</p>
+  }
 
   let steps = [
     {
@@ -97,37 +98,18 @@ const CheckoutFlow = () => {
 
   return (
     <CheckoutLayout>
-      <div>
-        {steps.map(step => {
-          return (
-            <CheckoutStepContainer
-              key={step.key}
-              step={step.key}
-              setState={setState}
-              title={step.title}
-              isOpen={step.key === state}
-              isCompleted={step.completed}
-            >
-              {step.children}
-              <div className={checkoutStepFooter}>
-                {step.key !== 0 && (
-                  <button onClick={() => update(step.key - 1)}>Go back</button>
-                )}
-                <div />
-                {step.key !== steps.length - 1 && (
-                  <button
-                    type="submit"
-                    onClick={step.handleSubmit}
-                    disabled={step.controller.isSubmitting}
-                  >
-                    Next
-                  </button>
-                )}
-              </div>
-            </CheckoutStepContainer>
-          )
-        })}
-      </div>
+      {steps.map(step => {
+        return (
+          <CheckoutStepContainer
+            key={step.key}
+            step={step}
+            setState={setState}
+            isOpen={step.key === state}
+          >
+            {step.children}
+          </CheckoutStepContainer>
+        )
+      })}
       <CheckoutSummary
         cart={cart}
         shippingOption={shippingOptionController.selectedShippingMethod}

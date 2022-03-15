@@ -1,10 +1,10 @@
 import { Link } from "gatsby"
 import React from "react"
-import AuthLayout from "../../components/auth/auth-layout"
-import Input from "../../components/forms/input"
-import ErrorMessage from "../../components/utility/error-message"
-import SearchEngineOptimization from "../../components/utility/seo"
-import { useAuth } from "../../hooks/use-auth"
+import AuthLayout from "../../../components/auth/auth-layout"
+import Input from "../../../components/forms/input"
+import ErrorMessage from "../../../components/utility/error-message"
+import SearchEngineOptimization from "../../../components/utility/seo"
+import { useAuth } from "../../../hooks/use-auth"
 
 const SignUp = () => {
   const {
@@ -18,7 +18,7 @@ const SignUp = () => {
         <div>
           <h1>Create account</h1>
           <p>
-            Already have an account? <Link to="/shop/sign-in">Sign in</Link>
+            Already have an account? <Link to="/shop/account/sign-in">Sign in</Link>
           </p>
         </div>
         <form

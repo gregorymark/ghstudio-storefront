@@ -1,5 +1,4 @@
 import React from "react"
-import IconSvg from "../../icons/logo-grey.svg"
 
 const AuthLayout = ({ children }) => {
   return (

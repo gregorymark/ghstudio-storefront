@@ -6,7 +6,7 @@ const Footer = () => {
   const internals = [
     {
       name: "Create return",
-      to: "/create-return",
+      to: "/shop/create-return",
     },
     {
       name: "FAQ",

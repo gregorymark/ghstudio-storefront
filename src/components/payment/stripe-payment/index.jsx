@@ -4,7 +4,6 @@ import React, { useMemo } from "react"
 import { useCart } from "../../../hooks/use-cart"
 import InjectableCardForm from "./injectable-card-form"
 
-console.log(process.env)
 const STRIPE_KEY = process.env.GATSBY_STRIPE_KEY || ""
 const stripePromise = loadStripe(STRIPE_KEY)
 
@@ -23,8 +22,10 @@ const StripePayment = () => {
     return null
   }
 
+  console.log(stripeSession)
+
   const options = {
-    client_secret: stripeSession.data.client_secret,
+    clientSecret: stripeSession.data.client_secret,
   }
 
   return (

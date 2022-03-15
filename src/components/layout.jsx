@@ -8,8 +8,7 @@ import { main } from "../styles/modules/layout.module.css"
 
 const Layout = ({ path, children }) => {
   const { cart } = useCart()
-  const cartHasItems = cart.items.length > 0
-  const showShopNav = path.startsWith("/shop") || cartHasItems
+  const showShopNav = path.startsWith("/shop")
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
