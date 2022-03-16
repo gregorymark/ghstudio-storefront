@@ -5,7 +5,7 @@ import AuthLayout from "../../../components/auth/auth-layout"
 import Input from "../../../components/forms/input"
 import ErrorMessage from "../../../components/utility/error-message"
 import SearchEngineOptimization from "../../../components/utility/seo"
-import SplitFieldset from "../../../components/forms/split-fieldset"
+import { authLayoutHead } from "../../../styles/modules/account.module.css"
 
 const SignIn = () => {
   const {
@@ -13,10 +13,10 @@ const SignIn = () => {
   } = useAuth()
 
   return (
-    <AuthLayout>
+    <>
       <SearchEngineOptimization title="Sign In" />
-      <div>
-        <div>
+      <AuthLayout>
+        <div className={authLayoutHead}>
           <h1>Welcome back</h1>
           <p>
             Don't have an account?{" "}
@@ -32,28 +32,26 @@ const SignIn = () => {
           {loginForm.status?.authError && (
             <ErrorMessage error={loginForm.status.authError} />
           )}
-          <SplitFieldset>
-            <Input
-              label="Email"
-              type="email"
-              autocomplete="email"
-              name={"email"}
-              formik={loginForm}
-              defaultValue={loginForm.values.email}
-            />
-            <Input
-              label="Password"
-              type="password"
-              autocomplete="old-password"
-              name={"password"}
-              formik={loginForm}
-              defaultValue={loginForm.values.password}
-            />
-          </SplitFieldset>
+          <Input
+            label="Email"
+            type="email"
+            autocomplete="email"
+            name={"email"}
+            formik={loginForm}
+            defaultValue={loginForm.values.email}
+          />
+          <Input
+            label="Password"
+            type="password"
+            autocomplete="old-password"
+            name={"password"}
+            formik={loginForm}
+            defaultValue={loginForm.values.password}
+          />
           <button type="submit">Sign in</button>
         </form>
-      </div>
-    </AuthLayout>
+      </AuthLayout>
+    </>
   )
 }
 

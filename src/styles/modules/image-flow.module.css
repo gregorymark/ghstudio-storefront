@@ -1,3 +1,6 @@
+.imageFlowImage {
+  margin-bottom: 30px;
+}
 @media (--tablet) {
   .imageFlow {
     display: flex;
@@ -5,15 +8,15 @@
   }
   .imageFlowColumn {
     &:first-child {
-      width: 60%;
+      width: 30%;
       padding-top: 20%;
     }
     &:last-child {
+      width: 60%;
       margin-left: auto;
-      width: 30%;
     }
   }
   .imageFlowImage {
-    margin-bottom: 13vw;
+    margin-bottom: 8vw;
   }
 }

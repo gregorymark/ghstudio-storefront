@@ -15,14 +15,16 @@ const ImageFlow = ({ images }) => {
   const columnsJsx = columns.map((column, index) => {
     return (
       <div key={`column${index}`} className={imageFlowColumn}>
-        {column.map(file => {
-          const imageData = getImage(file.node)
+        {column.map(image => {
+          console.log(image)
+          if (!image) return null
+          const imageData = getImage(image)
 
           return (
             <GatsbyImage
-              key={file.node.id}
+              key={image.id}
               image={imageData}
-              alt={file.node.name}
+              alt={image.name}
               className={imageFlowImage}
             />
           )

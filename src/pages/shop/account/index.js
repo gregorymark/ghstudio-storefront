@@ -67,7 +67,7 @@ const Account = () => {
           description="We need this information in case we need to contact you."
           handleSubmit={contactForm.handleSubmit}
         >
-          <div className="flex items-center mb-4">
+          <div>
             <Input
               label="First name"
               autocomplete="given-name"
@@ -75,7 +75,7 @@ const Account = () => {
               formik={contactForm}
               defaultValue={contactForm.values.first_name}
             />
-            <div className="mx-2" />
+            <div />
             <Input
               label="Last name"
               autocomplete="family-name"
@@ -84,7 +84,7 @@ const Account = () => {
               defaultValue={contactForm.values.last_name}
             />
           </div>
-          <div className="flex items-center">
+          <div>
             <Input
               label="Email"
               autocomplete="email"
@@ -92,7 +92,7 @@ const Account = () => {
               formik={contactForm}
               defaultValue={contactForm.values.email}
             />
-            <div className="mx-2" />
+            <div />
             <Input
               label="Phone (optional)"
               autocomplete="tel"
@@ -103,13 +103,13 @@ const Account = () => {
           </div>
         </FormContainer>
       </div>
-      <div className="mt-16">
+      <div>
         <FormContainer
           title="Password"
           description="You can use this form to reset your password."
           handleSubmit={passwordForm.handleSubmit}
         >
-          <div className="flex items-center">
+          <div>
             <Input
               label="New Password"
               type="password"
@@ -118,7 +118,7 @@ const Account = () => {
               formik={passwordForm}
               defaultValue={passwordForm.values.password}
             />
-            <div className="mx-2" />
+            <div />
             <Input
               label="Confirm Password"
               type="password"

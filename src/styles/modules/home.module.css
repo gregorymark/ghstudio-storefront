@@ -1,0 +1,6 @@
+@media (--tablet) {
+  .introText {
+    width: 50%;
+    margin-left: 5%;
+  }
+}
