@@ -1,5 +1,5 @@
-import { graphql, navigate } from "gatsby"
-import React, { useEffect } from "react"
+import React from "react"
+import { graphql } from "gatsby"
 import ProductExpandable from "../components/products/product-expandable"
 import ProductImages from "../components/products/product-images"
 import ProductListItem from "../components/products/product-list-item"
@@ -9,10 +9,8 @@ import Grid from "../components/utility/grid"
 import SearchEngineOptimization from "../components/utility/seo"
 import { useCart } from "../hooks/use-cart"
 import { useProduct } from "../hooks/use-product"
-import { useRegion } from "../hooks/use-region"
 import { formatPrice } from "../utils/format-price"
 import { pickDetails } from "../utils/pick-details"
-import { toKebab } from "../utils/to-kebab"
 
 const Product = ({ data, pageContext }) => {
   const { product, related } = data
@@ -43,14 +41,6 @@ const Product = ({ data, pageContext }) => {
     await addItem({ variant_id: variant.id, quantity })
     resetOptions()
   }
-
-  const { region } = useRegion()
-
-  useEffect(() => {
-    if (region && region.id !== regionId) {
-      navigate(`/${toKebab(region.name)}/${handle}`)
-    }
-  }, [region, handle, regionId])
 
   return (
     <div className="layout-base">
