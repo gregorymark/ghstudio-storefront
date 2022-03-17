@@ -23,64 +23,6 @@ const getFilterables = products => {
   return filterables
 }
 
-const BASE_URL =
-  process.env.GATSBY_MEDUSA_BACKEND_URL || "http://localhost:9000"
-
-// This method should be deleted once you have added collections to your store
-exports.sourceNodes = async function ({
-  actions,
-  createNodeId,
-  createContentDigest,
-  reporter,
-}) {
-  const client = new Medusa({ baseUrl: BASE_URL })
-  const { createNode } = actions
-
-  const count = await client.collections
-    .list()
-    .then(({ count }) => count)
-    .catch(_ => 0)
-
-  if (count === 0) {
-    const dummyCollection = {
-      handle: "dummy-collection",
-      title: "Dummy Collection",
-    }
-
-    const nodeContent = JSON.stringify(dummyCollection)
-
-    const nodeMeta = {
-      id: createNodeId(`prodcol_dummy`),
-      parent: null,
-      children: [],
-      internal: {
-        type: "MedusaCollections",
-        content: nodeContent,
-        contentDigest: createContentDigest(dummyCollection),
-      },
-    }
-
-    const node = Object.assign({}, dummyCollection, nodeMeta)
-
-    reporter.warn(
-      "📣 Your store does not have any collections. This starter expects you to have defined atleast one collection in your store, as they are referenced in several GraphQL queries throughout the site. To allow for you to still checkout the starter without having to add a collection, we will add a dummy collection. In a production environment you should either add collections to your store, or if you don't wish to make use of collections then remove all references to them throughout the project."
-    )
-
-    createNode(node)
-  }
-}
-
-// This method can also be deleted once you have added collections to your store
-exports.createSchemaCustomization = ({ actions }) => {
-  const { createTypes } = actions
-  const typeDefs = `
-    type MedusaProducts implements Node {
-      collection_id: String
-    }
-  `
-  createTypes(typeDefs)
-}
-
 exports.createPages = async function ({ actions, graphql }) {
   const { data } = await graphql(`
     query {
@@ -149,6 +91,11 @@ exports.createPages = async function ({ actions, graphql }) {
     })
   })
 
+  // TODO: Figure out what to do here. This was so that the product could
+  // be switched if we were on the wrong URL for the region. I THINK we only
+  // need one region as region isn't the same as shipping method, which is the
+  // only region switching kind of behaviour we need. Therefore we probably don't
+  // need multiple prices for each product per region?
   data.allMedusaRegions.edges.forEach(({ node }) => {
     const { id, name, currency_code, tax_rate } = node
 
@@ -169,6 +116,7 @@ exports.createPages = async function ({ actions, graphql }) {
 
   const products = data.allMedusaProducts.edges.map(({ node }) => node)
 
+  // TODO: Do we need this page?
   actions.createPage({
     path: "/products",
     component: require.resolve(`./src/templates/collection.js`),
@@ -179,34 +127,34 @@ exports.createPages = async function ({ actions, graphql }) {
     },
   })
 
-  const isDummyCollection =
-    data.allMedusaCollections.edges[0].node.id === "prodcol_dummy"
+  // TODO: Do we need collections yet?
+  data.allMedusaCollections.edges.forEach(({ node }) => {
+    const { id, handle, title } = node
 
-  if (!isDummyCollection) {
-    data.allMedusaCollections.edges.forEach(({ node }) => {
-      const { id, handle, title } = node
+    const productsInCollection = products.filter(
+      product => product.collection_id === id
+    )
 
-      const productsInCollection = products.filter(
-        product => product.collection_id === id
-      )
-
-      actions.createPage({
-        path: `collections/${handle}`,
-        component: require.resolve(`./src/templates/collection.js`),
-        context: {
-          title: title,
-          products: productsInCollection,
-          filterables: getFilterables(productsInCollection),
-        },
-      })
+    actions.createPage({
+      path: `collections/${handle}`,
+      component: require.resolve(`./src/templates/collection.js`),
+      context: {
+        title: title,
+        products: productsInCollection,
+        filterables: getFilterables(productsInCollection),
+      },
     })
-  }
+  })
 }
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
   if (node.internal.type === "Mdx") {
-    const relativePath = createFilePath({ node, getNode, basePath: "src/content" })
+    const relativePath = createFilePath({
+      node,
+      getNode,
+      basePath: "src/content",
+    })
     createNodeField({
       node,
       name: "slug",
