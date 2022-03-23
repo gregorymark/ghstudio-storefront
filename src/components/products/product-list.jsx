@@ -9,9 +9,7 @@ const ProductList = ({ products }) => {
 
   useEffect(() => {
     const tmpRowHeight = parseInt(
-      window
-        .getComputedStyle(listEl.current)
-        .getPropertyValue("grid-auto-rows")
+      window.getComputedStyle(listEl.current).getPropertyValue("grid-auto-rows")
     )
     setRowHeight(tmpRowHeight)
     setScreenWidth(window.innerWidth)
@@ -31,11 +29,6 @@ const ProductList = ({ products }) => {
 
   return (
     <div className={productList} ref={listEl}>
-      {productListJsx}
-      {productListJsx}
-      {productListJsx}
-      {productListJsx}
-      {productListJsx}
       {productListJsx}
     </div>
   )

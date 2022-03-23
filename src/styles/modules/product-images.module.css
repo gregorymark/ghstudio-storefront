@@ -2,8 +2,6 @@
 }
 .carousel {
   overflow: hidden;
-  width: 300px;
-  margin: 0 auto;
 }
 .carouselInner {
   display: flex;

@@ -1,21 +1,28 @@
 import React from "react"
-import { graphql } from "gatsby"
-import ProductExpandable from "../components/products/product-expandable"
+import { graphql, Link } from "gatsby"
 import ProductImages from "../components/products/product-images"
-import ProductListItem from "../components/products/product-list-item"
 import ProductOptionSelector from "../components/products/product-option-selector"
 import QuantitySelector from "../components/products/quantity-selector"
-import Grid from "../components/utility/grid"
 import SearchEngineOptimization from "../components/utility/seo"
 import { useCart } from "../hooks/use-cart"
 import { useProduct } from "../hooks/use-product"
 import { formatPrice } from "../utils/format-price"
-import { pickDetails } from "../utils/pick-details"
+import { useRegion } from "../hooks/use-region"
+import {
+  productWrap,
+  productImages,
+  productPrice,
+  productDescription,
+  productInfo,
+  addToCartButton,
+  productPrevNext,
+} from "../styles/modules/product-single.module.css"
 
 const Product = ({ data, pageContext }) => {
-  const { product, related } = data
-  const { regionId, taxRate, currencyCode, handle } = pageContext
-  const details = pickDetails(product)
+  const { product } = data
+  const { regionId, taxRate, currencyCode, handle, prevPath, nextPath } =
+    pageContext
+  const { region } = useRegion()
   const {
     loading,
     actions: { addItem },
@@ -34,7 +41,7 @@ const Product = ({ data, pageContext }) => {
   } = useProduct(product)
 
   const price = variant
-    ? variant.prices.find(p => p.currency_code === currencyCode)
+    ? variant.prices.find(p => p.currency_code === region?.currency_code)
     : undefined
 
   const handleAddToCart = async () => {
@@ -43,24 +50,27 @@ const Product = ({ data, pageContext }) => {
   }
 
   return (
-    <div className="layout-base">
+    <>
       <SearchEngineOptimization
         title={product.title}
         description={product.description}
       />
-      <div className="flex flex-col lg:flex-row">
-        <div className="lg:w-3/5 lg:pr-14">
-          <ProductImages images={product.images} />
-        </div>
-        <div className="mt-8 lg:mt-0 lg:w-2/5 lg:max-w-xl">
-          <h1 className="font-semibold text-3xl">{product.title}</h1>
-          <p className="text-lg mt-2 mb-4">
-            {formatPrice(price?.amount, currencyCode, 1, taxRate)}
-          </p>
-          <p className="font-light">{product.description}</p>
+      <div className={productWrap}>
+        <ProductImages images={product.images} className={productImages} />
+        <div className={productInfo}>
+          <h1>{product.title}</h1>
+          <div className={productPrice}>
+            {formatPrice(price?.amount, region?.currency_code, 1, taxRate)}
+          </div>
+          <div className={productDescription}>
+            {product.collection.metadata?.prodinfo && (
+              <p>{product.collection.metadata?.prodinfo}</p>
+            )}
+            <p>{product.description}</p>
+          </div>
           {product.options.map((option, index) => {
             return (
-              <div key={index} className="mt-6">
+              <div key={index}>
                 <ProductOptionSelector
                   option={option}
                   current={options[option.id]}
@@ -69,56 +79,26 @@ const Product = ({ data, pageContext }) => {
               </div>
             )
           })}
-          <div className="inline-flex mt-4">
-            <button
-              className="btn-ui mr-2 px-12"
-              onClick={() => handleAddToCart()}
-              disabled={loading}
-            >
-              Add to bag
-            </button>
-            <QuantitySelector
-              quantity={quantity}
-              increment={increaseQuantity}
-              decrement={decreaseQuantity}
-            />
-          </div>
-          <div className="mt-12">
-            {Object.keys(details).length > 0 && (
-              <ProductExpandable title="Details">
-                <ul className="list-inside list-disc">
-                  {Object.keys(details).map((key, index) => {
-                    return <li key={index}>{`${key}: ${details[key]}`}</li>
-                  })}
-                </ul>
-              </ProductExpandable>
-            )}
-            {product.metadata?.care && (
-              <ProductExpandable title="Care">
-                <ul className="list-inside list-disc">
-                  {product.metadata.care.map((instruction, index) => {
-                    return <li key={index}>{`${instruction}`}</li>
-                  })}
-                </ul>
-              </ProductExpandable>
-            )}
-          </div>
+          <QuantitySelector
+            quantity={quantity}
+            increment={increaseQuantity}
+            decrement={decreaseQuantity}
+            title="Select quantity"
+          />
+          <button
+            className={addToCartButton}
+            onClick={() => handleAddToCart()}
+            disabled={loading}
+          >
+            Add to bag
+          </button>
         </div>
       </div>
-      <div className="my-12">
-        <Grid
-          title="You might also like"
-          cta={{ to: "/products", text: "Browse all products" }}
-        >
-          {related.edges
-            .map(({ node }) => node)
-            .slice(0, 4)
-            .map(product => {
-              return <ProductListItem key={product.handle} product={product} />
-            })}
-        </Grid>
+      <div className={productPrevNext}>
+        <Link to={prevPath}>Previous product</Link>
+        <Link to={nextPath}>Next product</Link>
       </div>
-    </div>
+    </>
   )
 }
 
@@ -134,6 +114,12 @@ export const query = graphql`
         values {
           id
           value
+        }
+      }
+      collection {
+        handle
+        metadata {
+          prodinfo
         }
       }
       variants {
@@ -154,25 +140,6 @@ export const query = graphql`
         image {
           childImageSharp {
             gatsbyImageData
-          }
-        }
-      }
-    }
-    related: allMedusaProducts(limit: 5, filter: { handle: { ne: $handle } }) {
-      edges {
-        node {
-          handle
-          title
-          thumbnail {
-            childImageSharp {
-              gatsbyImageData
-            }
-          }
-          variants {
-            prices {
-              amount
-              currency_code
-            }
           }
         }
       }

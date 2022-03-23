@@ -1,5 +1,5 @@
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
-import React, { useMemo, useEffect, useRef } from "react"
+import React, { useState, useMemo, useEffect, useRef } from "react"
 import { usePrice } from "../../hooks/use-price"
 import { useRegion } from "../../hooks/use-region"
 import ProductLink from "../utility/product-link"
@@ -18,20 +18,25 @@ const ProductListItem = ({ product, rowHeight = null, screenWidth = null }) => {
     actions: { getFromPrice },
   } = usePrice()
 
-  const itemEl = useRef()
-  const itemcontentEl = useRef()
+  const [gridRowEnd, setGridRowEnd] = useState()
+
+  const itemContentEl = useRef()
 
   const { region } = useRegion()
 
   const imageData = getImage(product.thumbnail)
 
-  useEffect(() => {
+  const updateGridRowEnd = () => {
     if (rowHeight && screenWidth) {
       const rowSpan = Math.ceil(
-        (itemcontentEl.current.getBoundingClientRect().height + 40) / rowHeight
+        (itemContentEl.current.getBoundingClientRect().height + 40) / rowHeight
       )
-      itemEl.current.style.gridRowEnd = "span " + rowSpan
+      setGridRowEnd("span " + rowSpan)
     }
+  }
+
+  useEffect(() => {
+    updateGridRowEnd()
   }, [rowHeight, screenWidth])
 
   const fromPrice = useMemo(() => {
@@ -40,9 +45,9 @@ const ProductListItem = ({ product, rowHeight = null, screenWidth = null }) => {
   }, [product, region?.currency_code])
 
   return (
-    <div className={productListItem} ref={itemEl}>
+    <div className={productListItem} style={{ gridRowEnd }}>
       <div className={productListItemInner}>
-        <div className={productListItemContent} ref={itemcontentEl}>
+        <div className={productListItemContent} ref={itemContentEl}>
           <GatsbyImage
             image={imageData}
             alt={product.title}
@@ -54,7 +59,7 @@ const ProductListItem = ({ product, rowHeight = null, screenWidth = null }) => {
                 {product.title}
               </ProductLink>
             </h3>
-            <div className={productPrice}>from {fromPrice}</div>
+            <div className={productPrice}><span>from</span> {fromPrice}</div>
           </div>
         </div>
       </div>

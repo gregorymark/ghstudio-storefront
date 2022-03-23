@@ -47,6 +47,9 @@ exports.createPages = async function ({ actions, graphql }) {
               }
             }
             handle
+            collection {
+              handle
+            }
             collection_id
             options {
               values {
@@ -91,6 +94,8 @@ exports.createPages = async function ({ actions, graphql }) {
     })
   })
 
+  const products = data.allMedusaProducts.edges.map(({ node }) => node)
+
   // TODO: Figure out what to do here. This was so that the product could
   // be switched if we were on the wrong URL for the region. I THINK we only
   // need one region as region isn't the same as shipping method, which is the
@@ -99,8 +104,13 @@ exports.createPages = async function ({ actions, graphql }) {
   data.allMedusaRegions.edges.forEach(({ node }) => {
     const { id, name, currency_code, tax_rate } = node
 
-    data.allMedusaProducts.edges.forEach(({ node }) => {
+    products.forEach((node, index) => {
       const handle = node.handle
+      const prevIndex = index - 1 < 0 ? products.length - 1 : index - 1
+      const nextIndex = index + 1 >= products.length ? 0 : index + 1
+      const prevProductHandle = products[prevIndex].handle
+      const nextProductHandle = products[nextIndex].handle
+
       actions.createPage({
         path: `/shop/${handle}`,
         component: require.resolve(`./src/templates/product.js`),
@@ -109,14 +119,13 @@ exports.createPages = async function ({ actions, graphql }) {
           regionId: id,
           currencyCode: currency_code,
           taxRate: tax_rate,
+          prevPath: `/shop/${prevProductHandle}`,
+          nextPath: `/shop/${nextProductHandle}`,
         },
       })
     })
   })
 
-  const products = data.allMedusaProducts.edges.map(({ node }) => node)
-
-  // TODO: Do we need this page?
   actions.createPage({
     path: "/shop",
     component: require.resolve(`./src/templates/collection.js`),

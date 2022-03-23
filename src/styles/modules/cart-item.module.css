@@ -13,9 +13,6 @@
     margin-bottom: 0;
   }
 }
-.removeItemButton {
-  composes: noButton from "../parts/typography.css";
-}
 .itemQuantity {
 
 }

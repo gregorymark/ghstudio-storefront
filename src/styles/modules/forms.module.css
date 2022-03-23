@@ -1,15 +1,17 @@
-button {
+.button {
   border: 0;
   font-family: var(--def-font-stack);
   text-transform: uppercase;
+  text-decoration: none;
   color: white;
   background: var(--pink);
   padding: 0.8em 1.5em;
-  font-size: 16px;
+  font-size: var(--button-font-size);
   cursor: pointer;
   text-align: center;
   outline: none;
   transition: background 0.3s;
+  letter-spacing: 0.1em;
 }
 input[type="text"],
 input[type="email"],
@@ -189,7 +191,7 @@ select {
   margin-top: 30px;
 }
 @media (--tablet) {
-  button {
+  .button {
     &:hover {
       background: var(--orange);
     }

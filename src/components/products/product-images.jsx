@@ -8,7 +8,7 @@ import {
   carouselSlide,
 } from "../../styles/modules/product-images.module.css"
 
-const ProductImages = ({ images }) => {
+const ProductImages = ({ images, className }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel()
 
   const needsCarousel = images.length > 1
@@ -26,7 +26,7 @@ const ProductImages = ({ images }) => {
   })
 
   return (
-    <div className={productImages}>
+    <div className={`${productImages} ${className}`}>
       <div className={carousel} ref={emblaRef}>
         <div className={carouselInner}>{imagesList}</div>
       </div>

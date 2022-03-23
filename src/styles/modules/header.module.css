@@ -43,7 +43,6 @@
     transition: opacity 0.3s, transform 0s;
   }
   .navToggle {
-    composes: noButton from "../parts/typography.css";
     margin-left: auto;
   }
   .navClose {
@@ -137,12 +136,12 @@
     position: absolute;
     top: 100%;
     right: 0;
-    font-size: 24px;
+    font-size: 18px;
     margin-top: 10px;
 
     & a {
       position: relative;
-      top: -3px;
+      top: -5px;
 
       &[aria-current="page"] {
         text-decoration-line: underline;

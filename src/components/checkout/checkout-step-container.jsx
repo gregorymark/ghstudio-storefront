@@ -7,6 +7,7 @@ import {
   checkoutStepTitle,
   checkoutStepTick,
   checkoutStepFooter,
+  checkoutStepButton,
   checkoutStepContent,
 } from "../../styles/modules/checkout.module.css"
 
@@ -54,11 +55,17 @@ const CheckoutStepContainer = ({
             {children}
             <div className={checkoutStepFooter}>
               {step.key !== 0 && (
-                <button onClick={() => setState(step.key - 1)}>Go back</button>
+                <button
+                  className={checkoutStepButton}
+                  onClick={() => setState(step.key - 1)}
+                >
+                  Go back
+                </button>
               )}
               <div />
               {step.key !== stepCount - 1 && (
                 <button
+                  className={checkoutStepButton}
                   type="submit"
                   onClick={step.handleSubmit}
                   disabled={step.controller?.isSubmitting}

@@ -2,6 +2,8 @@
   .article {
     display: flex;
     font-size: 28px;
+    font-family: var(--display-2-font-stack);
+    font-weight: 300;
   }
   .articleContent {
     width: 55%;

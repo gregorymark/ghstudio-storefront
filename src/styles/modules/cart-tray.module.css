@@ -1,6 +1,5 @@
 .cartIcon {
   position: relative;
-  composes: noButton from "../parts/typography.css";
 
   & sup {
     position: absolute;
@@ -77,6 +76,9 @@
 }
 .cartTotal {
   flex-grow: 1;
+}
+.checkoutButton {
+  composes: button from "../modules/forms.module.css";
 }
 .cartEmptyMessage {
   padding-top: 90px;

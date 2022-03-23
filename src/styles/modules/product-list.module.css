@@ -1,10 +1,5 @@
 .productListItem {
   padding-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-}
-.productListItemInner {
-  flex-grow: 1;
 }
 .productListItemContent {
   padding: 10px;
@@ -22,9 +17,12 @@
     }
   }
 }
+.productPrice {
+  & span {
+    font-size: 0.8em;
+  }
+}
 .productLink {
-  margin-top: auto;
-
   &:after {
     content: " ";
     position: absolute;

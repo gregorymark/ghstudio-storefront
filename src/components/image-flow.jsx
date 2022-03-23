@@ -16,7 +16,6 @@ const ImageFlow = ({ images }) => {
     return (
       <div key={`column${index}`} className={imageFlowColumn}>
         {column.map(image => {
-          console.log(image)
           if (!image) return null
           const imageData = getImage(image)
 

@@ -1,7 +1,7 @@
 import React from "react"
 
 export const getCurrencySymbol = currencyCode => {
-  switch (currencyCode.toLowerCase()) {
+  switch (currencyCode?.toLowerCase()) {
     case "eur":
       return "€"
     default:

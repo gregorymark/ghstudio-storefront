@@ -10,10 +10,12 @@
     --semi-o-pink: rgba(174, 84, 109, 0.5);
     --orange: #fbaf5d;
     /* Fonts */
-    --def-font-stack: "mr-eaves-modern", sans-serif;
+    --def-font-stack: "mr-eaves-xl-modern", sans-serif;
     --display-font-stack: "orpheuspro", serif;
-    --small-font-stack: "mr-eaves-xl-modern", sans-serif;
+    --display-2-font-stack: "mr-eaves-modern", sans-serif;
     /* Dimensions */
     --max-site-width: 1200px;
     --pad-side-mobile: 40px;
+    --button-height: 42px;
+    --button-font-size: 16px;
 }
