@@ -61,12 +61,112 @@ select {
     margin-bottom: 0;
   }
 }
+.checkboxWrap {
+  & label {
+    display: block;
+    cursor: pointer;
+    position: relative;
+    padding-left: 30px;
+  }
+  & input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  & .checkboxUi {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 0;
+    background: var(--peach);
+    box-shadow: inset 0px 0px 5px var(--mid-peach);
+    overflow: hidden;
+    transform: translateY(-50%);
+
+    &:before {
+      content: " ";
+      position: absolute;
+      width: 12px;
+      height: 6px;
+      top: 50%;
+      left: 50%;
+      margin-top: -1px;
+      border-bottom: 2px solid var(--dark-slate);
+      border-left: 2px solid var(--dark-slate);
+      transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+      transform-origin: center;
+      opacity: 0;
+    }
+  }
+  & input[type="checkbox"] {
+    opacity: 0 !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    &:checked {
+      & ~ .checkboxUi {
+        &:before {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+}
 .radioWrap {
   & label {
+    display: block;
     cursor: pointer;
+    position: relative;
+    padding-left: 30px;
   }
   & input[type="radio"] {
     margin-right: 10px;
+  }
+  & .radioUi {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    top: 50%;
+    left: 0;
+    background: var(--peach);
+    box-shadow: inset 0px 0px 5px var(--mid-peach);
+    overflow: hidden;
+    transform: translateY(-50%);
+
+    &:before {
+      content: " ";
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      top: 25%;
+      left: 25%;
+      border-radius: 50%;
+      background: var(--dark-slate);
+      opacity: 0;
+    }
+    &.radioUiDark {
+      background: var(--border-slate);
+      box-shadow: inset 0 0 5px var(--pale-slate);
+
+      &:before {
+        background: var(--peach);
+      }
+    }
+  }
+  & input[type="radio"] {
+    opacity: 0 !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    &:checked {
+      & ~ .radioUi {
+        &:before {
+          opacity: 1;
+        }
+      }
+    }
   }
 }
 .inputError {
@@ -79,10 +179,11 @@ select {
   font-size: 18px;
   color: var(--pink);
 }
-.stripeCardForm {}
+.stripeCardForm {
+}
 .stripeCardElementWrap {
   padding-bottom: 5px;
-  border-bottom: 2px solid var(--semi-o-pink);  
+  border-bottom: 2px solid var(--semi-o-pink);
 }
 .stripeCardFormSubmit {
   margin-top: 30px;

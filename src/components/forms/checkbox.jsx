@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react"
 import {
-  radioWrap,
-  radioUi,
-  radioUiDark,
+  checkboxWrap,
+  checkboxUi,
+  checkboxUiDark,
   inputError,
 } from "../../styles/modules/forms.module.css"
 import ErrorMessage from "../utility/error-message"
 
-const Radio = ({
+const Checkbox = ({
   label,
   name,
   autocomplete = "on",
@@ -36,10 +36,10 @@ const Radio = ({
   }, [formik, name])
 
   return (
-    <div className={`${radioWrap} ${className} ${error ? inputError : ""}`}>
+    <div className={`${checkboxWrap} ${className} ${error ? inputError : ""}`}>
       <label>
         <input
-          type="radio"
+          type="checkbox"
           name={name}
           value={value}
           checked={checked}
@@ -47,11 +47,11 @@ const Radio = ({
           autoComplete={autocomplete}
         />
         {label}
-        <span className={`${radioUi} ${dark ? radioUiDark : ""}`}></span>
+        <span className={`${checkboxUi} ${dark ? checkboxUiDark : ""}`}></span>
       </label>
       {error && <ErrorMessage error={error} />}
     </div>
   )
 }
 
-export default Radio
+export default Checkbox
