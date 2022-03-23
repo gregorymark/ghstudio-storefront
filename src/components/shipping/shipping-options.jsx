@@ -23,7 +23,7 @@ const ShippingOptions = ({
     <div>
       {options.map(option => {
         const price = formatPrice(option.amount, currencyCode)
-        const labelText = option.name + price
+        const labelText = price + " - " + option.name
 
         return (
           <Radio
@@ -35,6 +35,7 @@ const ShippingOptions = ({
             checked={selectedOption?.id === option.id}
             onChange={() => handleOptionChange(option)}
             formik={controller}
+            dark={true}
           />
         )
       })}

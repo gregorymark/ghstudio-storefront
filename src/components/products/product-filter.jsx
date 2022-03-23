@@ -1,4 +1,6 @@
 import React from "react"
+import { productFilter } from "../../styles/modules/product-filter.module.css"
+import Checkbox from "../forms/checkbox"
 
 const ProductFilter = ({ filterables, activeFilters, setActiveFilters }) => {
   const handleChange = e => {
@@ -23,27 +25,22 @@ const ProductFilter = ({ filterables, activeFilters, setActiveFilters }) => {
   }
 
   return (
-    <div className="lg:sticky lg:top-0">
+    <div className={productFilter}>
       {Object.keys(filterables).map((key, index) => {
         const filterable = filterables[key]
+
         return (
-          <div key={index} className="py-4">
-            <p className="font-medium mb-2">{filterable.title}</p>
+          <div key={index}>
+            <h3>{filterable.title}</h3>
             <div>
               {filterable.values.map((value, index) => {
                 return (
-                  <label
+                  <Checkbox
                     key={index}
-                    className="block py-2 leading-5 text-sm text-gray-700"
-                  >
-                    <input
-                      className="checkbox-ui"
-                      type="checkbox"
-                      value={JSON.stringify({ key, value })}
-                      onChange={handleChange}
-                    />
-                    {value}
-                  </label>
+                    value={JSON.stringify({ key, value })}
+                    onChange={handleChange}
+                    label={value}
+                  />
                 )
               })}
             </div>

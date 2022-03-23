@@ -8,6 +8,7 @@ html {
 }
 body {
   background: var(--pale-peach);
+  padding: 40px 20px;
 }
 body:before {
   content: "mobile";
@@ -21,10 +22,10 @@ svg {
   max-width: 100%;
   height: auto;
 }
-body {
-  padding: 40px 20px;
-}
 @media (--tablet) {
+  body {
+    padding: 60px 40px;
+  }
   body:before {
     content: "tablet";
   }

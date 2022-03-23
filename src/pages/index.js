@@ -5,7 +5,6 @@ import ImageFlow from "../components/image-flow"
 import { introText } from "../styles/modules/home.module.css"
 
 const IndexPage = ({ data }) => {
-  console.log(data)
   const images = [
     data.imageCol01Image01,
     data.imageCol01Image02,

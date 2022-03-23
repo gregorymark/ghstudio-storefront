@@ -1,9 +1,0 @@
-.productInfo {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-.productLink {
-  font-weight: bold;
-  margin-top: auto;
-}
