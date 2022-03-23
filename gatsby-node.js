@@ -118,33 +118,36 @@ exports.createPages = async function ({ actions, graphql }) {
 
   // TODO: Do we need this page?
   actions.createPage({
-    path: "/products",
+    path: "/shop",
     component: require.resolve(`./src/templates/collection.js`),
     context: {
-      title: "All Products",
+      title: "Shop",
       products: products,
       filterables: getFilterables(products),
     },
   })
 
-  // TODO: Do we need collections yet?
-  data.allMedusaCollections.edges.forEach(({ node }) => {
-    const { id, handle, title } = node
+  /*
+   * We don't want separate collections yet as we've only got one
+   *
+    data.allMedusaCollections.edges.forEach(({ node }) => {
+      const { id, handle, title } = node
 
-    const productsInCollection = products.filter(
-      product => product.collection_id === id
-    )
+      const productsInCollection = products.filter(
+        product => product.collection_id === id
+      )
 
-    actions.createPage({
-      path: `collections/${handle}`,
-      component: require.resolve(`./src/templates/collection.js`),
-      context: {
-        title: title,
-        products: productsInCollection,
-        filterables: getFilterables(productsInCollection),
-      },
+      actions.createPage({
+        path: `collections/${handle}`,
+        component: require.resolve(`./src/templates/collection.js`),
+        context: {
+          title: title,
+          products: productsInCollection,
+          filterables: getFilterables(productsInCollection),
+        },
+      })
     })
-  })
+  */
 }
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
