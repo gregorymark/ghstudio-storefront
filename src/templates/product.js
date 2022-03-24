@@ -10,7 +10,7 @@ import { formatPrice } from "../utils/format-price"
 import { useRegion } from "../hooks/use-region"
 import {
   productWrap,
-  productImages,
+  productImagesWrap,
   productPrice,
   productDescription,
   productInfo,
@@ -56,7 +56,13 @@ const Product = ({ data, pageContext }) => {
         description={product.description}
       />
       <div className={productWrap}>
-        <ProductImages images={product.images} className={productImages} />
+        <div className={productImagesWrap}>
+          <ProductImages
+            mainImageUrl={product.thumbnail.url}
+            images={product.images}
+            mainAlt={product.title}
+          />
+        </div>
         <div className={productInfo}>
           <h1>{product.title}</h1>
           <div className={productPrice}>
@@ -135,11 +141,14 @@ export const query = graphql`
           currency_code
         }
       }
+      thumbnail {
+        url
+      }
       images {
         url
         image {
           childImageSharp {
-            gatsbyImageData
+            gatsbyImageData(width: 1000)
           }
         }
       }

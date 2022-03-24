@@ -28,8 +28,9 @@
 @media (--tablet) {
   .productWrap {
     display: flex;
+    align-items: start;
   }
-  .productImages {
+  .productImagesWrap {
     width: 50%;
   }
   .productInfo {

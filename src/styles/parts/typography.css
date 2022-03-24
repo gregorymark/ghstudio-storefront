@@ -69,7 +69,10 @@ button {
   height: 30px;
   text-indent: -99999em;
   overflow: hidden;
-  background: transparent !important;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=) repeat;
+  color: var(--dark-slate);
+  cursor: pointer;
+  text-decoration: none;
 }
 /* 
  * .crossButton is used with cssmodule composes, 
@@ -84,7 +87,7 @@ button {
   height: 1px;
   top: 50%;
   left: -15%;
-  background: var(--dark-slate);
+  background: currentColor;
 }
 .crossButton:before {
   transform: rotate(45deg);
