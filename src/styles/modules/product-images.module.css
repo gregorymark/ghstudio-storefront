@@ -74,6 +74,12 @@
   text-indent: -99999em;
   overflow: hidden;
 }
+@media (--mobile-only) {
+  .carouselPrev,
+  .carouselNext {
+    display: none;
+  }
+}
 @media (--tablet) {
   .carouselPrev,
   .carouselNext {
