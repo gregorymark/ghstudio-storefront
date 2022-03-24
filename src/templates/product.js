@@ -14,6 +14,7 @@ import {
   productPrice,
   productDescription,
   productInfo,
+  subTotal,
   addToCartButton,
   productPrevNext,
 } from "../styles/modules/product-single.module.css"
@@ -91,6 +92,9 @@ const Product = ({ data, pageContext }) => {
             decrement={decreaseQuantity}
             title="Select quantity"
           />
+          <div className={subTotal}>
+            Total: {formatPrice(price?.amount, region?.currency_code, quantity, taxRate)} excluding shipping
+          </div>
           <button
             className={addToCartButton}
             onClick={() => handleAddToCart()}

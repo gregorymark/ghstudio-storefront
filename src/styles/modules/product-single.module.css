@@ -1,5 +1,6 @@
 .productInfo {
   & h1 {
+    font-size: 40px;
     margin-bottom: 0;
   }
 }
@@ -9,6 +10,10 @@
 }
 .productDescription {
   margin: 30px 0;
+}
+.subTotal {
+  margin-top: 20px;
+  color: var(--pink);
 }
 .addToCartButton {
   composes: button from "../modules/forms.module.css";
@@ -23,6 +28,11 @@
     &:first-child {
       margin-right: auto;
     }
+  }
+}
+@media (--mobile-only) {
+  .productInfo {
+    margin-top: 30px;
   }
 }
 @media (--tablet) {

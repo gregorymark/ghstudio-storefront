@@ -8,6 +8,7 @@ import {
 } from "../../styles/modules/cart-item.module.css"
 import { useCart } from "../../hooks/use-cart"
 import QuantitySelector from "../products/quantity-selector"
+import { formatPrice } from "../../utils/format-price"
 
 const CartItem = ({ item, currencyCode, isInteractive = true }) => {
   const {
@@ -23,8 +24,7 @@ const CartItem = ({ item, currencyCode, isInteractive = true }) => {
         <h3>{item.title}</h3>
         <div>{item.description}</div>
         <div>
-          <strong>Price</strong> {(item.unit_price / 100) * item.quantity}{" "}
-          {currencyCode.toUpperCase()}
+          {formatPrice(item.unit_price, currencyCode, item.quantity)}
         </div>
         {isInteractive ? (
           <>
