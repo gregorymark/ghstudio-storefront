@@ -6,9 +6,15 @@ import {
   quantityText,
 } from "../../styles/modules/quantity-selector.module.css"
 
-const QuantitySelector = ({ quantity, increment, decrement, title }) => {
+const QuantitySelector = ({
+  quantity,
+  increment,
+  decrement,
+  title,
+  className,
+}) => {
   return (
-    <div className={selectorWrap}>
+    <div className={`${selectorWrap} ${className}`}>
       {title && <h4>{title}</h4>}
       <div className={selector}>
         <button className={button} onClick={() => decrement()}>

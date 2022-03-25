@@ -1,10 +1,16 @@
 import { useFormik } from "formik"
-import React, { Fragment, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import * as Yup from "yup"
 import { useCart } from "../../hooks/use-cart"
 import Input from "../forms/input"
+import {
+  discountField,
+  discountFieldset,
+  discountInput,
+  applyButton,
+} from "../../styles/modules/discount-field.module.css"
 
-const DiscountField = () => {
+const DiscountField = ({ className }) => {
   const [code, setCode] = useState()
 
   const {
@@ -46,37 +52,41 @@ const DiscountField = () => {
   }
 
   return (
-    <div>
-      <p className="font-semibold text-sm mb-2">Discount code</p>
-      <div className="flex items-start">
+    <div className={`${className} ${discountField}`}>
+      <h4>Discount code</h4>
+      <fieldset className={discountFieldset}>
         {!code ? (
-          <Fragment>
+          <>
             <Input
               name={"discount_code"}
               defaultValue={discountForm.values.discount_code}
               formik={discountForm}
+              solidBg={true}
+              className={discountInput}
             />
-            <div className="mx-2" />
-            <button className="btn-ui" onClick={handleSubmit} type="submit">
+            <button
+              className={applyButton}
+              onClick={handleSubmit}
+              type="submit"
+            >
               Apply
             </button>
-          </Fragment>
+          </>
         ) : (
-          <Fragment>
-            <div className="pointer-events-none w-full">
-              <Input
-                name={"discount_code"}
-                defaultValue={code}
-                formik={discountForm}
-              />
-            </div>
-            <div className="mx-2" />
-            <button className="btn-ui" onClick={handleSubmit}>
+          <>
+            <Input
+              name={"discount_code"}
+              defaultValue={code}
+              formik={discountForm}
+              solidBg={true}
+              className={discountInput}
+            />
+            <button className={applyButton} onClick={handleSubmit}>
               Remove
             </button>
-          </Fragment>
+          </>
         )}
-      </div>
+      </fieldset>
     </div>
   )
 }

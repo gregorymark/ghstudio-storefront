@@ -3,6 +3,7 @@ import { trayItem } from "../../styles/modules/cart-tray.module.css"
 import {
   thumbWrap,
   itemInfo,
+  itemQuantitySelector,
   itemQuantity,
   removeItemButton,
 } from "../../styles/modules/cart-item.module.css"
@@ -23,13 +24,11 @@ const CartItem = ({ item, currencyCode, isInteractive = true }) => {
       <div className={itemInfo}>
         <h3>{item.title}</h3>
         <div>{item.description}</div>
-        <div>
-          {formatPrice(item.unit_price, currencyCode, item.quantity)}
-        </div>
+        <div>{formatPrice(item.unit_price, currencyCode, item.quantity)}</div>
         {isInteractive ? (
           <>
             <QuantitySelector
-              className={itemQuantity}
+              className={itemQuantitySelector}
               quantity={item.quantity}
               increment={() =>
                 updateQuantity({ id: item.id, quantity: item.quantity + 1 })
@@ -46,7 +45,7 @@ const CartItem = ({ item, currencyCode, isInteractive = true }) => {
             </button>
           </>
         ) : (
-          <div>
+          <div className={itemQuantity}>
             <strong>Quantity</strong> {item.quantity}
           </div>
         )}

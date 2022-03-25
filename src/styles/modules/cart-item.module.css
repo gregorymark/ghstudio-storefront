@@ -1,5 +1,5 @@
 .thumbWrap {
-  width: 80px;
+  width: 120px;
   margin-right: 20px;
 
   & img {
@@ -8,11 +8,16 @@
 }
 .itemInfo {
   font-size: 20px;
+  line-height: 1.2;
 
   & h3 {
-    margin-bottom: 0;
+    margin-bottom: 5px;
   }
 }
-.itemQuantity {
-
+.itemQuantitySelector {
+  margin: 10px 0;
+}
+.removeItemButton {
+  text-transform: uppercase;
+  font-size: var(--font-size-small);
 }

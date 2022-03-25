@@ -63,6 +63,15 @@ select {
     margin-bottom: 0;
   }
 }
+.inputWrap {
+  &.inputSolidBg {
+    & input {
+      border: 0;
+      background: var(--peach);
+      padding: 5px;
+    }
+  }
+}
 .checkboxWrap {
   & label {
     display: block;

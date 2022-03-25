@@ -47,6 +47,9 @@
   background: var(--orange);
   color: var(--dark-slate);
 }
+.cSummaryDiscount {
+  margin-bottom: 20px;
+}
 @media (--mobile-only) {
   .checkoutWrap {
     flex-direction: column;

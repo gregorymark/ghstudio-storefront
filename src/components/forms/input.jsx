@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react"
-import { inputWrap, inputError } from "../../styles/modules/forms.module.css"
+import {
+  inputWrap,
+  inputError,
+  inputSolidBg,
+} from "../../styles/modules/forms.module.css"
 import ErrorMessage from "../utility/error-message"
 
 const Input = ({
@@ -11,6 +15,7 @@ const Input = ({
   formik,
   defaultValue,
   className,
+  solidBg = false,
 }) => {
   const [error, setError] = useState(null)
 
@@ -21,7 +26,11 @@ const Input = ({
   }, [formik, name])
 
   return (
-    <div className={`${inputWrap} ${className} ${error ? inputError : ""}`}>
+    <div
+      className={`${inputWrap} ${className} ${error ? inputError : ""} ${
+        solidBg ? inputSolidBg : ""
+      }`}
+    >
       {label && <label>{label}</label>}
       <input
         type={type}

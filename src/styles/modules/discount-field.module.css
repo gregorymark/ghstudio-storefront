@@ -1,0 +1,23 @@
+.discountFieldset {
+  display: flex;
+  align-items: start;
+}
+.discountInput input,
+.applyButton {
+  height: 37px;
+}
+.discountInput {
+  margin: 0;
+  flex-grow: 1;
+
+  & input {
+    display: block;
+  }
+  & > div {
+    font-size: var(--font-size-small);
+  }
+}
+.applyButton {
+  composes: button from "../modules/forms.module.css";
+  font-size: 0.5em;
+}
