@@ -26,7 +26,7 @@ const Product = ({ data, pageContext }) => {
   const { region } = useRegion()
   const {
     loading,
-    actions: { addItem },
+    actions: { addItem, setCartOpen },
   } = useCart()
 
   const {
@@ -47,6 +47,7 @@ const Product = ({ data, pageContext }) => {
 
   const handleAddToCart = async () => {
     await addItem({ variant_id: variant.id, quantity })
+    setCartOpen(true)
     resetOptions()
   }
 
@@ -93,7 +94,14 @@ const Product = ({ data, pageContext }) => {
             title="Select quantity"
           />
           <div className={subTotal}>
-            Total: {formatPrice(price?.amount, region?.currency_code, quantity, taxRate)} excluding shipping
+            Total:{" "}
+            {formatPrice(
+              price?.amount,
+              region?.currency_code,
+              quantity,
+              taxRate
+            )}{" "}
+            excluding shipping
           </div>
           <button
             className={addToCartButton}

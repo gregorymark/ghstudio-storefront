@@ -1,7 +1,11 @@
 .authLayout {
   max-width: 600px;
   margin: 0 auto;
+
+  & form {
+    margin-top: 30px;
+  }
 }
-.authLayoutHead {
-  
+.authSubmitButton {
+  composes: button from "./forms.module.css"
 }

@@ -29,6 +29,7 @@ const CART_ID = "cart_id"
 const isBrowser = typeof window !== "undefined"
 
 export const CartProvider = props => {
+  const [open, setOpen] = useState(false)
   const [cart, setCart] = useState(defaultCartContext.cart)
   const [loading, setLoading] = useState(defaultCartContext.loading)
   const client = useMedusa()
@@ -113,6 +114,10 @@ export const CartProvider = props => {
       setCart(cart)
       setLoading(false)
     })
+  }
+
+  const setCartOpen = value => {
+    setOpen(value)
   }
 
   const removeItem = async id => {
@@ -231,6 +236,7 @@ export const CartProvider = props => {
         ...defaultCartContext,
         loading,
         cart,
+        open,
         actions: {
           addItem,
           removeItem,
@@ -242,6 +248,7 @@ export const CartProvider = props => {
           getCartShippingOptions,
           addShippingMethod,
           updateCart,
+          setCartOpen,
         },
       }}
     />

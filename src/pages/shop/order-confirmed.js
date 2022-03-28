@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react"
 import Totals from "../../components/checkout/totals"
-import OrderCompletedItem from "../../components/orders/order-completed-item"
+import OrderItem from "../../components/orders/order-item"
 import SearchEngineOptimization from "../../components/utility/seo"
+import { orderItemWrap } from "../../styles/modules/order-item.module.css"
+import { introText } from "../../styles/modules/order-confirmed.module.css"
 
 const OrderConfirmed = ({ location }) => {
   const [order, setOrder] = useState(undefined)
@@ -22,20 +24,20 @@ const OrderConfirmed = ({ location }) => {
   }, [location.state])
 
   return !loading && order ? (
-    <div className="layout-base flex justify-center pb-16">
+    <>
       <SearchEngineOptimization title="Order Confirmed" />
-      <div className="max-w-xl">
-        <span className="text-xs font-medium mb-2">THANK YOU</span>
+      <div>
+        <span>THANK YOU</span>
         <h1>Order Confirmed</h1>
-        <p className="text-md font-light mt-3">
+        <p className={introText}>
           Your order #{order.display_id} was successfully processed. You will
           receive an email with the tracking number of your parcel once it’s
           avaliable.
         </p>
-        <div className="my-8">
+        <div className={orderItemWrap}>
           {order.items.map((item, index) => {
             return (
-              <OrderCompletedItem
+              <OrderItem
                 key={index}
                 item={item}
                 currencyCode={order.currency_code}
@@ -52,11 +54,11 @@ const OrderConfirmed = ({ location }) => {
           discount={order.discounts}
         />
       </div>
-    </div>
+    </>
   ) : (
-    <div>
+    <>
       <p>loading...</p>
-    </div>
+    </>
   )
 }
 

@@ -17,7 +17,6 @@ import CartTray from "../cart-tray"
 
 const Header = ({ showShopNav }) => {
   const [navOpen, setNavOpen] = useState(false)
-  const [cartOpen, setCartOpen] = useState(false)
 
   return (
     <>
@@ -29,9 +28,7 @@ const Header = ({ showShopNav }) => {
         <button className={navToggle} onClick={() => setNavOpen(true)}>
           Menu
         </button>
-        {showShopNav && (
-          <CartIcon className={cartIconMobile} setOpen={setCartOpen} />
-        )}
+        {showShopNav && <CartIcon className={cartIconMobile} />}
         <nav className={`${navWrap} ${navOpen ? navIsOpen : ""}`}>
           <div className={mainNav}>
             <Link to="/" onClick={() => setNavOpen(false)}>
@@ -58,12 +55,12 @@ const Header = ({ showShopNav }) => {
               >
                 Account
               </Link>
-              <CartIcon setOpen={setCartOpen} />
+              <CartIcon />
             </div>
           )}
         </nav>
       </header>
-      <CartTray open={cartOpen} setOpen={setCartOpen} />
+      <CartTray />
     </>
   )
 }

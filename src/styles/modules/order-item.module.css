@@ -1,0 +1,37 @@
+.orderItem {
+  display: flex;
+}
+.imageWrap {
+  width: 200px;
+  margin-right: 20px;
+}
+.orderInfo {
+  & h3 {
+    margin-bottom: 5px;
+  }
+}
+.infoItem {
+  line-height: 1.2;
+  font-size: 0.85em;
+}
+@media (--tablet) {
+  .orderItemWrap {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -10px;
+    margin-right: -10px;
+
+    & .orderItem {
+      padding: 0 10px;
+      width: 50%;
+      margin-bottom: 30px;
+    }
+  }
+}
+@media (--desktop) {
+  .orderItemWrap {
+    & .orderItem {
+      width: 33.33333%;
+    }
+  }
+}

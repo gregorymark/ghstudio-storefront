@@ -61,7 +61,7 @@ export const useAuth = () => {
         return
       }
 
-      navigate("/")
+      navigate("/shop/account")
     },
   })
 

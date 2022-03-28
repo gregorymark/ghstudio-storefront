@@ -5,7 +5,10 @@ import AuthLayout from "../../../components/auth/auth-layout"
 import Input from "../../../components/forms/input"
 import ErrorMessage from "../../../components/utility/error-message"
 import SearchEngineOptimization from "../../../components/utility/seo"
-import { authLayoutHead } from "../../../styles/modules/account.module.css"
+import {
+  authLayoutHead,
+  authSubmitButton,
+} from "../../../styles/modules/account.module.css"
 
 const SignIn = () => {
   const {
@@ -48,7 +51,9 @@ const SignIn = () => {
             formik={loginForm}
             defaultValue={loginForm.values.password}
           />
-          <button type="submit">Sign in</button>
+          <button type="submit" className={authSubmitButton}>
+            Sign in
+          </button>
         </form>
       </AuthLayout>
     </>

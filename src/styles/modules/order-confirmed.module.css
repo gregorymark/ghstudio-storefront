@@ -1,0 +1,4 @@
+.introText {
+  max-width: var(--intro-text-width);
+  margin-bottom: 60px;
+}

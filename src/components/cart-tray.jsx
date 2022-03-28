@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { useCart } from "../hooks/use-cart"
 import CartItem from "./cart/cart-item"
 import {
@@ -10,12 +10,16 @@ import {
 } from "../styles/modules/cart-tray.module.css"
 import CartReview from "./cart/cart-review"
 
-const CartTray = ({ open, setOpen }) => {
-  const { cart } = useCart()
+const CartTray = () => {
+  const {
+    cart,
+    open,
+    actions: { setCartOpen },
+  } = useCart()
 
   return (
     <div className={`${tray} ${open ? trayIsOpen : ""}`}>
-      <button className={trayClose} onClick={() => setOpen(false)}>
+      <button className={trayClose} onClick={() => setCartOpen(false)}>
         Close
       </button>
       {cart.items < 1 ? (
@@ -37,7 +41,7 @@ const CartTray = ({ open, setOpen }) => {
               })}
             </div>
           </div>
-          <CartReview cart={cart} setOpen={setOpen} />
+          <CartReview cart={cart} setOpen={setCartOpen} />
         </>
       )}
     </div>

@@ -5,7 +5,10 @@ import Input from "../../../components/forms/input"
 import ErrorMessage from "../../../components/utility/error-message"
 import SearchEngineOptimization from "../../../components/utility/seo"
 import { useAuth } from "../../../hooks/use-auth"
-import { authLayoutHead } from "../../../styles/modules/account.module.css"
+import {
+  authLayoutHead,
+  authSubmitButton,
+} from "../../../styles/modules/account.module.css"
 
 const SignUp = () => {
   const {
@@ -68,7 +71,9 @@ const SignUp = () => {
             formik={registerForm}
             defaultValue={registerForm.values.password}
           />
-          <button type="submit">Sign up</button>
+          <button type="submit" className={authSubmitButton}>
+            Sign up
+          </button>
         </form>
       </AuthLayout>
     </>
