@@ -142,6 +142,7 @@ export const CustomerProvider = props => {
           loginCustomer,
           updateCustomerDetails,
           retrieveOrders,
+          clearCustomer,
         },
       }}
     />

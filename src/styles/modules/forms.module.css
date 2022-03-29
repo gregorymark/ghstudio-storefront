@@ -13,6 +13,9 @@
   transition: background 0.3s;
   letter-spacing: 0.1em;
 }
+label {
+  font-size: 0.8em;
+}
 input[type="text"],
 input[type="email"],
 input[type="date"],
@@ -25,8 +28,8 @@ select {
   appearance: none;
   background: transparent;
   font-family: var(--def-font-stack);
-  font-size: 0.8em;
-  padding: 0 0 5px;
+  font-size: 0.9em;
+  padding: 0 0 8px;
   color: var(--dark-slate);
   border-width: 0 0 2px 0;
   border-color: var(--semi-o-pink);

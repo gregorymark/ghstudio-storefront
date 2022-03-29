@@ -1,12 +1,13 @@
 .accountNav {
-  text-transform: uppercase;
-  font-size: 0.8em;
-  letter-spacing: 1px;
   margin-bottom: var(--large-spacing);
   border-bottom: 1px solid var(--orange);
   display: flex;
 
-  & a {
+  & a,
+  & button {
+    text-transform: uppercase;
+    font-size: 0.8em;
+    letter-spacing: 1px;
     text-decoration: none;
     padding: 5px 15px;
     border: 1px solid var(--orange);
