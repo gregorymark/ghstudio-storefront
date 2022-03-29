@@ -1,0 +1,21 @@
+.orderHistoryEntry {
+  border-top: 1px solid var(--border-slate);
+  padding: 30px 0;
+}
+.orderBulletin {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 500px;
+}
+.bulletinInfo {
+  width: 33.33333%;
+  margin-bottom: 20px;
+}
+.orderHistoryItem {
+  border: 1px solid var(--orange);
+  padding: 20px 10px;
+  display: flex;
+}
+.imageWrap {
+  margin-right: 20px;
+}

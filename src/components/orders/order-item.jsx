@@ -1,6 +1,7 @@
 import React from "react"
 import { formatPrice } from "../../utils/format-price"
-import ImageContainer from "../utility/image-container"
+import { GatsbyImage } from "gatsby-plugin-image"
+import { useCart } from "../../hooks/use-cart"
 import {
   orderItem,
   imageWrap,
@@ -9,10 +10,18 @@ import {
 } from "../../styles/modules/order-item.module.css"
 
 const OrderItem = ({ item, currencyCode, taxRate }) => {
+  const { prodThumbImages } = useCart()
+
+  const prodThumbData = prodThumbImages.find(
+    thumbData => thumbData.product_id === item.variant?.product_id
+  )
+
   return (
     <div className={orderItem}>
       <div className={imageWrap}>
-        <ImageContainer src={item.thumbnail} alt={item.title} />
+        {prodThumbData && (
+          <GatsbyImage image={prodThumbData.image_data} alt={item.title} />
+        )}
       </div>
       <div className={orderInfo}>
         <h3>{item.title}</h3>

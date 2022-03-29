@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import Totals from "../../components/checkout/totals"
 import OrderItem from "../../components/orders/order-item"
 import SearchEngineOptimization from "../../components/utility/seo"
-import { orderItemWrap } from "../../styles/modules/order-item.module.css"
+import { orderItemsWrap } from "../../styles/modules/order-item.module.css"
 import { introText } from "../../styles/modules/order-confirmed.module.css"
 
 const OrderConfirmed = ({ location }) => {
@@ -34,7 +34,7 @@ const OrderConfirmed = ({ location }) => {
           receive an email with the tracking number of your parcel once it’s
           avaliable.
         </p>
-        <div className={orderItemWrap}>
+        <div className={orderItemsWrap}>
           {order.items.map((item, index) => {
             return (
               <OrderItem

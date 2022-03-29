@@ -50,7 +50,7 @@ const Header = ({ showShopNav }) => {
           {showShopNav && (
             <div className={shopNav}>
               <Link
-                to="/shop/account/sign-in"
+                to="/shop/account"
                 onClick={() => setNavOpen(false)}
               >
                 Account

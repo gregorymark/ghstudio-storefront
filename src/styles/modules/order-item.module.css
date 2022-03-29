@@ -1,5 +1,11 @@
 .orderItem {
   display: flex;
+  padding: 20px 10px;
+  border: 1px solid var(--orange);
+
+  & + .orderItem {
+    margin-top: 10px;
+  }
 }
 .imageWrap {
   width: 200px;
@@ -13,25 +19,4 @@
 .infoItem {
   line-height: 1.2;
   font-size: 0.85em;
-}
-@media (--tablet) {
-  .orderItemWrap {
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: -10px;
-    margin-right: -10px;
-
-    & .orderItem {
-      padding: 0 10px;
-      width: 50%;
-      margin-bottom: 30px;
-    }
-  }
-}
-@media (--desktop) {
-  .orderItemWrap {
-    & .orderItem {
-      width: 33.33333%;
-    }
-  }
 }

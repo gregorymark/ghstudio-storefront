@@ -22,8 +22,6 @@ const StripePayment = () => {
     return null
   }
 
-  console.log(stripeSession)
-
   const options = {
     clientSecret: stripeSession.data.client_secret,
   }

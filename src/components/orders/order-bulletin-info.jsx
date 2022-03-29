@@ -1,10 +1,11 @@
 import React from "react"
+import { bulletinInfo } from "../../styles/modules/order-history.module.css"
 
 const OrderBulletinInfo = ({ label, info }) => {
   return (
-    <div className="text-sm">
-      <p className="font-semibold mb-2">{label}</p>
-      <p className="font-light">{info}</p>
+    <div className={bulletinInfo}>
+      <h4>{label}</h4>
+      <div>{info}</div>
     </div>
   )
 }

@@ -32,11 +32,6 @@ const OrderHistory = () => {
       <SearchEngineOptimization title="Order History" />
       <div>
         <h1>Order History</h1>
-        <p>
-          View the status of recent orders, and manage returns. It is not
-          possible to return an order before it has been processed, if you wish
-          to cancel your order then please contact us.
-        </p>
       </div>
       <div>
         {orders.map(order => {

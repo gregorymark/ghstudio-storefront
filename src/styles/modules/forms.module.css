@@ -197,6 +197,7 @@ select {
   border-bottom: 2px solid var(--semi-o-pink);
 }
 .stripeCardFormSubmit {
+  composes: button;
   margin-top: 30px;
 }
 @media (--tablet) {

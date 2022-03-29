@@ -1,3 +1,5 @@
+import { graphql, useStaticQuery } from "gatsby"
+import { getImage } from "gatsby-plugin-image"
 import React, { createContext, useEffect, useState } from "react"
 import { useMedusa } from "../hooks/use-medusa"
 import { useRegion } from "../hooks/use-region"
@@ -34,6 +36,30 @@ export const CartProvider = props => {
   const [loading, setLoading] = useState(defaultCartContext.loading)
   const client = useMedusa()
   const { region } = useRegion()
+
+  const thumbData = useStaticQuery(graphql`
+    {
+      allMedusaProducts {
+        edges {
+          node {
+            id
+            thumbnail {
+              childImageSharp {
+                gatsbyImageData(width: 300)
+              }
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  const prodThumbImages = thumbData.allMedusaProducts.edges.map(edge => {
+    return {
+      product_id: edge.node.id,
+      image_data: getImage(edge.node.thumbnail),
+    }
+  })
 
   const setCartItem = cart => {
     if (isBrowser) {
@@ -237,6 +263,7 @@ export const CartProvider = props => {
         loading,
         cart,
         open,
+        prodThumbImages,
         actions: {
           addItem,
           removeItem,
