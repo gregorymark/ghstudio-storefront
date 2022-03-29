@@ -3,7 +3,7 @@
 .selector {
   display: inline-flex;
   border: 1px solid var(--orange);
-  border-radius: 3px;
+  border-radius: var(--small-round-corner);
   height: var(--button-height);
 }
 .button {

@@ -1,9 +1,10 @@
-.orderItem {
+.orderProduct {
   display: flex;
   padding: 20px 10px;
   border: 1px solid var(--orange);
+  border-radius: var(--small-round-corner);
 
-  & + .orderItem {
+  & + .orderProduct {
     margin-top: 10px;
   }
 }
@@ -11,7 +12,7 @@
   width: 200px;
   margin-right: 20px;
 }
-.orderInfo {
+.productInfo {
   & h3 {
     margin-bottom: 5px;
   }

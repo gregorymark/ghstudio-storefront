@@ -1,11 +1,56 @@
+.accountNav {
+  text-transform: uppercase;
+  font-size: 0.8em;
+  letter-spacing: 1px;
+  margin-bottom: var(--large-spacing);
+  border-bottom: 1px solid var(--orange);
+  display: flex;
+
+  & a {
+    text-decoration: none;
+    padding: 5px 15px;
+    border: 1px solid var(--orange);
+    border-radius: var(--small-round-corner) var(--small-round-corner) 0 0;
+    background: var(--pale-peach);
+    margin-bottom: -1px;
+    margin-right: 5px;
+
+    &:first-child {
+      border-left-width: 1px;
+    }
+    &[aria-current] {
+      border-bottom-width: 0;
+    }
+  }
+}
 .authLayout {
-  max-width: 600px;
+  max-width: var(--content-width);
   margin: 0 auto;
 
   & form {
-    margin-top: 30px;
+    margin-top: var(--mid-spacing);
   }
 }
 .authSubmitButton {
-  composes: button from "./forms.module.css"
+  composes: button from "./forms.module.css";
+}
+@media (--mobile-only) {
+  .accountContactForm {
+    margin-bottom: var(--mid-spacing);
+  }
+}
+@media (--tablet) {
+  .accountDetailsFormWrap {
+    display: flex;
+  }
+  .accountContactForm,
+  .accountPasswordForm {
+    width: 50%;
+  }
+  .accountContactForm {
+    padding-right: 20px;
+  }
+  .accountPasswordForm {
+    padding-left: 20px;
+  }
 }

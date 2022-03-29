@@ -6,6 +6,11 @@ import Input from "../../../components/forms/input"
 import FormContainer from "../../../components/forms/form-container"
 import SearchEngineOptimization from "../../../components/utility/seo"
 import { useCustomer } from "../../../hooks/use-customer"
+import {
+  accountDetailsFormWrap,
+  accountContactForm,
+  accountPasswordForm,
+} from "../../../styles/modules/account.module.css"
 
 const Account = () => {
   const {
@@ -43,7 +48,7 @@ const Account = () => {
       passwordConfirmation: Yup.string().oneOf(
         [Yup.ref("password"), null],
         "Passwords must match"
-      ),
+      ).required("Please confirm your new password"),
     }),
     onSubmit: async (values, { setStatus }) => {
       const response = await updateCustomerDetails({
@@ -61,73 +66,64 @@ const Account = () => {
   return (
     <AccountLayout>
       <SearchEngineOptimization title="Account" />
-      <div>
+      <div className={accountDetailsFormWrap}>
         <FormContainer
-          title="Contact"
+          title="Contact details"
           description="We need this information in case we need to contact you."
           handleSubmit={contactForm.handleSubmit}
+          className={accountContactForm}
         >
-          <div>
-            <Input
-              label="First name"
-              autocomplete="given-name"
-              name="first_name"
-              formik={contactForm}
-              defaultValue={contactForm.values.first_name}
-            />
-            <div />
-            <Input
-              label="Last name"
-              autocomplete="family-name"
-              name="last_name"
-              formik={contactForm}
-              defaultValue={contactForm.values.last_name}
-            />
-          </div>
-          <div>
-            <Input
-              label="Email"
-              autocomplete="email"
-              name="email"
-              formik={contactForm}
-              defaultValue={contactForm.values.email}
-            />
-            <div />
-            <Input
-              label="Phone (optional)"
-              autocomplete="tel"
-              name="phone"
-              formik={contactForm}
-              defaultValue={contactForm.values.phone}
-            />
-          </div>
+          <Input
+            label="First name"
+            autocomplete="given-name"
+            name="first_name"
+            formik={contactForm}
+            defaultValue={contactForm.values.first_name}
+          />
+          <Input
+            label="Last name"
+            autocomplete="family-name"
+            name="last_name"
+            formik={contactForm}
+            defaultValue={contactForm.values.last_name}
+          />
+          <Input
+            label="Email"
+            autocomplete="email"
+            name="email"
+            formik={contactForm}
+            defaultValue={contactForm.values.email}
+          />
+          <Input
+            label="Phone (optional)"
+            autocomplete="tel"
+            name="phone"
+            formik={contactForm}
+            defaultValue={contactForm.values.phone}
+          />
         </FormContainer>
-      </div>
-      <div>
         <FormContainer
           title="Password"
           description="You can use this form to reset your password."
           handleSubmit={passwordForm.handleSubmit}
+          className={accountPasswordForm}
         >
-          <div>
-            <Input
-              label="New Password"
-              type="password"
-              autocomplete="new-password"
-              name="password"
-              formik={passwordForm}
-              defaultValue={passwordForm.values.password}
-            />
-            <div />
-            <Input
-              label="Confirm Password"
-              type="password"
-              autocomplete="new-password"
-              name="passwordConfirmation"
-              formik={passwordForm}
-              defaultValue={passwordForm.values.passwordConfirmation}
-            />
-          </div>
+          <Input
+            label="New Password"
+            type="password"
+            autocomplete="new-password"
+            name="password"
+            formik={passwordForm}
+            defaultValue={passwordForm.values.password}
+          />
+          <Input
+            label="Confirm Password"
+            type="password"
+            autocomplete="new-password"
+            name="passwordConfirmation"
+            formik={passwordForm}
+            defaultValue={passwordForm.values.passwordConfirmation}
+          />
         </FormContainer>
       </div>
     </AccountLayout>

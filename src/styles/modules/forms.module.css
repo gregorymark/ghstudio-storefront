@@ -186,6 +186,10 @@ select {
     border-color: var(--pink);
   }
 }
+.submitButton {
+  composes: button;
+  margin-top: var(--mid-spacing);
+}
 .errorMessage {
   font-size: 18px;
   color: var(--pink);
@@ -198,9 +202,12 @@ select {
 }
 .stripeCardFormSubmit {
   composes: button;
-  margin-top: 30px;
+  margin-top: var(--mid-spacing);
 }
 @media (--tablet) {
+  .generalForm {
+    max-width: var(--content-width);
+  }
   .button {
     &:hover {
       background: var(--orange);

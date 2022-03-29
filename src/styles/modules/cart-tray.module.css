@@ -34,7 +34,7 @@
 }
 .trayItem {
   display: flex;
-  margin-bottom: 30px;
+  margin-bottom: var(--mid-spacing);
 }
 .trayClose {
   composes: crossButton from "../parts/typography.css";

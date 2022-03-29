@@ -3,7 +3,7 @@ import React, { useEffect } from "react"
 import { useCustomer } from "../../hooks/use-customer"
 import AccountNav from "./account-nav"
 
-const AccountLayout = ({ children }) => {
+const AccountLayout = ({ className, children }) => {
   const { loading, customer } = useCustomer()
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const AccountLayout = ({ children }) => {
       {loading || !customer ? (
         <p>Loading...</p>
       ) : (
-        <div>
+        <div className={className}>
           <AccountNav />
           {children}
         </div>

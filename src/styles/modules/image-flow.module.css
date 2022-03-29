@@ -1,5 +1,5 @@
 .imageFlowImage {
-  margin-bottom: 30px;
+  margin-bottom: var(--mid-spacing);
 }
 @media (--tablet) {
   .imageFlow {

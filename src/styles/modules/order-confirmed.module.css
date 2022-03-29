@@ -1,4 +1,4 @@
 .introText {
-  max-width: var(--intro-text-width);
-  margin-bottom: 60px;
+  max-width: var(--content-width);
+  margin-bottom: var(--large-spacing);
 }

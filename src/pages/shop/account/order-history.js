@@ -31,15 +31,8 @@ const OrderHistory = () => {
     <AccountLayout>
       <SearchEngineOptimization title="Order History" />
       <div>
-        <h1>Order History</h1>
-      </div>
-      <div>
         {orders.map(order => {
-          return (
-            <div key={order.display_id}>
-              <OrderHistoryEntry order={order} />
-            </div>
-          )
+          return <OrderHistoryEntry key={order.display_id} order={order} />
         })}
       </div>
     </AccountLayout>

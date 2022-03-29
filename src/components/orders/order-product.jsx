@@ -3,13 +3,13 @@ import { formatPrice } from "../../utils/format-price"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { useCart } from "../../hooks/use-cart"
 import {
-  orderItem,
+  orderProduct,
   imageWrap,
-  orderInfo,
+  productInfo,
   infoItem,
-} from "../../styles/modules/order-item.module.css"
+} from "../../styles/modules/order-product.module.css"
 
-const OrderItem = ({ item, currencyCode, taxRate }) => {
+const OrderProduct = ({ item, currencyCode, taxRate, className }) => {
   const { prodThumbImages } = useCart()
 
   const prodThumbData = prodThumbImages.find(
@@ -17,13 +17,13 @@ const OrderItem = ({ item, currencyCode, taxRate }) => {
   )
 
   return (
-    <div className={orderItem}>
+    <div className={`${orderProduct} ${className}`}>
       <div className={imageWrap}>
         {prodThumbData && (
           <GatsbyImage image={prodThumbData.image_data} alt={item.title} />
         )}
       </div>
-      <div className={orderInfo}>
+      <div className={productInfo}>
         <h3>{item.title}</h3>
         <div className={infoItem}>{item.description}</div>
         <div className={infoItem}>Quantity {item.quantity}</div>
@@ -36,4 +36,4 @@ const OrderItem = ({ item, currencyCode, taxRate }) => {
   )
 }
 
-export default OrderItem
+export default OrderProduct

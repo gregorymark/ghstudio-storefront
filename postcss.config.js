@@ -6,12 +6,12 @@ module.exports = () => ({
     postcssImport,
     postcssPresetEnv({
       features: {
-        'nesting-rules': true,
-        'custom-media-queries': {
-          importFrom: 'src/styles/parts/custom-media.css'
-        }
+        "nesting-rules": true,
+        "custom-media-queries": {
+          importFrom: "src/styles/parts/custom-media.css",
+        },
       },
-      importFrom: 'src/styles/parts/variables.css'
+      importFrom: "src/styles/parts/variables.css",
     }),
-  ]
+  ],
 })

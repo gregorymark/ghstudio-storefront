@@ -1,7 +1,6 @@
 import { graphql, useStaticQuery } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
-import Footer from "./footer"
 import Header from "./header"
 import { useCart } from "../hooks/use-cart"
 import { main } from "../styles/modules/layout.module.css"

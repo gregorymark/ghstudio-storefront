@@ -1,6 +1,6 @@
 .header {
   max-width: var(--max-site-width);
-  margin: 0 auto 60px;
+  margin: 0 auto var(--large-spacing);
   line-height: 1;
   display: flex;
 
@@ -142,10 +142,6 @@
     & a {
       position: relative;
       top: -5px;
-
-      &[aria-current="page"] {
-        text-decoration-line: underline;
-      }
     }
     & button {
       margin-left: 15px;
