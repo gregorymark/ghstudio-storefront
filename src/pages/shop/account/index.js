@@ -1,5 +1,5 @@
+import React, { useState } from "react"
 import { useFormik } from "formik"
-import React from "react"
 import * as Yup from "yup"
 import AccountLayout from "../../../components/account/account-layout"
 import Input from "../../../components/forms/input"
@@ -11,12 +11,16 @@ import {
   accountContactForm,
   accountPasswordForm,
 } from "../../../styles/modules/account.module.css"
+import { successMessage } from "../../../styles/modules/forms.module.css"
 
 const Account = () => {
   const {
     customer,
     actions: { updateCustomerDetails },
   } = useCustomer()
+
+  const [showContactFormSuccess, setShowContactFormSuccess] = useState(false)
+  const [showPasswordFormSuccess, setShowPasswordFormSuccess] = useState(false)
 
   const contactForm = useFormik({
     enableReinitialize: true,
@@ -34,6 +38,7 @@ const Account = () => {
     }),
     onSubmit: async values => {
       const response = await updateCustomerDetails(values)
+      setShowContactFormSuccess(true)
     },
   })
 
@@ -45,12 +50,11 @@ const Account = () => {
     },
     validationSchema: Yup.object({
       password: Yup.string().required("Password is required"),
-      passwordConfirmation: Yup.string().oneOf(
-        [Yup.ref("password"), null],
-        "Passwords must match"
-      ).required("Please confirm your new password"),
+      passwordConfirmation: Yup.string()
+        .oneOf([Yup.ref("password"), null], "Passwords must match")
+        .required("Please confirm your new password"),
     }),
-    onSubmit: async (values, { setStatus }) => {
+    onSubmit: async (values, { setStatus, resetForm }) => {
       const response = await updateCustomerDetails({
         password: values.password,
       })
@@ -60,6 +64,8 @@ const Account = () => {
       }
 
       setStatus({ success: true })
+      setShowPasswordFormSuccess(true)
+      resetForm()
     },
   })
 
@@ -72,34 +78,38 @@ const Account = () => {
           description="We need this information in case we need to contact you."
           handleSubmit={contactForm.handleSubmit}
           className={accountContactForm}
+          onChange={() => setShowContactFormSuccess(false)}
         >
+          {showContactFormSuccess && (
+            <div className={successMessage}>Your contact details were saved</div>
+          )}
           <Input
             label="First name"
             autocomplete="given-name"
             name="first_name"
             formik={contactForm}
-            defaultValue={contactForm.values.first_name}
+            value={contactForm.values.first_name}
           />
           <Input
             label="Last name"
             autocomplete="family-name"
             name="last_name"
             formik={contactForm}
-            defaultValue={contactForm.values.last_name}
+            value={contactForm.values.last_name}
           />
           <Input
             label="Email"
             autocomplete="email"
             name="email"
             formik={contactForm}
-            defaultValue={contactForm.values.email}
+            value={contactForm.values.email}
           />
           <Input
             label="Phone (optional)"
             autocomplete="tel"
             name="phone"
             formik={contactForm}
-            defaultValue={contactForm.values.phone}
+            value={contactForm.values.phone}
           />
         </FormContainer>
         <FormContainer
@@ -107,14 +117,18 @@ const Account = () => {
           description="You can use this form to reset your password."
           handleSubmit={passwordForm.handleSubmit}
           className={accountPasswordForm}
+          onChange={() => setShowPasswordFormSuccess(false)}
         >
+          {showPasswordFormSuccess && (
+            <div className={successMessage}>Your new password was saved</div>
+          )}
           <Input
             label="New Password"
             type="password"
             autocomplete="new-password"
             name="password"
             formik={passwordForm}
-            defaultValue={passwordForm.values.password}
+            value={passwordForm.values.password}
           />
           <Input
             label="Confirm Password"
@@ -122,7 +136,7 @@ const Account = () => {
             autocomplete="new-password"
             name="passwordConfirmation"
             formik={passwordForm}
-            defaultValue={passwordForm.values.passwordConfirmation}
+            value={passwordForm.values.passwordConfirmation}
           />
         </FormContainer>
       </div>

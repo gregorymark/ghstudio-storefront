@@ -40,28 +40,28 @@ const SignUp = () => {
             autocomplete="given-name"
             name={"first_name"}
             formik={registerForm}
-            defaultValue={registerForm.values.first_name}
+            value={registerForm.values.first_name}
           />
           <Input
             label="Last name"
             autocomplete="family-name"
             name={"last_name"}
             formik={registerForm}
-            defaultValue={registerForm.values.last_name}
+            value={registerForm.values.last_name}
           />
           <Input
             label="Email"
             autocomplete="email"
             name={"email"}
             formik={registerForm}
-            defaultValue={registerForm.values.email}
+            value={registerForm.values.email}
           />
           <Input
             label="Phone (optional)"
             autocomplete="tel"
             name={"phone"}
             formik={registerForm}
-            defaultValue={registerForm.values.phone}
+            value={registerForm.values.phone}
           />
           <Input
             label="Password"
@@ -69,7 +69,7 @@ const SignUp = () => {
             autocomplete="new-password"
             name={"password"}
             formik={registerForm}
-            defaultValue={registerForm.values.password}
+            value={registerForm.values.password}
           />
           <button type="submit" className={authSubmitButton}>
             Sign up

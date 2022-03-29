@@ -8,10 +8,10 @@ const ShippingOptions = ({
   title,
   currencyCode = "eur",
   onSelect,
-  defaultValue,
+  value,
   controller,
 }) => {
-  const defaultSelectedOption = options.find(o => o.id === defaultValue?.id)
+  const defaultSelectedOption = options.find(o => o.id === value?.id)
   const [selectedOption, setSelectedOption] = useState(defaultSelectedOption)
 
   const handleOptionChange = option => {

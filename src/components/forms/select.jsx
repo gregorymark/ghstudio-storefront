@@ -7,7 +7,7 @@ const Select = ({
   name,
   autocomplete = "on",
   formik,
-  defaultValue,
+  value,
   options,
   placeholder = "",
   className,
@@ -26,7 +26,7 @@ const Select = ({
       <select
         name={name}
         autoComplete={autocomplete}
-        value={defaultValue}
+        value={value}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
       >

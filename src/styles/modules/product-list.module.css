@@ -3,7 +3,7 @@
 }
 .productListItemContent {
   padding: 10px;
-  border: 1px solid var(--mid-peach);
+  border: 1px solid var(--orange);
   position: relative;
 }
 .productInfo {
@@ -52,7 +52,7 @@
       transform: scale(1.01);
 
       & .productListItemContent {
-        border-color: var(--orange);
+        border-color: var(--mid-peach);
       }
     }
   }

@@ -5,7 +5,7 @@ const CheckoutDelivery = ({ controller, options, currencyCode = "eur" }) => {
   const { setSelectedShippingMethod, selectedShippingMethod } = controller
   return (
     <ShippingOptions
-      defaultValue={selectedShippingMethod}
+      value={selectedShippingMethod}
       onSelect={setSelectedShippingMethod}
       options={options}
       currencyCode={currencyCode}

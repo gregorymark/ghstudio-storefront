@@ -1,5 +1,8 @@
 import React from "react"
-import { generalForm, submitButton } from "../../styles/modules/forms.module.css"
+import {
+  generalForm,
+  submitButton,
+} from "../../styles/modules/forms.module.css"
 
 const FormContainer = ({
   title,
@@ -7,12 +10,14 @@ const FormContainer = ({
   handleSubmit,
   className,
   children,
+  onChange,
 }) => {
   return (
     <form
       onSubmit={e => {
         handleSubmit(e)
       }}
+      onChange={onChange}
       className={`${generalForm} ${className}`}
     >
       <div>

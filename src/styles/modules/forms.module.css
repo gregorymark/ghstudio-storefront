@@ -197,6 +197,11 @@ select {
   font-size: 18px;
   color: var(--pink);
 }
+.successMessage {
+  font-size: 0.9em;
+  color: var(--green);
+  margin-bottom: 10px;
+}
 .stripeCardForm {
 }
 .stripeCardElementWrap {

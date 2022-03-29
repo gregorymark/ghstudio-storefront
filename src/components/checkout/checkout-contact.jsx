@@ -6,7 +6,7 @@ const CheckoutContact = ({ controller }) => {
     <Input
       formik={controller}
       name={"email"}
-      defaultValue={controller.values.email}
+      value={controller.values.email}
       label={"Email"}
       autocomplete="email"
     />

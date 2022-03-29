@@ -59,7 +59,7 @@ const DiscountField = ({ className }) => {
           <>
             <Input
               name={"discount_code"}
-              defaultValue={discountForm.values.discount_code}
+              value={discountForm.values.discount_code}
               formik={discountForm}
               solidBg={true}
               className={discountInput}
@@ -76,7 +76,7 @@ const DiscountField = ({ className }) => {
           <>
             <Input
               name={"discount_code"}
-              defaultValue={code}
+              value={code}
               formik={discountForm}
               solidBg={true}
               className={discountInput}

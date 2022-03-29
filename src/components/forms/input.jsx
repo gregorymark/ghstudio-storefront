@@ -13,7 +13,7 @@ const Input = ({
   placeholder = "",
   autocomplete = "on",
   formik,
-  defaultValue,
+  value,
   className,
   solidBg = false,
 }) => {
@@ -37,7 +37,7 @@ const Input = ({
         name={name}
         autoComplete={autocomplete}
         placeholder={placeholder}
-        defaultValue={defaultValue}
+        value={value}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
       />
