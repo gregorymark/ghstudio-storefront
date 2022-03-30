@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import Totals from "../../components/checkout/totals"
 import OrderProduct from "../../components/orders/order-product"
+import OrderProductsList from "../../components/orders/order-products-list"
 import SearchEngineOptimization from "../../components/utility/seo"
 import {
   introText,
@@ -36,18 +37,11 @@ const OrderConfirmed = ({ location }) => {
           receive an email with the tracking number of your parcel once it’s
           avaliable.
         </p>
-        <div className={orderItemsWrap}>
-          {order.items.map((item, index) => {
-            return (
-              <OrderProduct
-                key={index}
-                item={item}
-                currencyCode={order.currency_code}
-                taxRate={order.tax_rate}
-              />
-            )
-          })}
-        </div>
+        <OrderProductsList
+          products={order.items}
+          currencyCode={order.currencyCode}
+          taxRate={order.tax_rate}
+        />
         <Totals
           currencyCode={order.currency_code}
           subtotal={order.subtotal}

@@ -105,6 +105,7 @@ const CheckoutFlow = () => {
             step={step}
             setState={setState}
             isOpen={step.key === state}
+            stepCount={steps.length}
           >
             {step.children}
           </CheckoutStepContainer>

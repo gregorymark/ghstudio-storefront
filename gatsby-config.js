@@ -4,9 +4,9 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    title: `Medusa Gatsby Starter`,
-    description: `Kick off your next, great e-commerce project with this default starter with Medusa, Gatsby and common dev tools.`,
-    author: `@medusajs`,
+    title: `Greg Hannan Studio`,
+    description: `I'm an artist, primarily a painter, with a strong draw towards portraiture and the human figure. Based in Lisbon.`,
+    author: `@gregorymark`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

@@ -1,20 +1,19 @@
 import { Link } from "gatsby"
 import React from "react"
+import Article from "../components/article"
 import SearchEngineOptimization from "../components/utility/seo"
 
 const NotFoundPage = () => (
-  <div className="layout-base">
-    <SearchEngineOptimization title="404: Not found" />
-    <div className="h-full w-full flex flex-col justify-center items-center mt-8">
-      <h1 className="text-3xl">404: NOT FOUND</h1>
-      <p className="mt-2">
-        You just hit a route that doesn&#39;t exist... the sadness 😢
+  <>
+    <SearchEngineOptimization title="404 | Page not found" />
+    <Article>
+      <h1>404</h1>
+      <p>
+        This page doesn't seem to exist. Do you want to go back{" "}
+        <Link to="/">Home</Link>?
       </p>
-      <Link to="/" className="mt-4 btn-ui">
-        Go to frontpage
-      </Link>
-    </div>
-  </div>
+    </Article>
+  </>
 )
 
 export default NotFoundPage

@@ -59,7 +59,7 @@ const CheckoutStepContainer = ({
                   className={checkoutStepButton}
                   onClick={() => setState(step.key - 1)}
                 >
-                  Go back
+                  {`<`} Back
                 </button>
               )}
               <div />
@@ -70,7 +70,7 @@ const CheckoutStepContainer = ({
                   onClick={step.handleSubmit}
                   disabled={step.controller?.isSubmitting}
                 >
-                  Next
+                  Next {`>`}
                 </button>
               )}
             </div>

@@ -1,11 +1,7 @@
 import React from "react"
 import OrderBulletin from "./order-bulletin"
-import OrderProduct from "./order-product"
-import {
-  orderHistoryEntry,
-  orderHistoryProducts,
-  orderHistoryProductWrap,
-} from "../../styles/modules/order-history.module.css"
+import { orderHistoryEntry } from "../../styles/modules/order-history.module.css"
+import OrderProductsList from "./order-products-list"
 
 const OrderHistoryEntry = ({ order }) => {
   const date = new Date(order.created_at).toLocaleDateString()
@@ -18,15 +14,10 @@ const OrderHistoryEntry = ({ order }) => {
       </h2>
       <OrderBulletin order={order} />
       <h3>Order items</h3>
-      <div className={orderHistoryProducts}>
-        {order.items.map((item, i) => {
-          return (
-            <div key={i} className={orderHistoryProductWrap}>
-              <OrderProduct item={item} currencyCode={order.currency_code} />
-            </div>
-          )
-        })}
-      </div>
+      <OrderProductsList
+        products={order.items}
+        currencyCode={order.currency_code}
+      />
     </div>
   )
 }

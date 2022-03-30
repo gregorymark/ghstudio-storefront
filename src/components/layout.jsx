@@ -1,22 +1,10 @@
-import { graphql, useStaticQuery } from "gatsby"
-import PropTypes from "prop-types"
 import React from "react"
+import PropTypes from "prop-types"
 import Header from "./header"
-import { useCart } from "../hooks/use-cart"
 import { main } from "../styles/modules/layout.module.css"
 
 const Layout = ({ path, children }) => {
-  const { cart } = useCart()
-  const showShopNav = path.startsWith("/shop")
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
+  const showShopNav = path?.startsWith("/shop")
 
   return (
     <>

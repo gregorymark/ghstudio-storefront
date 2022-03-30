@@ -26,7 +26,6 @@
   }
 }
 .checkoutStepTick {
-  fill: var(--pink);
   margin-left: auto;
   width: 30px;
 
@@ -43,8 +42,10 @@
 }
 .checkoutStepButton {
   composes: button from "../modules/forms.module.css";
+  padding: 0.4em 1em;
   margin-right: 10px;
-  background: var(--orange);
+  background: var(--mid-peach);
+  border: 1px solid var(--orange);
   color: var(--dark-slate);
 }
 .cSummaryDiscount {
