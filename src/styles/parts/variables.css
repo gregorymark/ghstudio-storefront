@@ -13,8 +13,13 @@
 
   /* Fonts */
   --def-font-stack: "mr-eaves-xl-modern", sans-serif;
+  --def-font-stack-weight: 300;
+  --def-font-stack-bold-weight: 700;
   --display-font-stack: "orpheuspro", serif;
+  --display-font-stack-weight: 400;
   --display-2-font-stack: "mr-eaves-modern", sans-serif;
+  --display-2-font-stack-body-weight: 300;
+  --display-2-font-stack-title-weight: 400;
   --font-size-small: 0.7em;
 
   /* Dimensions */

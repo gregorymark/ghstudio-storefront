@@ -1,4 +1,7 @@
 .selectorWrap {
+  & h4 {
+    margin-bottom: 0.4em;
+  }
 }
 .selector {
   display: inline-flex;

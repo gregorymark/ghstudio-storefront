@@ -8,7 +8,7 @@
     transform: translate3d(-50%, -50%, 0);
     font-family: var(--def-font-stack);
     font-size: 15px;
-    font-weight: bold;
+    font-weight: var(--def-font-stack-bold-weight);
     color: white;
     margin-top: 5px;
   }

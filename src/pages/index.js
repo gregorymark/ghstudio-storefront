@@ -18,8 +18,8 @@ const IndexPage = ({ data }) => {
     <>
       <SearchEngineOptimization title="Home" />
       <blockquote className={introText}>
-        I'm an artist, primarily a painter, with a strong draw towards
-        portraiture and the human figure.
+        I'm an artist, <em>primarily a painter</em>, with a strong draw towards{" "}
+        <em>portraiture and the human figure</em>.
       </blockquote>
       <ImageFlow images={images} />
     </>
@@ -49,21 +49,27 @@ export const query = graphql`
         gatsbyImageData
       }
     }
-    imageCol02Image01: file(relativePath: { eq: "home/Rudi and Maria Detail.jpg" }) {
+    imageCol02Image01: file(
+      relativePath: { eq: "home/Rudi and Maria Detail.jpg" }
+    ) {
       id
       name
       childImageSharp {
         gatsbyImageData
       }
     }
-    imageCol02Image02: file(relativePath: { eq: "home/Corpos sketch pink.png" }) {
+    imageCol02Image02: file(
+      relativePath: { eq: "home/Corpos sketch pink.png" }
+    ) {
       id
       name
       childImageSharp {
         gatsbyImageData
       }
     }
-    imageCol02Image03: file(relativePath: { eq: "home/Male Back with a Striped Duvet.jpg" }) {
+    imageCol02Image03: file(
+      relativePath: { eq: "home/Male Back with a Striped Duvet.jpg" }
+    ) {
       id
       name
       childImageSharp {

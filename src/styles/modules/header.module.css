@@ -11,6 +11,7 @@
 .mainNav,
 .navHomeLink {
   font-family: var(--display-font-stack);
+  font-weight: var(--display-font-stack-weight);
 }
 .navHomeLink {
   color: var(--pink);
