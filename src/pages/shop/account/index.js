@@ -51,8 +51,8 @@ const Account = () => {
     validationSchema: Yup.object({
       password: Yup.string().required("Password is required"),
       passwordConfirmation: Yup.string()
-        .oneOf([Yup.ref("password"), null], "Passwords must match")
-        .required("Please confirm your new password"),
+        .required("Please confirm your new password")
+        .oneOf([Yup.ref("password"), null], "Passwords must match"),
     }),
     onSubmit: async (values, { setStatus, resetForm }) => {
       const response = await updateCustomerDetails({
@@ -81,7 +81,9 @@ const Account = () => {
           onChange={() => setShowContactFormSuccess(false)}
         >
           {showContactFormSuccess && (
-            <div className={successMessage}>Your contact details were saved</div>
+            <div className={successMessage}>
+              Your contact details were saved
+            </div>
           )}
           <Input
             label="First name"

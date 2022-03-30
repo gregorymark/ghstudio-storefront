@@ -1,56 +1,144 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import SearchEngineOptimization from "../components/utility/seo"
-import ImageFlow from "../components/image-flow"
-import { introText } from "../styles/modules/home.module.css"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import {
+  text01,
+  text02,
+  homeImages,
+  homeImage0Wrap,
+  homeImage0,
+  homeImage1Wrap,
+  homeImage1,
+  homeImage2Wrap,
+  homeImage2,
+  homeImage3Wrap,
+  homeImage3,
+  homeImage4Wrap,
+  homeImage4,
+  homeImage5Wrap,
+  homeImage5,
+  homeImage6Wrap,
+  homeImage6,
+} from "../styles/modules/home.module.css"
 
 const IndexPage = ({ data }) => {
   const images = [
-    data.imageCol01Image01,
-    data.imageCol01Image02,
-    data.imageCol01Image03,
-    data.imageCol02Image01,
-    data.imageCol02Image02,
-    data.imageCol02Image03,
+    { name: data.image0.name, imageData: getImage(data.image0) },
+    { name: data.image1.name, imageData: getImage(data.image1) },
+    { name: data.image2.name, imageData: getImage(data.image2) },
+    { name: data.image3.name, imageData: getImage(data.image3) },
+    { name: data.image4.name, imageData: getImage(data.image4) },
+    { name: data.image5.name, imageData: getImage(data.image5) },
+    { name: data.image6.name, imageData: getImage(data.image6) },
   ]
 
   return (
     <>
       <SearchEngineOptimization title="Home" />
-      <blockquote className={introText}>
+      <blockquote className={text01}>
         I'm an artist, <em>primarily a painter</em>, with a strong draw towards{" "}
         <em>portraiture and the human figure</em>.
       </blockquote>
-      <ImageFlow images={images} />
+      <div className={homeImages}>
+        <div className={homeImage0Wrap}>
+          <GatsbyImage
+            image={images[0].imageData}
+            alt={images[0].name}
+            className={homeImage0}
+          />
+        </div>
+        <div className={homeImage1Wrap}>
+          <GatsbyImage
+            image={images[1].imageData}
+            alt={images[1].name}
+            className={homeImage1}
+          />
+        </div>
+        <blockquote className={text02}>
+          I also enjoy <em>commissions</em>, you can find out more <Link to="/commissions">here</Link>.
+        </blockquote>
+        <div className={homeImage2Wrap}>
+          <GatsbyImage
+            image={images[2].imageData}
+            alt={images[2].name}
+            className={homeImage2}
+          />
+        </div>
+        <div className={homeImage3Wrap}>
+          <GatsbyImage
+            image={images[3].imageData}
+            alt={images[3].name}
+            className={homeImage3}
+          />
+        </div>
+        <div className={homeImage4Wrap}>
+          <GatsbyImage
+            image={images[4].imageData}
+            alt={images[4].name}
+            className={homeImage4}
+          />
+        </div>
+        <div className={homeImage5Wrap}>
+          <GatsbyImage
+            image={images[5].imageData}
+            alt={images[5].name}
+            className={homeImage5}
+          />
+        </div>
+        <div className={homeImage6Wrap}>
+          <GatsbyImage
+            image={images[6].imageData}
+            alt={images[6].name}
+            className={homeImage6}
+          />
+        </div>
+      </div>
     </>
   )
 }
 
 export const query = graphql`
   {
-    imageCol01Image01: file(relativePath: { eq: "home/Olivia.png" }) {
+    image0: file(relativePath: { eq: "home/Olivia.png" }) {
       id
       name
       childImageSharp {
         gatsbyImageData
       }
     }
-    imageCol01Image02: file(relativePath: { eq: "home/Large Interior.png" }) {
+    image1: file(relativePath: { eq: "home/Rudi and Maria Detail.jpg" }) {
       id
       name
       childImageSharp {
         gatsbyImageData
       }
     }
-    imageCol01Image03: file(relativePath: { eq: "home/Rudi Zygadlo.jpg" }) {
+    image2: file(relativePath: { eq: "home/Dinner Party at Roos.jpg" }) {
       id
       name
       childImageSharp {
         gatsbyImageData
       }
     }
-    imageCol02Image01: file(
-      relativePath: { eq: "home/Rudi and Maria Detail.jpg" }
+    image3: file(relativePath: { eq: "home/Jacket on the Striped Bed.jpg" }) {
+      id
+      name
+      childImageSharp {
+        gatsbyImageData
+      }
+    }
+    image4: file(relativePath: { eq: "home/Rudi and Maria.jpg" }) {
+      id
+      name
+      childImageSharp {
+        gatsbyImageData
+      }
+    }
+    image5: file(
+      relativePath: {
+        eq: "home/Still life with moka, pepper, squash and aubergine.jpg"
+      }
     ) {
       id
       name
@@ -58,18 +146,7 @@ export const query = graphql`
         gatsbyImageData
       }
     }
-    imageCol02Image02: file(
-      relativePath: { eq: "home/Corpos sketch pink.png" }
-    ) {
-      id
-      name
-      childImageSharp {
-        gatsbyImageData
-      }
-    }
-    imageCol02Image03: file(
-      relativePath: { eq: "home/Male Back with a Striped Duvet.jpg" }
-    ) {
+    image6: file(relativePath: { eq: "home/Dymchurch.jpg" }) {
       id
       name
       childImageSharp {

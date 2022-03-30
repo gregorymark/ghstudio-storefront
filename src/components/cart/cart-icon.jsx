@@ -15,7 +15,7 @@ const CartIcon = ({ className }) => {
       className={`${cartIcon} ${className}`}
       onClick={() => setCartOpen(true)}
     >
-      <ShoppingBagIcon /> {cartCount > 0 && <sup>{cartCount}</sup>}
+      <ShoppingBagIcon /> {<sup>{cartCount}</sup>}
     </button>
   )
 }

@@ -10,7 +10,7 @@
     font-size: 15px;
     font-weight: var(--def-font-stack-bold-weight);
     color: white;
-    margin-top: 5px;
+    margin-top: 4px;
   }
   & svg {
     display: block;
