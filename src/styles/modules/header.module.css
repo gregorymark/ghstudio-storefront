@@ -67,10 +67,15 @@
     margin-top: 10px;
     border-top: 1px solid var(--border-slate);
     padding-top: 12px;
-
-    & button {
-      display: none;
-    }
+  }
+  .cartIcon {
+    display: none;
+  }
+  .logoutButton {
+    margin-top: 5px;
+  }
+  .spacer {
+    display: none;
   }
 }
 @media (--tablet) {
@@ -139,14 +144,14 @@
     right: 0;
     font-size: 18px;
     margin-top: 10px;
-
-    & a {
-      position: relative;
-      top: -5px;
-    }
-    & button {
-      margin-left: 15px;
-    }
+    display: flex;
+    align-items: center;
+  }
+  .cartIcon {
+    margin-left: 15px;
+  }
+  .spacer {
+    padding: 0 5px;
   }
   .navClose {
     display: none;

@@ -1,0 +1,10 @@
+.collectionIntro {
+  margin-bottom: var(--large-spacing);
+
+  & h1 {
+    margin-bottom: var(--mid-spacing);
+  }
+  & p {
+    max-width: var(--content-width);
+  }
+}

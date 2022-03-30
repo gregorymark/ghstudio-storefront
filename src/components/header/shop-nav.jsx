@@ -1,14 +1,50 @@
-import React, { useState } from "react"
+import React from "react"
 import { Link } from "gatsby"
-import CartTray from "../cart-tray"
-import { shopNav } from "../../styles/modules/header.module.css"
+import { useCustomer } from "../../hooks/use-customer"
+import {
+  shopNav,
+  cartIcon,
+  accountButton,
+  loginButton,
+  logoutButton,
+  spacer,
+} from "../../styles/modules/header.module.css"
+import CartIcon from "../cart/cart-icon"
 
-const ShopNav = ({ setOpen }) => {
-  const onShopRoute = true
-  if (!onShopRoute) return null
+const ShopNav = ({ setNavOpen }) => {
+  const {
+    loading,
+    customer,
+    actions: { clearCustomer },
+  } = useCustomer()
+
   return (
     <div className={shopNav}>
       {/* Region toggle is here on original starter */}
+      {loading || !customer ? (
+        <Link
+          to="/shop/account/sign-in"
+          className={loginButton}
+          onClick={() => setNavOpen(false)}
+        >
+          Log in
+        </Link>
+      ) : (
+        <>
+          <Link
+            to="/shop/account"
+            className={accountButton}
+            onClick={() => setNavOpen(false)}
+          >
+            Account
+          </Link>
+          <span className={spacer}>/</span>
+          <button className={logoutButton} onClick={() => clearCustomer()}>
+            Log out
+          </button>
+        </>
+      )}
+      <CartIcon className={cartIcon} />
     </div>
   )
 }

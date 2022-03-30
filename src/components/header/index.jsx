@@ -1,5 +1,5 @@
-import { Link } from "gatsby"
 import React, { useState } from "react"
+import { Link } from "gatsby"
 import SearchEngineOptimization from "../utility/seo"
 import {
   header,
@@ -9,11 +9,11 @@ import {
   navIsOpen,
   navHomeLink,
   mainNav,
-  shopNav,
   cartIconMobile,
 } from "../../styles/modules/header.module.css"
 import CartIcon from "../cart/cart-icon"
 import CartTray from "../cart-tray"
+import ShopNav from "./shop-nav"
 
 const Header = ({ showShopNav }) => {
   const [navOpen, setNavOpen] = useState(false)
@@ -34,11 +34,8 @@ const Header = ({ showShopNav }) => {
             <Link to="/" onClick={() => setNavOpen(false)}>
               Work
             </Link>
-            <Link to="/about" onClick={() => setNavOpen(false)}>
-              About
-            </Link>
-            <Link to="/commissions" onClick={() => setNavOpen(false)}>
-              Commissions
+            <Link to="/contact" onClick={() => setNavOpen(false)}>
+              Contact
             </Link>
             <Link to="/shop" onClick={() => setNavOpen(false)}>
               Shop
@@ -47,17 +44,7 @@ const Header = ({ showShopNav }) => {
               Close
             </button>
           </div>
-          {showShopNav && (
-            <div className={shopNav}>
-              <Link
-                to="/shop/account"
-                onClick={() => setNavOpen(false)}
-              >
-                Account
-              </Link>
-              <CartIcon />
-            </div>
-          )}
+          {showShopNav && <ShopNav setNavOpen={setNavOpen} />}
         </nav>
       </header>
       <CartTray />
