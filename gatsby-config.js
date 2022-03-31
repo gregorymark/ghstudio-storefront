@@ -44,5 +44,6 @@ module.exports = {
           process.env.GATSBY_MEDUSA_BACKEND_URL || `http://localhost:9000`,
       },
     },
+    `gatsby-plugin-netlify`,
   ],
 }
