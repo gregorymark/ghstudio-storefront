@@ -5,9 +5,7 @@ import { useRegion } from "../../hooks/use-region"
 import ProductLink from "../utility/product-link"
 import {
   productListItem,
-  productListItemInner,
   productListItemContent,
-  productImage,
   productInfo,
   productLink,
   productPrice,
@@ -26,17 +24,13 @@ const ProductListItem = ({ product, rowHeight = null, screenWidth = null }) => {
 
   const imageData = getImage(product.thumbnail)
 
-  const updateGridRowEnd = () => {
+  useEffect(() => {
     if (rowHeight && screenWidth) {
       const rowSpan = Math.ceil(
         (itemContentEl.current.getBoundingClientRect().height + 40) / rowHeight
       )
       setGridRowEnd("span " + rowSpan)
     }
-  }
-
-  useEffect(() => {
-    updateGridRowEnd()
   }, [rowHeight, screenWidth])
 
   const fromPrice = useMemo(() => {
@@ -46,12 +40,11 @@ const ProductListItem = ({ product, rowHeight = null, screenWidth = null }) => {
 
   return (
     <div className={productListItem} style={{ gridRowEnd }}>
-      <div className={productListItemInner}>
+      <div>
         <div className={productListItemContent} ref={itemContentEl}>
           <GatsbyImage
             image={imageData}
             alt={product.title}
-            className={productImage}
           />
           <div className={productInfo}>
             <h3>

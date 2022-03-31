@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { formatPrice } from "../../utils/format-price"
 import Radio from "../forms/radio"
 import ErrorMessage from "../utility/error-message"
 
 const ShippingOptions = ({
   options = [],
-  title,
   currencyCode = "eur",
   onSelect,
   value,

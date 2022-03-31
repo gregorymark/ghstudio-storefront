@@ -21,7 +21,7 @@ import {
 
 const Product = ({ data, pageContext }) => {
   const { product } = data
-  const { regionId, taxRate, currencyCode, handle, prevPath, nextPath } =
+  const { taxRate, prevPath, nextPath } =
     pageContext
   const { region } = useRegion()
   const {

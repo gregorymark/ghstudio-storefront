@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react"
 import Totals from "../../components/checkout/totals"
-import OrderProduct from "../../components/orders/order-product"
 import OrderProductsList from "../../components/orders/order-products-list"
 import SearchEngineOptimization from "../../components/utility/seo"
-import {
-  introText,
-  orderItemsWrap,
-} from "../../styles/modules/order-confirmed.module.css"
+import { introText } from "../../styles/modules/order-confirmed.module.css"
 
 const OrderConfirmed = ({ location }) => {
   const [order, setOrder] = useState(undefined)

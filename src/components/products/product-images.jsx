@@ -29,7 +29,7 @@ const ProductImages = ({ mainImageUrl, images, mainAlt = "", className }) => {
   let mainImageData
   let thumbImagesJsx = []
   let carouselImagesJsx = []
-  images.map((image, index) => {
+  images.forEach((image, index) => {
     const imageData = getImage(image.image)
 
     if (image.url === mainImageUrl) {

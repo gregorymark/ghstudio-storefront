@@ -4,8 +4,6 @@ import { useCustomer } from "../../hooks/use-customer"
 import {
   shopNav,
   cartIcon,
-  accountButton,
-  loginButton,
   logoutButton,
   spacer,
 } from "../../styles/modules/header.module.css"
@@ -22,20 +20,12 @@ const ShopNav = ({ setNavOpen }) => {
     <div className={shopNav}>
       {/* Region toggle is here on original starter */}
       {loading || !customer ? (
-        <Link
-          to="/shop/account/sign-in"
-          className={loginButton}
-          onClick={() => setNavOpen(false)}
-        >
+        <Link to="/shop/account/sign-in" onClick={() => setNavOpen(false)}>
           Log in
         </Link>
       ) : (
         <>
-          <Link
-            to="/shop/account"
-            className={accountButton}
-            onClick={() => setNavOpen(false)}
-          >
+          <Link to="/shop/account" onClick={() => setNavOpen(false)}>
             Account
           </Link>
           <span className={spacer}>/</span>

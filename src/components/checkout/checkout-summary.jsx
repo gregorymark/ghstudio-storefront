@@ -2,17 +2,12 @@ import React from "react"
 import Totals from "../checkout/totals"
 import CartItem from "../cart/cart-item"
 import DiscountField from "./discount-field"
-import {
-  cSummary,
-  cSummaryItems,
-  cSummaryDiscount,
-  cSummaryTotals,
-} from "../../styles/modules/checkout.module.css"
+import { cSummaryDiscount } from "../../styles/modules/checkout.module.css"
 
 const CheckoutSummary = ({ cart, shippingOption }) => {
   return (
-    <div className={cSummary}>
-      <div className={cSummaryItems}>
+    <div>
+      <div>
         {cart.items.map(item => {
           return (
             <CartItem
@@ -32,7 +27,6 @@ const CheckoutSummary = ({ cart, shippingOption }) => {
         shipping={shippingOption?.amount}
         currencyCode={cart.region?.currency_code}
         discount={cart.discount}
-        className={cSummaryTotals}
       />
     </div>
   )

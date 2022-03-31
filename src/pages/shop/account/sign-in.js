@@ -5,10 +5,7 @@ import AuthLayout from "../../../components/auth/auth-layout"
 import Input from "../../../components/forms/input"
 import ErrorMessage from "../../../components/utility/error-message"
 import SearchEngineOptimization from "../../../components/utility/seo"
-import {
-  authLayoutHead,
-  authSubmitButton,
-} from "../../../styles/modules/account.module.css"
+import { authSubmitButton } from "../../../styles/modules/account.module.css"
 
 const SignIn = () => {
   const {
@@ -19,7 +16,7 @@ const SignIn = () => {
     <>
       <SearchEngineOptimization title="Sign In" />
       <AuthLayout>
-        <div className={authLayoutHead}>
+        <div>
           <h1>Welcome back</h1>
           <p>
             Don't have an account?{" "}

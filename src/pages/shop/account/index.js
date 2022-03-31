@@ -37,7 +37,7 @@ const Account = () => {
       phone: Yup.string().optional(),
     }),
     onSubmit: async values => {
-      const response = await updateCustomerDetails(values)
+      await updateCustomerDetails(values)
       setShowContactFormSuccess(true)
     },
   })

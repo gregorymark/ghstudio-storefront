@@ -5,10 +5,7 @@ import Input from "../../../components/forms/input"
 import ErrorMessage from "../../../components/utility/error-message"
 import SearchEngineOptimization from "../../../components/utility/seo"
 import { useAuth } from "../../../hooks/use-auth"
-import {
-  authLayoutHead,
-  authSubmitButton,
-} from "../../../styles/modules/account.module.css"
+import { authSubmitButton } from "../../../styles/modules/account.module.css"
 
 const SignUp = () => {
   const {
@@ -19,7 +16,7 @@ const SignUp = () => {
     <>
       <SearchEngineOptimization title="Sign Up" />
       <AuthLayout>
-        <div className={authLayoutHead}>
+        <div>
           <h1>Create account</h1>
           <p>
             Already have an account?{" "}

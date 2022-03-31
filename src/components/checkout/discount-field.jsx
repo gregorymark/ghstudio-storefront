@@ -4,7 +4,6 @@ import * as Yup from "yup"
 import { useCart } from "../../hooks/use-cart"
 import Input from "../forms/input"
 import {
-  discountField,
   discountFieldset,
   discountInput,
   applyButton,
@@ -52,7 +51,7 @@ const DiscountField = ({ className }) => {
   }
 
   return (
-    <div className={`${className} ${discountField}`}>
+    <div className={`${className}`}>
       <h4>Discount code</h4>
       <fieldset className={discountFieldset}>
         {!code ? (

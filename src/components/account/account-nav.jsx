@@ -1,7 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
 import { accountNav } from "../../styles/modules/account.module.css"
-import { useCustomer } from "../../hooks/use-customer"
 
 const AccountNav = () => {
 

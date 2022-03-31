@@ -7,19 +7,12 @@ import {
   text02,
   homeImages,
   homeImage0Wrap,
-  homeImage0,
   homeImage1Wrap,
-  homeImage1,
   homeImage2Wrap,
-  homeImage2,
   homeImage3Wrap,
-  homeImage3,
   homeImage4Wrap,
-  homeImage4,
   homeImage5Wrap,
-  homeImage5,
   homeImage6Wrap,
-  homeImage6,
 } from "../styles/modules/home.module.css"
 
 const IndexPage = ({ data }) => {
@@ -45,14 +38,12 @@ const IndexPage = ({ data }) => {
           <GatsbyImage
             image={images[0].imageData}
             alt={images[0].name}
-            className={homeImage0}
           />
         </div>
         <div className={homeImage1Wrap}>
           <GatsbyImage
             image={images[1].imageData}
             alt={images[1].name}
-            className={homeImage1}
           />
         </div>
         <blockquote className={text02}>
@@ -62,35 +53,30 @@ const IndexPage = ({ data }) => {
           <GatsbyImage
             image={images[2].imageData}
             alt={images[2].name}
-            className={homeImage2}
           />
         </div>
         <div className={homeImage3Wrap}>
           <GatsbyImage
             image={images[3].imageData}
             alt={images[3].name}
-            className={homeImage3}
           />
         </div>
         <div className={homeImage4Wrap}>
           <GatsbyImage
             image={images[4].imageData}
             alt={images[4].name}
-            className={homeImage4}
           />
         </div>
         <div className={homeImage5Wrap}>
           <GatsbyImage
             image={images[5].imageData}
             alt={images[5].name}
-            className={homeImage5}
           />
         </div>
         <div className={homeImage6Wrap}>
           <GatsbyImage
             image={images[6].imageData}
             alt={images[6].name}
-            className={homeImage6}
           />
         </div>
       </div>

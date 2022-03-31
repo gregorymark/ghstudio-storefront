@@ -4,7 +4,6 @@ import {
   thumbWrap,
   itemInfo,
   itemQuantitySelector,
-  itemQuantity,
   removeItemButton,
 } from "../../styles/modules/cart-item.module.css"
 import { useCart } from "../../hooks/use-cart"
@@ -53,7 +52,7 @@ const CartItem = ({ item, currencyCode, isInteractive = true }) => {
             </button>
           </>
         ) : (
-          <div className={itemQuantity}>
+          <div>
             <strong>Quantity</strong> {item.quantity}
           </div>
         )}
