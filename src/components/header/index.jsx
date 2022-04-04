@@ -5,6 +5,7 @@ import {
   header,
   navWrap,
   navToggle,
+  navToggleOpen,
   navClose,
   navIsOpen,
   navHomeLink,
@@ -25,8 +26,11 @@ const Header = ({ showShopNav }) => {
         <Link to="/" title="Home" className={navHomeLink}>
           Greg Hannan
         </Link>
-        <button className={navToggle} onClick={() => setNavOpen(true)}>
-          Menu
+        <button
+          className={`${navToggle} ${navOpen ? navToggleOpen : ""}`}
+          onClick={() => setNavOpen(!navOpen)}
+        >
+          <span>Menu</span>
         </button>
         {showShopNav && <CartIcon className={cartIconMobile} />}
         <nav className={`${navWrap} ${navOpen ? navIsOpen : ""}`}>
@@ -40,9 +44,6 @@ const Header = ({ showShopNav }) => {
             <Link to="/shop" onClick={() => setNavOpen(false)}>
               Shop
             </Link>
-            <button className={navClose} onClick={() => setNavOpen(false)}>
-              Close
-            </button>
           </div>
           {showShopNav && <ShopNav setNavOpen={setNavOpen} />}
         </nav>

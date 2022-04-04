@@ -29,6 +29,7 @@ h3 {
   font-family: var(--display-font-stack);
   font-weight: var(--display-font-stack-weight);
   line-height: 1.2;
+  color: var(--turquoise);
 }
 h4,
 h5,
@@ -52,6 +53,11 @@ blockquote {
   font-family: var(--display-font-stack);
   font-weight: var(--display-font-stack-weight);
   line-height: 1.4;
+  color: var(--turquoise);
+
+  & a {
+    color: var(--turquoise);
+  }
 }
 button {
   border: 0;

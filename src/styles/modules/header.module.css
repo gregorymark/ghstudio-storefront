@@ -23,6 +23,9 @@
   }
 }
 @media (--mobile-only) {
+  .header {
+    align-items: center;
+  }
   .navWrap {
     position: fixed;
     bottom: 100%;
@@ -45,6 +48,76 @@
   }
   .navToggle {
     margin-left: auto;
+    width: 30px;
+    height: 21px;
+    overflow: hidden;
+    text-indent: -9999em;
+    outline: none;
+    position: relative;
+
+    &:before,
+    &:after,
+    & span:before,
+    & span:after {
+      content: " ";
+      background: var(--turquoise);
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 1px;
+    }
+    & span:before,
+    & span:after{
+      background: var(--pink);
+    }
+    &:before {
+      top: 0;
+      transition: top 0.25s 0.25s, opacity 0s 0.25s, color 0.25s;
+    }
+    &:after {
+      bottom: 0;
+      transition: bottom 0.25s 0.25s, opacity 0s 0.25s, color 0.25s;
+    }
+    & span {
+      width: 100%;
+      height: 100%;
+      display: block;
+      position: relative;
+
+      &:before,
+      &:after {
+        top: 10px;
+        transform-origin: 50%;
+        transition: transform 0.25s cubic-bezier(0.87, -0.41, 0.19, 1.44),
+          color 0.25s;
+      }
+    }
+  }
+  .navToggleOpen {
+    z-index: 99999;
+
+    & span {
+      &:before,
+      &:after {
+        transition: transform 0.25s cubic-bezier(0.87, -0.41, 0.19, 1.44) 0.25s;
+      }
+      &:before {
+        transform: rotate(45deg);
+      }
+      &:after {
+        transform: rotate(-45deg);
+      }
+    }
+    &:before {
+      top: 10px;
+      opacity: 0;
+      transition: top 0.25s, opacity 0s 0.25s;
+    }
+    &:after {
+      bottom: 10px;
+      opacity: 0;
+      transition: bottom 0.25s, opacity 0s 0.25s;
+    }
   }
   .navClose {
     composes: crossButton from "../parts/typography.css";
@@ -110,6 +183,7 @@
           position: absolute;
           top: 0;
           left: -0.7em;
+          color: var(--dark-slate);
         }
       }
     }
@@ -122,6 +196,7 @@
       &[aria-current="page"] {
         text-decoration: none;
         position: relative;
+        color: var(--turquoise);
         outline: none;
         -webkit-tap-highlight-color: transparent;
 

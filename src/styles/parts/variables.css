@@ -9,7 +9,8 @@
   --pink: #ae546e;
   --semi-o-pink: rgba(174, 84, 109, 0.5);
   --orange: #fbaf5d;
-  --success-colour: #5eab9f;
+  --turquoise: #43b5a2;
+  --success-colour: var(--turquoise);
 
   /* Fonts */
   --def-font-stack: "mr-eaves-xl-modern", sans-serif;
