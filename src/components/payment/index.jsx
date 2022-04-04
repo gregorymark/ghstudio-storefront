@@ -2,6 +2,7 @@ import React, { useEffect } from "react"
 import { useCart } from "../../hooks/use-cart"
 import ManualPayment from "./manual-payment"
 import StripePayment from "./stripe-payment"
+import { loadingSvg } from "../../styles/modules/checkout.module.css"
 
 const Payment = ({ cartId = null }) => {
   const {
@@ -37,6 +38,7 @@ const Payment = ({ cartId = null }) => {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
+            className={loadingSvg}
           >
             <circle
               cx="12"

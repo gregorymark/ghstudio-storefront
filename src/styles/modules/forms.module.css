@@ -1,3 +1,8 @@
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .button {
   border: 0;
   font-family: var(--def-font-stack);
@@ -156,16 +161,13 @@ select {
       top: 25%;
       left: 25%;
       border-radius: 50%;
-      background: var(--dark-slate);
+      background: var(--pale-slate);
       opacity: 0;
     }
     &.radioUiDark {
-      background: var(--border-slate);
-      box-shadow: inset 0 0 5px var(--pale-slate);
-
-      &:before {
-        background: var(--peach);
-      }
+      background: var(--mid-peach);
+      border: 1px solid var(--pale-slate);
+      box-shadow: none;
     }
   }
   & input[type="radio"] {
@@ -211,6 +213,24 @@ select {
 .stripeCardFormSubmit {
   composes: button;
   margin-top: var(--mid-spacing);
+  height: 53px;
+  width: 80px;
+
+  & svg {
+    width: 24px;
+    height: 24px;
+    display: block;
+    animation: spin 1s linear infinite;
+    color: var(--pale-peach);
+    margin: 0 auto;
+
+    & circle {
+      opacity: 0.25;
+    }
+    & path {
+      opacity: 0.75;
+    }
+  }
 }
 @media (--tablet) {
   .generalForm {
