@@ -41,6 +41,10 @@ select {
   border-style: solid;
   width: 100%;
   outline: none;
+
+  &:focus {
+    border-color: var(--pink);
+  }
 }
 input[type="text"],
 input[type="email"],
