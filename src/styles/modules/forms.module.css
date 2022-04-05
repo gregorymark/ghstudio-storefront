@@ -188,6 +188,11 @@ select {
         }
       }
     }
+    &:focus {
+      & ~ .radioUi {
+        border-color: var(--pink);
+      }
+    }
   }
 }
 .inputError {

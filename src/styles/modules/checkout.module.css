@@ -53,6 +53,10 @@
   background: var(--mid-peach);
   border: 1px solid var(--orange);
   color: var(--dark-slate);
+
+  &:focus {
+    border-color: var(--pink);
+  }
 }
 .cSummaryDiscount {
   margin-bottom: 20px;

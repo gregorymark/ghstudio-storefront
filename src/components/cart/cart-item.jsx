@@ -53,7 +53,7 @@ const CartItem = ({ item, currencyCode, isInteractive = true }) => {
           </>
         ) : (
           <div>
-            <strong>Quantity</strong> {item.quantity}
+            Quantity {item.quantity}
           </div>
         )}
       </div>
