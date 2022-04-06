@@ -1,12 +1,12 @@
 import _ from "lodash"
-import React from "react"
+import React, { useState, useMemo, useEffect } from "react"
 
 export const useProduct = (product = { options: [], variants: [] }) => {
-  const [options, setOptions] = React.useState({})
-  const [quantity, setQuantity] = React.useState(1)
+  const [options, setOptions] = useState({})
+  const [quantity, setQuantity] = useState(1)
   const { variants } = product
 
-  React.useEffect(() => {
+  useEffect(() => {
     const optionObj = {}
     for (const option of product.options) {
       Object.assign(optionObj, { [option.id]: option.values[0].value })
@@ -14,7 +14,7 @@ export const useProduct = (product = { options: [], variants: [] }) => {
     setOptions(optionObj)
   }, [product])
 
-  const variantMap = React.useMemo(() => {
+  const variantMap = useMemo(() => {
     const map = {}
 
     for (const variant of variants) {
@@ -30,7 +30,7 @@ export const useProduct = (product = { options: [], variants: [] }) => {
     return map
   }, [variants])
 
-  const variant = React.useMemo(() => {
+  const variant = useMemo(() => {
     let variantId = undefined
 
     for (const key of Object.keys(variantMap)) {
@@ -42,12 +42,20 @@ export const useProduct = (product = { options: [], variants: [] }) => {
     return product.variants.find(v => v.id === variantId)
   }, [options, variantMap, product.variants])
 
+  useEffect(() => {
+    if (quantity > variant?.inventory_quantity) {
+      setQuantity(variant.inventory_quantity)
+    }
+  }, [variant])
+
   const updateOptions = update => {
     setOptions({ ...options, ...update })
   }
 
   const increaseQuantity = () => {
-    setQuantity(quantity + 1)
+    if (!(quantity + 1 > variant.inventory_quantity)) {
+      setQuantity(quantity + 1)
+    }
   }
 
   const decreaseQuantity = () => {

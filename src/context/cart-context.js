@@ -125,6 +125,10 @@ export const CartProvider = props => {
     }
   }, [cart.id, cart.region, region?.id, client.carts])
 
+  useEffect(() => {
+    cart.items.sort((a, b) => (a.created_at > b.created_at ? 1 : -1))
+  }, [cart.items])
+
   const addItem = async item => {
     setLoading(true)
 
@@ -161,6 +165,10 @@ export const CartProvider = props => {
     setLoading(true)
 
     const cartId = cart.id
+
+    if (item.quantity > item.max) {
+      return false
+    }
 
     return client.carts.lineItems
       .update(cartId, item.id, { quantity: item.quantity })

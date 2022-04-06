@@ -38,10 +38,18 @@ const CartItem = ({ item, currencyCode, isInteractive = true }) => {
               className={itemQuantitySelector}
               quantity={item.quantity}
               increment={() =>
-                updateQuantity({ id: item.id, quantity: item.quantity + 1 })
+                updateQuantity({
+                  id: item.id,
+                  quantity: item.quantity + 1,
+                  max: item.variant.inventory_quantity,
+                })
               }
               decrement={() =>
-                updateQuantity({ id: item.id, quantity: item.quantity - 1 })
+                updateQuantity({
+                  id: item.id,
+                  quantity: item.quantity - 1,
+                  max: item.variant.inventory_quantity,
+                })
               }
             />
             <button
@@ -52,9 +60,7 @@ const CartItem = ({ item, currencyCode, isInteractive = true }) => {
             </button>
           </>
         ) : (
-          <div>
-            Quantity {item.quantity}
-          </div>
+          <div>Quantity {item.quantity}</div>
         )}
       </div>
     </div>

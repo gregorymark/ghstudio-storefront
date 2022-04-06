@@ -134,6 +134,7 @@ export const query = graphql`
         }
       }
       variants {
+        inventory_quantity
         options {
           value
           option_id
