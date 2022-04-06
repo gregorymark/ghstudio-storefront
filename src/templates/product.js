@@ -45,9 +45,12 @@ const Product = ({ data, pageContext }) => {
     : undefined
 
   const handleAddToCart = async () => {
-    await addItem({ variant_id: variant.id, quantity })
-    setCartOpen(true)
-    resetOptions()
+    addItem({ variant_id: variant.id, quantity }).then(success => {
+      if (success) {
+        setCartOpen(true)
+        resetOptions()
+      }
+    })
   }
 
   return (

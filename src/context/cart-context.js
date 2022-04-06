@@ -78,6 +78,8 @@ export const CartProvider = props => {
           const existingCart = await client.carts
             .retrieve(existingCartId)
             .then(({ cart }) => cart)
+            .catch(err => console.log(err.message))
+
           if (!existingCart.completed_at) {
             setCartItem(existingCart)
             return
@@ -87,7 +89,11 @@ export const CartProvider = props => {
         }
       }
 
-      const newCart = await client.carts.create({}).then(({ cart }) => cart)
+      const newCart = await client.carts
+        .create({})
+        .then(({ cart }) => cart)
+        .catch(err => console.log(err.message))
+
       setCartItem(newCart)
       setLoading(false)
     }
@@ -112,6 +118,7 @@ export const CartProvider = props => {
       const cartRes = await client.carts
         .update(cartId, { region_id: region.id })
         .then(({ cart }) => cart)
+        .catch(err => console.log(err.message))
 
       if (cartRes) {
         setCart(cartRes)
@@ -135,15 +142,28 @@ export const CartProvider = props => {
     let cartId = cart.id
 
     if (!cartId) {
-      const newCart = await client.carts.create({}).then(({ cart }) => cart)
+      const newCart = await client.carts
+        .create({})
+        .then(({ cart }) => cart)
+        .catch(err => console.log(err.message))
+
       cartId = newCart.id
       setCartItem(newCart)
     }
 
-    return client.carts.lineItems.create(cartId, item).then(({ cart }) => {
-      setCart(cart)
-      setLoading(false)
-    })
+    return client.carts.lineItems
+      .create(cartId, item)
+      .then(({ cart }) => {
+        setCart(cart)
+        setLoading(false)
+
+        return true
+      })
+      .catch(err => {
+        console.log(err.message)
+
+        return false
+      })
   }
 
   const setCartOpen = value => {
@@ -155,10 +175,13 @@ export const CartProvider = props => {
 
     const cartId = cart.id
 
-    return client.carts.lineItems.delete(cartId, id).then(({ cart }) => {
-      setCart(cart)
-      setLoading(false)
-    })
+    return client.carts.lineItems
+      .delete(cartId, id)
+      .then(({ cart }) => {
+        setCart(cart)
+        setLoading(false)
+      })
+      .catch(err => console.log(err.message))
   }
 
   const updateQuantity = async item => {
@@ -175,6 +198,13 @@ export const CartProvider = props => {
       .then(({ cart }) => {
         setCart(cart)
         setLoading(false)
+
+        return true
+      })
+      .catch(err => {
+        console.log(err.message)
+
+        return false
       })
   }
 
@@ -189,6 +219,7 @@ export const CartProvider = props => {
         setCart(cart)
         setLoading(false)
       })
+      .catch(err => console.log(err.message))
   }
 
   const getCartShippingOptions = async (providedCartId = null) => {
@@ -202,6 +233,7 @@ export const CartProvider = props => {
         setLoading(false)
         return shipping_options
       })
+      .catch(err => console.log(err.message))
   }
 
   const addShippingMethod = async payload => {
@@ -209,10 +241,13 @@ export const CartProvider = props => {
 
     const cartId = cart.id
 
-    return client.carts.addShippingMethod(cartId, payload).then(({ cart }) => {
-      setCart(cart)
-      setLoading(false)
-    })
+    return client.carts
+      .addShippingMethod(cartId, payload)
+      .then(({ cart }) => {
+        setCart(cart)
+        setLoading(false)
+      })
+      .catch(err => console.log(err.message))
   }
 
   const updateCart = async payload => {
@@ -220,10 +255,13 @@ export const CartProvider = props => {
 
     const cartId = cart.id
 
-    return client.carts.update(cartId, payload).then(({ cart }) => {
-      setCart(cart)
-      setLoading(false)
-    })
+    return client.carts
+      .update(cartId, payload)
+      .then(({ cart }) => {
+        setCart(cart)
+        setLoading(false)
+      })
+      .catch(err => console.log(err.message))
   }
 
   const createPaymentSession = async (providedCartId = null) => {
@@ -231,10 +269,13 @@ export const CartProvider = props => {
 
     const cartId = providedCartId ?? cart.id
 
-    return client.carts.createPaymentSessions(cartId).then(({ cart }) => {
-      setCart(cart)
-      setLoading(false)
-    })
+    return client.carts
+      .createPaymentSessions(cartId)
+      .then(({ cart }) => {
+        setCart(cart)
+        setLoading(false)
+      })
+      .catch(err => console.log(err.message))
   }
 
   const setPaymentSession = async (providerId, providedCartId = null) => {
@@ -249,6 +290,7 @@ export const CartProvider = props => {
         setLoading(false)
         return cart
       })
+      .catch(err => console.log(err.message))
   }
 
   const completeCart = async (providedCartId = null) => {
@@ -256,11 +298,14 @@ export const CartProvider = props => {
 
     const cartId = providedCartId ?? cart.id
 
-    return client.carts.complete(cartId).then(({ data: order }) => {
-      setCart(defaultCartContext.cart)
-      setLoading(false)
-      return order
-    })
+    return client.carts
+      .complete(cartId)
+      .then(({ data: order }) => {
+        setCart(defaultCartContext.cart)
+        setLoading(false)
+        return order
+      })
+      .catch(err => console.log(err.message))
   }
 
   return (

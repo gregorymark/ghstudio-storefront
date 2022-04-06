@@ -1,5 +1,5 @@
 import _ from "lodash"
-import React, { useState, useMemo, useEffect } from "react"
+import { useState, useMemo, useEffect } from "react"
 
 export const useProduct = (product = { options: [], variants: [] }) => {
   const [options, setOptions] = useState({})
