@@ -5,7 +5,7 @@ import {
   orderProductWrap,
 } from "../../styles/modules/order-product-list.module.css"
 
-const OrderProductsList = ({ products, currencyCode, taxRate }) => {
+const OrderProductsList = ({ products, currencyCode }) => {
   return (
     <div className={orderProductsList}>
       {products.map(product => {
@@ -14,7 +14,6 @@ const OrderProductsList = ({ products, currencyCode, taxRate }) => {
             <OrderProduct
               product={product}
               currencyCode={currencyCode}
-              taxRate={taxRate}
             />
           </div>
         )

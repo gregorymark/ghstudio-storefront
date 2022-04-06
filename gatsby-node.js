@@ -26,16 +26,6 @@ const getFilterables = products => {
 exports.createPages = async function ({ actions, graphql }) {
   const { data } = await graphql(`
     query {
-      allMedusaRegions {
-        edges {
-          node {
-            name
-            currency_code
-            id
-            tax_rate
-          }
-        }
-      }
       allMedusaProducts {
         edges {
           node {
@@ -95,17 +85,6 @@ exports.createPages = async function ({ actions, graphql }) {
   })
 
   const products = data.allMedusaProducts.edges.map(({ node }) => node)
-
-  // TODO: Figure out what to do here. This was so that the product could
-  // be switched if we were on the wrong URL for the region. I THINK we only
-  // need one region as region isn't the same as shipping method, which is the
-  // only region switching kind of behaviour we need. Therefore we probably don't
-  // need multiple prices for each product per region?
-  data.allMedusaRegions.edges.forEach(({ node }) => {
-    const { id, name, currency_code, tax_rate } = node
-
-    
-  })
 
   actions.createPage({
     path: "/shop",

@@ -36,7 +36,6 @@ const OrderConfirmed = ({ location }) => {
         <OrderProductsList
           products={order.items}
           currencyCode={order.currencyCode}
-          taxRate={order.tax_rate}
         />
         <Totals
           currencyCode={order.currency_code}
