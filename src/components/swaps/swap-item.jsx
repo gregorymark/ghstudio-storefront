@@ -2,7 +2,7 @@ import React from "react"
 import { formatPrice } from "../../utils/format-price"
 import DividedContainer from "../utility/divided-container"
 
-const SwapItem = ({ item, currencyCode, taxRate }) => {
+const SwapItem = ({ item, currencyCode }) => {
   return (
     <div className="flex items-center">
       <img
@@ -27,8 +27,7 @@ const SwapItem = ({ item, currencyCode, taxRate }) => {
               {formatPrice(
                 item.unit_price,
                 currencyCode,
-                item.quantity,
-                taxRate
+                item.quantity
               )}
             </p>
           </DividedContainer>

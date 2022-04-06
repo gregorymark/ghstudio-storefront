@@ -21,8 +21,7 @@ import {
 
 const Product = ({ data, pageContext }) => {
   const { product } = data
-  const { taxRate, prevPath, nextPath } =
-    pageContext
+  const { prevPath, nextPath } = pageContext
   const { region } = useRegion()
   const {
     loading,
@@ -68,7 +67,7 @@ const Product = ({ data, pageContext }) => {
         <div className={productInfo}>
           <h1>{product.title}</h1>
           <div className={productPrice}>
-            {formatPrice(price?.amount, region?.currency_code, 1, taxRate)}
+            {formatPrice(price?.amount, region?.currency_code, 1)}
           </div>
           <div className={productDescription}>
             {product.collection.metadata?.prodinfo && (
@@ -94,13 +93,7 @@ const Product = ({ data, pageContext }) => {
             title="Select quantity"
           />
           <div className={subTotal}>
-            Total:{" "}
-            {formatPrice(
-              price?.amount,
-              region?.currency_code,
-              quantity,
-              taxRate
-            )}{" "}
+            Total: {formatPrice(price?.amount, region?.currency_code, quantity)}{" "}
             excluding shipping
           </div>
           <button

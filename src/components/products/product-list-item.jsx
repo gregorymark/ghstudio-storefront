@@ -48,7 +48,7 @@ const ProductListItem = ({ product, rowHeight = null, screenWidth = null }) => {
           />
           <div className={productInfo}>
             <h3>
-              <ProductLink to={product.handle} className={productLink}>
+              <ProductLink product={product} className={productLink}>
                 {product.title}
               </ProductLink>
             </h3>

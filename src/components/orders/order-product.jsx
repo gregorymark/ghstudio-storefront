@@ -9,7 +9,7 @@ import {
   infoItem,
 } from "../../styles/modules/order-product-list.module.css"
 
-const OrderProduct = ({ product, currencyCode, taxRate, className }) => {
+const OrderProduct = ({ product, currencyCode, className }) => {
   const { prodThumbImages } = useCart()
 
   const prodThumbData = prodThumbImages.find(
@@ -32,8 +32,7 @@ const OrderProduct = ({ product, currencyCode, taxRate, className }) => {
           {formatPrice(
             product.unit_price,
             currencyCode,
-            product.quantity,
-            taxRate
+            product.quantity
           )}
         </div>
       </div>

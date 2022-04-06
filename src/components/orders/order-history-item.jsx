@@ -36,7 +36,7 @@ const OrderHistoryItem = ({ item, currencyCode }) => {
           {((item.unit_price * item.quantity) / 100).toFixed(2)}{" "}
           {currencyCode.toUpperCase()}
         </div>
-        <ProductLink to={item.variant.product.handle}>View Product</ProductLink>
+        <ProductLink product={item.variant.product}>View Product</ProductLink>
       </div>
     </div>
   )

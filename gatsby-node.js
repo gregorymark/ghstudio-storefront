@@ -104,26 +104,7 @@ exports.createPages = async function ({ actions, graphql }) {
   data.allMedusaRegions.edges.forEach(({ node }) => {
     const { id, name, currency_code, tax_rate } = node
 
-    products.forEach((node, index) => {
-      const handle = node.handle
-      const prevIndex = index - 1 < 0 ? products.length - 1 : index - 1
-      const nextIndex = index + 1 >= products.length ? 0 : index + 1
-      const prevProductHandle = products[prevIndex].handle
-      const nextProductHandle = products[nextIndex].handle
-
-      actions.createPage({
-        path: `/shop/${handle}`,
-        component: require.resolve(`./src/templates/product.js`),
-        context: {
-          handle: handle,
-          regionId: id,
-          currencyCode: currency_code,
-          taxRate: tax_rate,
-          prevPath: `/shop/${prevProductHandle}`,
-          nextPath: `/shop/${nextProductHandle}`,
-        },
-      })
-    })
+    
   })
 
   actions.createPage({
@@ -136,27 +117,33 @@ exports.createPages = async function ({ actions, graphql }) {
     },
   })
 
-  /*
-   * We don't want separate collections yet as we've only got one
-   *
-    data.allMedusaCollections.edges.forEach(({ node }) => {
-      const { id, handle, title } = node
+  data.allMedusaCollections.edges.forEach(({ node }) => {
+    const { id, handle: collectionHandle } = node
 
-      const productsInCollection = products.filter(
-        product => product.collection_id === id
-      )
+    const productsInCollection = products.filter(
+      product => product.collection_id === id
+    )
+
+    productsInCollection.forEach((node, index) => {
+      const productHandle = node.handle
+
+      // Getting previous and next products from the same collection
+      const prevIndex = index - 1 < 0 ? productsInCollection.length - 1 : index - 1
+      const nextIndex = index + 1 >= productsInCollection.length ? 0 : index + 1
+      const prevProductHandle = productsInCollection[prevIndex].handle
+      const nextProductHandle = productsInCollection[nextIndex].handle
 
       actions.createPage({
-        path: `collections/${handle}`,
-        component: require.resolve(`./src/templates/collection.js`),
+        path: `/shop/${collectionHandle}/${productHandle}`,
+        component: require.resolve(`./src/templates/product.js`),
         context: {
-          title: title,
-          products: productsInCollection,
-          filterables: getFilterables(productsInCollection),
+          handle: productHandle,
+          prevPath: `/shop/${collectionHandle}/${prevProductHandle}`,
+          nextPath: `/shop/${collectionHandle}/${nextProductHandle}`,
         },
       })
     })
-  */
+  })
 }
 
 exports.onCreateNode = ({ node, getNode, actions }) => {

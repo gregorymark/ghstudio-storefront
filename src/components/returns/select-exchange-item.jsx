@@ -8,7 +8,6 @@ import QuantitySelector from "../products/quantity-selector"
 const SelectExchangeItem = ({
   item,
   currencyCode,
-  taxRate,
   addExchangeItem,
   removeExchangeItem,
 }) => {
@@ -78,8 +77,7 @@ const SelectExchangeItem = ({
                 {formatPrice(
                   selectedExchange?.amount ?? 0,
                   currencyCode,
-                  quantity,
-                  taxRate
+                  quantity
                 )}
               </p>
             </div>
