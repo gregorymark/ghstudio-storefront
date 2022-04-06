@@ -155,7 +155,6 @@ export const CartProvider = props => {
       .create(cartId, item)
       .then(({ cart }) => {
         setCart(cart)
-        setLoading(false)
 
         return true
       })
@@ -164,6 +163,7 @@ export const CartProvider = props => {
 
         return false
       })
+      .finally(() => setLoading(false))
   }
 
   const setCartOpen = value => {
@@ -179,9 +179,9 @@ export const CartProvider = props => {
       .delete(cartId, id)
       .then(({ cart }) => {
         setCart(cart)
-        setLoading(false)
       })
       .catch(err => console.log(err.message))
+      .finally(() => setLoading(false))
   }
 
   const updateQuantity = async item => {
@@ -197,7 +197,6 @@ export const CartProvider = props => {
       .update(cartId, item.id, { quantity: item.quantity })
       .then(({ cart }) => {
         setCart(cart)
-        setLoading(false)
 
         return true
       })
@@ -206,6 +205,7 @@ export const CartProvider = props => {
 
         return false
       })
+      .finally(() => setLoading(false))
   }
 
   const addDiscount = async discount => {
@@ -217,9 +217,9 @@ export const CartProvider = props => {
       .update(cartId, { discounts: [{ code: discount }] })
       .then(({ cart }) => {
         setCart(cart)
-        setLoading(false)
       })
       .catch(err => console.log(err.message))
+      .finally(() => setLoading(false))
   }
 
   const getCartShippingOptions = async (providedCartId = null) => {
@@ -230,10 +230,10 @@ export const CartProvider = props => {
     return client.shippingOptions
       .listCartOptions(cartId)
       .then(({ shipping_options }) => {
-        setLoading(false)
         return shipping_options
       })
       .catch(err => console.log(err.message))
+      .finally(() => setLoading(false))
   }
 
   const addShippingMethod = async payload => {
@@ -259,9 +259,9 @@ export const CartProvider = props => {
       .update(cartId, payload)
       .then(({ cart }) => {
         setCart(cart)
-        setLoading(false)
       })
       .catch(err => console.log(err.message))
+      .finally(() => setLoading(false))
   }
 
   const createPaymentSession = async (providedCartId = null) => {
@@ -287,10 +287,15 @@ export const CartProvider = props => {
       .setPaymentSession(cartId, { provider_id: providerId })
       .then(({ cart }) => {
         setCart(cart)
-        setLoading(false)
+
         return cart
       })
-      .catch(err => console.log(err.message))
+      .catch(err => {
+        console.log(err.message)
+        
+        return false
+      })
+      .finally(() => setLoading(false))
   }
 
   const completeCart = async (providedCartId = null) => {
@@ -302,10 +307,15 @@ export const CartProvider = props => {
       .complete(cartId)
       .then(({ data: order }) => {
         setCart(defaultCartContext.cart)
-        setLoading(false)
+
         return order
       })
-      .catch(err => console.log(err.message))
+      .catch(err => {
+        console.log(err.message)
+
+        return false
+      })
+      .finally(() => setLoading(false))
   }
 
   return (

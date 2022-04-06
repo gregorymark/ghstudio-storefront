@@ -17,6 +17,12 @@
   outline: none;
   transition: background 0.3s;
   letter-spacing: 0.1em;
+
+  &[disabled] {
+    background: var(--pale-slate);
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 label {
   font-size: 0.8em;
@@ -247,7 +253,7 @@ select {
     max-width: var(--content-width);
   }
   .button {
-    &:hover {
+    &:hover:not([disabled]) {
       background: var(--orange);
     }
   }
