@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import Totals from "../../components/checkout/totals"
 import OrderProductsList from "../../components/orders/order-products-list"
-import SearchEngineOptimization from "../../components/utility/seo"
+import SearchEngineOptimization from "../../components/seo"
 import { introText } from "../../styles/modules/order-confirmed.module.css"
 
 const OrderConfirmed = ({ location }) => {

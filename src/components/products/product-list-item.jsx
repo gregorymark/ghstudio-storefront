@@ -2,7 +2,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import React, { useState, useMemo, useEffect, useRef } from "react"
 import { usePrice } from "../../hooks/use-price"
 import { useRegion } from "../../hooks/use-region"
-import ProductLink from "../utility/product-link"
+import ProductLink from "../product-link"
 import {
   productListItem,
   productListItemContent,

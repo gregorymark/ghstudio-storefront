@@ -1,7 +1,7 @@
 import { navigate } from "gatsby"
 import React, { useState } from "react"
 import { useCart } from "../../../hooks/use-cart"
-import ErrorMessage from "../../utility/error-message"
+import ErrorMessage from "../../forms/error-message"
 
 // 🚧 This is a test payment, and is for testing purposes only.
 // Look at the Medusa documentation on how to use one of our

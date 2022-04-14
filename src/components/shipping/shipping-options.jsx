@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { formatPrice } from "../../utils/format-price"
 import Radio from "../forms/radio"
-import ErrorMessage from "../utility/error-message"
+import ErrorMessage from "../forms/error-message"
 
 const ShippingOptions = ({
   options = [],

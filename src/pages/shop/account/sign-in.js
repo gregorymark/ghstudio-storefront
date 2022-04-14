@@ -3,8 +3,8 @@ import { useAuth } from "../../../hooks/use-auth"
 import { Link } from "gatsby"
 import AuthLayout from "../../../components/auth/auth-layout"
 import Input from "../../../components/forms/input"
-import ErrorMessage from "../../../components/utility/error-message"
-import SearchEngineOptimization from "../../../components/utility/seo"
+import ErrorMessage from "../../../components/forms/error-message"
+import SearchEngineOptimization from "../../../components/seo"
 import { authSubmitButton } from "../../../styles/modules/account.module.css"
 
 const SignIn = () => {

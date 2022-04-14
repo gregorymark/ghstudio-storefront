@@ -2,7 +2,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import { navigate } from "gatsby"
 import React, { useState } from "react"
 import { useCart } from "../../../hooks/use-cart"
-import ErrorMessage from "../../utility/error-message"
+import ErrorMessage from "../../forms/error-message"
 import {
   stripeCardForm,
   stripeCardElementWrap,

@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
-import SearchEngineOptimization from "../components/utility/seo"
+import SearchEngineOptimization from "../components/seo"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import {
   text01,

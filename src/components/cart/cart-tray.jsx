@@ -1,14 +1,14 @@
 import React from "react"
-import { useCart } from "../hooks/use-cart"
-import CartItem from "./cart/cart-item"
+import { useCart } from "../../hooks/use-cart"
+import CartItem from "./cart-item"
 import {
   tray,
   trayIsOpen,
   trayClose,
   cartItems,
   cartEmptyMessage,
-} from "../styles/modules/cart-tray.module.css"
-import CartReview from "./cart/cart-review"
+} from "../../styles/modules/cart-tray.module.css"
+import CartReview from "./cart-review"
 
 const CartTray = () => {
   const {

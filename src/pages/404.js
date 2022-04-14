@@ -1,7 +1,7 @@
 import { Link } from "gatsby"
 import React from "react"
 import Article from "../components/article"
-import SearchEngineOptimization from "../components/utility/seo"
+import SearchEngineOptimization from "../components/seo"
 
 const NotFoundPage = () => (
   <>

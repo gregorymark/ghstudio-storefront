@@ -1,7 +1,7 @@
 import React from "react"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { useCart } from "../../hooks/use-cart"
-import ProductLink from "../utility/product-link"
+import ProductLink from "../product-link"
 import {
   orderHistoryItem,
   imageWrap,

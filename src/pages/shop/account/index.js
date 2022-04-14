@@ -4,7 +4,7 @@ import * as Yup from "yup"
 import AccountLayout from "../../../components/account/account-layout"
 import Input from "../../../components/forms/input"
 import FormContainer from "../../../components/forms/form-container"
-import SearchEngineOptimization from "../../../components/utility/seo"
+import SearchEngineOptimization from "../../../components/seo"
 import { useCustomer } from "../../../hooks/use-customer"
 import {
   accountDetailsFormWrap,

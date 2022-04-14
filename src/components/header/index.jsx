@@ -1,19 +1,18 @@
 import React, { useState } from "react"
 import { Link } from "gatsby"
-import SearchEngineOptimization from "../utility/seo"
+import SearchEngineOptimization from "../seo"
 import {
   header,
   navWrap,
   navToggle,
   navToggleOpen,
-  navClose,
   navIsOpen,
   navHomeLink,
   mainNav,
   cartIconMobile,
 } from "../../styles/modules/header.module.css"
 import CartIcon from "../cart/cart-icon"
-import CartTray from "../cart-tray"
+import CartTray from "../cart/cart-tray"
 import ShopNav from "./shop-nav"
 
 const Header = ({ showShopNav }) => {

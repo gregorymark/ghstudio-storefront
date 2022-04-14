@@ -1,5 +1,5 @@
 import React from "react"
-import SearchEngineOptimization from "../components/utility/seo"
+import SearchEngineOptimization from "../components/seo"
 import ProductList from "../components/products/product-list"
 import { collectionIntro } from "../styles/modules/collection.module.css"
 import { Link } from "gatsby"
