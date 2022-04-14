@@ -9,9 +9,9 @@ const BASE_URL =
 const medusaClient = new Medusa({ baseUrl: BASE_URL })
 
 export const wrapPageElement = ({ element, props }) => {
-  return (
-    <MedusaProvider client={medusaClient}>
-      <Layout {...props}>{element}</Layout>
-    </MedusaProvider>
-  )
+  return <Layout {...props}>{element}</Layout>
+}
+
+export const wrapRootElement = ({ element }) => {
+  return <MedusaProvider client={medusaClient}>{element}</MedusaProvider>
 }
