@@ -154,7 +154,8 @@ export const CartProvider = props => {
         return true
       })
       .catch(err => {
-        console.log(err.message)
+        console.log("ERROR: Could not add to cart. Someone might have bought the product elsewhere.", err.message)
+        updateInventory()
 
         return false
       })
@@ -196,7 +197,8 @@ export const CartProvider = props => {
         return true
       })
       .catch(err => {
-        console.log(err.message)
+        console.log("ERROR: Couldn't change quantity. If you were trying to add another item, someone else might have bought the last of the product.", err.message)
+        updateInventory()
 
         return false
       })
