@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { trayItem } from "../../styles/modules/cart-tray.module.css"
 import {
   thumbWrap,
@@ -13,9 +13,17 @@ import { GatsbyImage } from "gatsby-plugin-image"
 
 const CartItem = ({ item, currencyCode, isInteractive = true }) => {
   const {
+    inventory,
     prodThumbImages,
     actions: { removeItem, updateQuantity },
   } = useCart()
+  const [maxQuantity, setMaxQuantity] = useState(item.quantity)
+
+  useEffect(() => {
+    if (inventory[item.variant.product_id]) {
+      setMaxQuantity(inventory[item.variant.product_id][item.variant.id].all)
+    }
+  }, [inventory])
 
   const prodThumbData = prodThumbImages.find(
     thumbData => thumbData.product_id === item.variant.product_id
@@ -41,14 +49,14 @@ const CartItem = ({ item, currencyCode, isInteractive = true }) => {
                 updateQuantity({
                   id: item.id,
                   quantity: item.quantity + 1,
-                  max: item.variant.inventory_quantity,
+                  max: maxQuantity,
                 })
               }
               decrement={() =>
                 updateQuantity({
                   id: item.id,
                   quantity: item.quantity - 1,
-                  max: item.variant.inventory_quantity,
+                  max: maxQuantity,
                 })
               }
             />

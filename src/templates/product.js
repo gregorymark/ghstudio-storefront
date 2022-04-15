@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { graphql, Link } from "gatsby"
 import ProductImages from "../components/products/product-images"
 import ProductOptionSelector from "../components/products/product-option-selector"
@@ -14,12 +14,13 @@ import {
   productPrice,
   productDescription,
   productInfo,
-  subTotal,
+  subTotal as preAddToBagMessage,
   addToCartButton,
   productPrevNext,
 } from "../styles/modules/product-single.module.css"
 
 const Product = ({ data, pageContext }) => {
+  const [price, setPrice] = useState()
   const { product } = data
   const { prevPath, nextPath } = pageContext
   const { region } = useRegion()
@@ -29,23 +30,30 @@ const Product = ({ data, pageContext }) => {
   } = useCart()
 
   const {
-    variant,
-    options,
+    currentVariant,
+    noMoreOfVariant,
+    selectedOptions,
     quantity,
     actions: {
-      updateOptions,
+      updateSelectedOptions,
       increaseQuantity,
       decreaseQuantity,
       resetOptions,
     },
   } = useProduct(product)
 
-  const price = variant
-    ? variant.prices.find(p => p.currency_code === region?.currency_code)
-    : undefined
+  useEffect(() => {
+    const currentPrice = currentVariant
+      ? currentVariant.prices.find(
+          p => p.currency_code === region?.currency_code
+        )
+      : undefined
+
+    setPrice(currentPrice)
+  }, [currentVariant])
 
   const handleAddToCart = async () => {
-    addItem({ variant_id: variant.id, quantity }).then(success => {
+    addItem({ variant_id: currentVariant.id, quantity }).then(success => {
       if (success) {
         setCartOpen(true)
         resetOptions()
@@ -83,8 +91,8 @@ const Product = ({ data, pageContext }) => {
               <div key={index}>
                 <ProductOptionSelector
                   option={option}
-                  current={options[option.id]}
-                  updateOption={updateOptions}
+                  current={selectedOptions[option.id]}
+                  updateOption={updateSelectedOptions}
                 />
               </div>
             )
@@ -94,10 +102,16 @@ const Product = ({ data, pageContext }) => {
             increment={increaseQuantity}
             decrement={decreaseQuantity}
             title="Select quantity"
+            disabled={noMoreOfVariant}
           />
-          <div className={subTotal}>
-            Total: {formatPrice(price?.amount, region?.currency_code, quantity)}{" "}
-            excluding shipping
+          <div className={preAddToBagMessage}>
+            {noMoreOfVariant
+              ? `This option is sold out.`
+              : `Total: ${formatPrice(
+                  price?.amount,
+                  region?.currency_code,
+                  quantity
+                )} excluding shipping`}
           </div>
           <button
             className={addToCartButton}
@@ -137,7 +151,6 @@ export const query = graphql`
         }
       }
       variants {
-        inventory_quantity
         options {
           value
           option_id

@@ -1,23 +1,31 @@
 import _ from "lodash"
 import { useState, useMemo, useEffect } from "react"
+import { useCart } from "./use-cart"
 
 export const useProduct = (product = { options: [], variants: [] }) => {
-  const [options, setOptions] = useState({})
+  const [noMoreOfVariant, setNoMoreOfVariant] = useState(false)
+  const [selectedOptions, setSelectedOptions] = useState({})
   const [quantity, setQuantity] = useState(1)
-  const { variants } = product
+  const [currVariantInventory, setCurrVariantInventory] = useState()
+  const { inventory } = useCart()
 
   useEffect(() => {
     const optionObj = {}
     for (const option of product.options) {
       Object.assign(optionObj, { [option.id]: option.values[0].value })
     }
-    setOptions(optionObj)
+    setSelectedOptions(optionObj)
   }, [product])
 
-  const variantMap = useMemo(() => {
+  /*
+   * A variant is a combination of different options. So if you have size and colour,
+   * one variant would be "large, blue" and another would be "large, red". Therefore
+   * variants have options associated with them, options don't have associated variants.
+   */
+  const variantOptions = useMemo(() => {
     const map = {}
 
-    for (const variant of variants) {
+    for (const variant of product.variants) {
       const tmp = {}
 
       for (const option of variant.options) {
@@ -28,32 +36,47 @@ export const useProduct = (product = { options: [], variants: [] }) => {
     }
 
     return map
-  }, [variants])
+  }, [product.variants])
 
-  const variant = useMemo(() => {
+  const currentVariant = useMemo(() => {
     let variantId = undefined
 
-    for (const key of Object.keys(variantMap)) {
-      if (_.isEqual(variantMap[key], options)) {
+    for (const key of Object.keys(variantOptions)) {
+      if (_.isEqual(variantOptions[key], selectedOptions)) {
         variantId = key
       }
     }
 
     return product.variants.find(v => v.id === variantId)
-  }, [options, variantMap, product.variants])
+  }, [selectedOptions, variantOptions, product.variants])
 
   useEffect(() => {
-    if (quantity > variant?.inventory_quantity) {
-      setQuantity(variant.inventory_quantity)
+    if (inventory[product.id] && currentVariant) {
+      setCurrVariantInventory(
+        inventory[product.id][currentVariant.id].not_in_cart
+      )
+      setNoMoreOfVariant(
+        inventory[product.id][currentVariant.id].not_in_cart === 0
+      )
     }
-  }, [variant])
+  }, [currentVariant, inventory, product])
 
-  const updateOptions = update => {
-    setOptions({ ...options, ...update })
+  useEffect(() => {
+    if (quantity > currVariantInventory) {
+      setQuantity(currVariantInventory)
+    }
+    // In case the quantity was zero but we switch to a variant with some available
+    if (quantity === 0 && currVariantInventory > 0) {
+      setQuantity(1)
+    }
+  }, [quantity, currVariantInventory])
+
+  const updateSelectedOptions = update => {
+    setSelectedOptions({ ...selectedOptions, ...update })
   }
 
   const increaseQuantity = () => {
-    if (!(quantity + 1 > variant.inventory_quantity)) {
+    if (!(quantity + 1 > currVariantInventory)) {
       setQuantity(quantity + 1)
     }
   }
@@ -69,16 +92,17 @@ export const useProduct = (product = { options: [], variants: [] }) => {
     for (const option of product.options) {
       Object.assign(optionObj, { [option.id]: option.values[0].value })
     }
-    setOptions(optionObj)
+    setSelectedOptions(optionObj)
     setQuantity(1)
   }
 
   return {
-    variant,
-    options,
+    currentVariant,
+    noMoreOfVariant,
+    selectedOptions,
     quantity,
     actions: {
-      updateOptions,
+      updateSelectedOptions,
       increaseQuantity,
       decreaseQuantity,
       resetOptions,

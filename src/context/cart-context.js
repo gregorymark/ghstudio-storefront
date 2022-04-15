@@ -1,10 +1,11 @@
 import { graphql, useStaticQuery } from "gatsby"
 import { getImage } from "gatsby-plugin-image"
-import React, { createContext, useEffect, useState } from "react"
+import React, { createContext, useEffect, useState, useCallback } from "react"
 import { useMedusa } from "../hooks/use-medusa"
 import { useRegion } from "../hooks/use-region"
 
 const defaultCartContext = {
+  inventory: [],
   cart: {
     items: [],
   },
@@ -34,6 +35,8 @@ export const CartProvider = props => {
   const [open, setOpen] = useState(false)
   const [cart, setCart] = useState(defaultCartContext.cart)
   const [loading, setLoading] = useState(defaultCartContext.loading)
+  const [products, setProducts] = useState([])
+  const [inventory, setInventory] = useState(defaultCartContext.inventory)
   const client = useMedusa()
   const { region } = useRegion()
 
@@ -60,14 +63,6 @@ export const CartProvider = props => {
       image_data: getImage(edge.node.thumbnail),
     }
   })
-
-  const setCartItem = cart => {
-    if (isBrowser) {
-      localStorage.setItem(CART_ID, cart.id)
-    }
-
-    setCart(cart)
-  }
 
   useEffect(() => {
     const initializeCart = async () => {
@@ -292,7 +287,7 @@ export const CartProvider = props => {
       })
       .catch(err => {
         console.log(err.message)
-        
+
         return false
       })
       .finally(() => setLoading(false))
@@ -318,11 +313,72 @@ export const CartProvider = props => {
       .finally(() => setLoading(false))
   }
 
+  const setCartItem = cart => {
+    if (isBrowser) {
+      localStorage.setItem(CART_ID, cart.id)
+    }
+
+    setCart(cart)
+  }
+
+  /*
+   * Inventory. This context should possibly just be called ShopContext.
+   * We're only using getProducts for inventory as otherwise we lose all of
+   * the gatsby goodness to do with images etc. (Not 100% Gatsby is the best
+   * for a shop that has to manage inventory). It also doesn't seem that
+   * Medusa includes inventory info for products that may be in other people's
+   * carts. So we have to check inventory if a cart purchase fails because
+   * of insufficient inventory.
+   */
+  const getProducts = useCallback(async () => {
+    const products = await client.products
+      .list()
+      .then(({ products }) => products)
+      .catch(_ => undefined)
+
+    setProducts(products)
+  }, [client.products])
+
+  useEffect(() => {
+    getProducts().catch(console.error)
+  }, [getProducts])
+
+  useEffect(() => {
+    const inventoryMap = {}
+
+    for (const product of products) {
+      const tmp = {}
+
+      for (const variant of product.variants) {
+        tmp[variant.id] = {
+          all: variant.inventory_quantity,
+          not_in_cart: variant.inventory_quantity,
+        }
+
+        // Remove any in cart from available quantity
+        for (const item of cart.items) {
+          if (item.variant_id === variant.id) {
+            tmp[variant.id].not_in_cart -= item.quantity
+          }
+        }
+      }
+
+      inventoryMap[product.id] = tmp
+    }
+
+    setInventory(inventoryMap)
+  }, [products, cart.items])
+
+  const updateInventory = () => {
+    getProducts().catch(console.error)
+  }
+
   return (
     <CartContext.Provider
       {...props}
       value={{
         ...defaultCartContext,
+        inventory,
         loading,
         cart,
         open,

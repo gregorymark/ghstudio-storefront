@@ -22,10 +22,19 @@
   font-size: 18px;
   line-height: var(--button-height);
 }
+.disabledClass {
+  opacity: 0.5;
+
+  & .button {
+    cursor: inherit;
+  }
+}
 @media (--tablet) {
-  .button {
-    &:hover {
-      background: var(--mid-peach);
+  .selectorWrap:not(.disabledClass) {
+    & .button {
+      &:hover {
+        background: var(--mid-peach);
+      }
     }
   }
 }
