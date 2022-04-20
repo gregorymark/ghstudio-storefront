@@ -4,17 +4,11 @@ import { useCustomer } from "../../hooks/use-customer"
 import {
   shopNav,
   cartIcon,
-  logoutButton,
-  spacer,
 } from "../../styles/modules/header.module.css"
 import CartIcon from "../cart/cart-icon"
 
 const ShopNav = ({ setNavOpen }) => {
-  const {
-    loading,
-    customer,
-    actions: { clearCustomer },
-  } = useCustomer()
+  const { loading, customer } = useCustomer()
 
   return (
     <div className={shopNav}>
@@ -28,10 +22,6 @@ const ShopNav = ({ setNavOpen }) => {
           <Link to="/shop/account" onClick={() => setNavOpen(false)}>
             Account
           </Link>
-          <span className={spacer}>/</span>
-          <button className={logoutButton} onClick={() => clearCustomer()}>
-            Log out
-          </button>
         </>
       )}
       <CartIcon className={cartIcon} />
