@@ -45,5 +45,13 @@ module.exports = {
       },
     },
     `gatsby-plugin-netlify`,
+    {
+      resolve: `gatsby-plugin-google-gtag`,
+      options: {
+        trackingIds: [
+          "G-VE70TYMRM0",
+        ],
+      },
+    },
   ],
 }
