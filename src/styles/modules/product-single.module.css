@@ -37,7 +37,7 @@
 @media (--tablet) {
   .productWrap {
     display: flex;
-    align-items: start;
+    align-items: flex-start;
   }
   .productImagesWrap {
     width: 50%;
