@@ -1,4 +1,3 @@
-import Medusa from "@medusajs/medusa-js"
 import React, { createContext } from "react"
 import { CartProvider } from "./cart-context"
 import { CustomerProvider } from "./customer-context"

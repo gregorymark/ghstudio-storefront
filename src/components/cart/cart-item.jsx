@@ -20,10 +20,10 @@ const CartItem = ({ item, currencyCode, isInteractive = true }) => {
   const [maxQuantity, setMaxQuantity] = useState(item.quantity)
 
   useEffect(() => {
-    if (inventory[item.variant.product_id]) {
+    if (inventory[item.variant?.product_id]) {
       setMaxQuantity(inventory[item.variant.product_id][item.variant.id].all)
     }
-  }, [inventory])
+  }, [inventory, item.variant?.product_id, item.variant?.id])
 
   const prodThumbData = prodThumbImages.find(
     thumbData => thumbData.product_id === item.variant.product_id

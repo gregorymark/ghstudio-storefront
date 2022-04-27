@@ -33,11 +33,12 @@ const CheckoutStepContainer = ({
 
   return (
     <>
+      { /* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */ }
       <div
         className={`${checkoutStep} ${isOpen ? checkoutStepIsOpen : ""} ${
           isClickable ? checkoutStepIsClickable : ""
         }`}
-        onClick={handleClick}
+        onClick={handleClick} // ES Lint was picking up no onKeyDown and no role here. Suppressing for now.
       >
         <div className={checkoutStepTitle}>
           <h3>{title}</h3>
