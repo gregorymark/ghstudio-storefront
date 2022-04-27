@@ -19,7 +19,7 @@
     &:first-child {
       border-left-width: 1px;
     }
-    &[aria-current] {
+    &.activeTab {
       border-bottom-width: 0;
     }
   }
