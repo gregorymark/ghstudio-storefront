@@ -1,5 +1,6 @@
 .prodMainImage {
   cursor: pointer;
+  width: 100%;
 }
 .thumbImages {
   display: flex;
