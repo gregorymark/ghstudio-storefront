@@ -30,13 +30,6 @@ const CheckoutAddress = ({ controller }) => {
         value={controller.values.last_name}
       />
       <Input
-        label="Company"
-        autocomplete="organization"
-        name="company"
-        formik={controller}
-        value={controller.values.company}
-      />
-      <Input
         label="Address"
         autocomplete="address-line1"
         name="address_1"
@@ -70,7 +63,7 @@ const CheckoutAddress = ({ controller }) => {
         value={controller.values.city}
       />
       <Input
-        label="State / Province"
+        label="State / County / Province"
         autocomplete="address-level1"
         name="province"
         formik={controller}
@@ -84,7 +77,7 @@ const CheckoutAddress = ({ controller }) => {
         value={controller.values.postal_code}
       />
       <Input
-        label="Phone"
+        label="Phone (optional)"
         autocomplete="tel"
         name="phone"
         formik={controller}

@@ -17,7 +17,6 @@ export const useShippingAddressForm = setState => {
       first_name:
         cart?.shipping_address?.first_name || customer?.first_name || "",
       last_name: cart?.shipping_address?.last_name || customer?.last_name || "",
-      company: cart?.shipping_address?.company || "",
       address_1: cart?.shipping_address?.address_1 || "",
       address_2: cart?.shipping_address?.address_2 || "",
       country_code: cart?.shipping_address?.country_code || "",

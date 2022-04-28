@@ -24,7 +24,6 @@ const Validator = {
     shippingSchema: Yup.object({
       first_name: Yup.string().required(ERRORS.REQUIRED),
       last_name: Yup.string().required(ERRORS.REQUIRED),
-      company: Yup.string().optional(),
       address_1: Yup.string().required(ERRORS.REQUIRED),
       address_2: Yup.string().optional(),
       country_code: Yup.string().required(ERRORS.REQUIRED),
@@ -36,7 +35,6 @@ const Validator = {
     billingSchema: Yup.object({
       first_name: Yup.string().required(ERRORS.REQUIRED),
       last_name: Yup.string().required(ERRORS.REQUIRED),
-      company: Yup.string().optional(),
       address_1: Yup.string().required(ERRORS.REQUIRED),
       address_2: Yup.string().optional(),
       country_code: Yup.string().required(ERRORS.REQUIRED),
