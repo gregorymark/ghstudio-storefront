@@ -9,7 +9,7 @@ const Layout = ({ path, children }) => {
   return (
     <>
       <Header showShopNav={showShopNav} />
-      <main className={main}>{children}</main>
+      <div className={main}>{children}</div>
     </>
   )
 }
