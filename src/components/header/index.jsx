@@ -8,6 +8,7 @@ import {
   navToggleOpen,
   navIsOpen,
   navHomeLink,
+  navLinkActive,
   mainNav,
   cartIconMobile,
 } from "../../styles/modules/header.module.css"
@@ -34,13 +35,26 @@ const Header = ({ showShopNav }) => {
         {showShopNav && <CartIcon className={cartIconMobile} />}
         <nav className={`${navWrap} ${navOpen ? navIsOpen : ""}`}>
           <div className={mainNav}>
-            <Link to="/" onClick={() => setNavOpen(false)}>
+            <Link
+              to="/"
+              onClick={() => setNavOpen(false)}
+              activeClassName={navLinkActive}
+            >
               Work
             </Link>
-            <Link to="/contact" onClick={() => setNavOpen(false)}>
+            <Link
+              to="/contact"
+              onClick={() => setNavOpen(false)}
+              activeClassName={navLinkActive}
+            >
               Contact
             </Link>
-            <Link to="/shop" onClick={() => setNavOpen(false)}>
+            <Link
+              to="/shop"
+              onClick={() => setNavOpen(false)}
+              activeClassName={navLinkActive}
+              partiallyActive={true}
+            >
               Shop
             </Link>
           </div>

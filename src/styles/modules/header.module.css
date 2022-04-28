@@ -198,7 +198,7 @@
     font-size: 28px;
 
     & > a {
-      &[aria-current="page"] {
+      &.navLinkActive {
         text-decoration: none;
         position: relative;
         color: var(--turquoise);
