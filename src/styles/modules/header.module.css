@@ -35,7 +35,7 @@
     background: var(--pale-peach);
     z-index: 10;
     opacity: 0;
-    transition: opacity 0.3s, transform 0s 0.3s;
+    transition: opacity 0.5s, transform 0s 0.5s;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -44,7 +44,7 @@
   .navIsOpen {
     opacity: 1;
     transform: translateY(100%);
-    transition: opacity 0.3s, transform 0s;
+    transition: opacity 0.5s, transform 0s;
   }
   .navToggle {
     margin-left: auto;
@@ -54,6 +54,8 @@
     text-indent: -9999em;
     outline: none;
     position: relative;
+    z-index: 1;
+    transition: z-index 0s 0.5s;
 
     &:before,
     &:after,
@@ -89,17 +91,20 @@
         top: 10px;
         transform-origin: 50%;
         transition: transform 0.25s cubic-bezier(0.87, -0.41, 0.19, 1.44),
-          color 0.25s;
+          color 0.25s, width 0.25s 0.25s, left 0.25s 0.25s;
       }
     }
   }
   .navToggleOpen {
     z-index: 99999;
+    transition: z-index 0s;
 
     & span {
       &:before,
       &:after {
-        transition: transform 0.25s cubic-bezier(0.87, -0.41, 0.19, 1.44) 0.25s;
+        width: 90%;
+        left: 5%;
+        transition: transform 0.25s cubic-bezier(0.87, -0.41, 0.19, 1.44) 0.25s, width 0.25s, left 0.25s;
       }
       &:before {
         transform: rotate(45deg);
