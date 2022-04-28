@@ -91,6 +91,7 @@
 @media (--mobile-only) {
   .cartIcon {
     margin-left: 10px;
+    top: -2px;
   }
 }
 @media (--tablet) {
