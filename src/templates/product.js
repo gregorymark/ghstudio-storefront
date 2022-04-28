@@ -50,7 +50,7 @@ const Product = ({ data, pageContext }) => {
       : undefined
 
     setPrice(currentPrice)
-  }, [currentVariant])
+  }, [currentVariant, region])
 
   const handleAddToCart = async () => {
     addItem({ variant_id: currentVariant.id, quantity }).then(success => {

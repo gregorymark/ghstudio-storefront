@@ -80,7 +80,8 @@ export const RegionProvider = props => {
     }
 
     initRegion()
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  // Adding regions as dependency causes loop
 
   const updateRegion = (region, country) => {
     localStorage.setItem(REGION, JSON.stringify(region))

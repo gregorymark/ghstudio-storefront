@@ -58,7 +58,9 @@ function SearchEngineOptimization({ description, lang, meta, title }) {
           content: metaDescription,
         },
       ].concat(meta)}
-    />
+    >
+      <link rel="icon" type="image/png" href="/images/favicon.png" />
+    </Helmet>
   )
 }
 
