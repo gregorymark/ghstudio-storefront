@@ -47,7 +47,7 @@ const IndexPage = ({ data }) => {
           />
         </div>
         <blockquote className={text02}>
-          I also enjoy <em>commissions</em>, you can find out more <Link to="/commissions">here</Link>.
+          I also enjoy <em>commissions</em>, you can find out more <Link to="/commissions/">here</Link>.
         </blockquote>
         <div className={homeImage2Wrap}>
           <GatsbyImage

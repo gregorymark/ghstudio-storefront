@@ -43,14 +43,14 @@ const Header = ({ showShopNav }) => {
               Work
             </Link>
             <Link
-              to="/contact"
+              to="/contact/"
               onClick={() => setNavOpen(false)}
               activeClassName={navLinkActive}
             >
               Contact
             </Link>
             <Link
-              to="/shop"
+              to="/shop/"
               onClick={() => setNavOpen(false)}
               activeClassName={navLinkActive}
               partiallyActive={true}

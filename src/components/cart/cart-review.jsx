@@ -15,7 +15,7 @@ const CartReview = ({ cart, setOpen }) => {
         <div>{formatPrice(cart.total, cart.region?.currency_code)}</div>
       </div>
       <Link
-        to="/shop/checkout"
+        to="/shop/checkout/"
         className={checkoutButton}
         onClick={() => setOpen(false)}
       >

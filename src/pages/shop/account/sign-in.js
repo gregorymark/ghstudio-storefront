@@ -20,7 +20,7 @@ const SignIn = () => {
           <h1>Welcome back</h1>
           <p>
             Don't have an account?{" "}
-            <Link to="/shop/account/sign-up">Sign up</Link>
+            <Link to="/shop/account/sign-up/">Sign up</Link>
           </p>
         </div>
         <form

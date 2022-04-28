@@ -14,12 +14,12 @@ const ShopNav = ({ setNavOpen }) => {
     <div className={shopNav}>
       {/* Region toggle is here on original starter */}
       {loading || !customer ? (
-        <Link to="/shop/account/sign-in" onClick={() => setNavOpen(false)}>
+        <Link to="/shop/account/sign-in/" onClick={() => setNavOpen(false)}>
           Log in
         </Link>
       ) : (
         <>
-          <Link to="/shop/account" onClick={() => setNavOpen(false)}>
+          <Link to="/shop/account/" onClick={() => setNavOpen(false)}>
             Account
           </Link>
         </>
