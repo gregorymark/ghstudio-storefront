@@ -2,6 +2,9 @@
   .articleContent {
     margin-bottom: var(--mid-spacing);
   }
+  .articleImage {
+    width: 100%;
+  }
 }
 @media (--tablet) {
   .article {

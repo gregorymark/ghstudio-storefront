@@ -1,3 +1,6 @@
+.homeImage {
+  width: 100%;
+}
 @media (--mobile-only) {
   .text01 {
     margin-bottom: var(--mid-spacing);
@@ -11,10 +14,10 @@
   .homeImage6Wrap {
     margin-bottom: 30px;
   }
-   .homeImage3Wrap,
-   .homeImage5Wrap {
-     margin: 0 5% 30px;
-   }
+  .homeImage3Wrap,
+  .homeImage5Wrap {
+    margin: 0 5% 30px;
+  }
 }
 @media (--tablet) {
   .homeImages {

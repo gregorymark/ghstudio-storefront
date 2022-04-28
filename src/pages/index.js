@@ -6,6 +6,7 @@ import {
   text01,
   text02,
   homeImages,
+  homeImage,
   homeImage0Wrap,
   homeImage1Wrap,
   homeImage2Wrap,
@@ -38,12 +39,14 @@ const IndexPage = ({ data }) => {
           <GatsbyImage
             image={images[0].imageData}
             alt={images[0].name}
+            className={homeImage}
           />
         </div>
         <div className={homeImage1Wrap}>
           <GatsbyImage
             image={images[1].imageData}
             alt={images[1].name}
+            className={homeImage}
           />
         </div>
         <blockquote className={text02}>
@@ -53,30 +56,35 @@ const IndexPage = ({ data }) => {
           <GatsbyImage
             image={images[2].imageData}
             alt={images[2].name}
+            className={homeImage}
           />
         </div>
         <div className={homeImage3Wrap}>
           <GatsbyImage
             image={images[3].imageData}
             alt={images[3].name}
+            className={homeImage}
           />
         </div>
         <div className={homeImage4Wrap}>
           <GatsbyImage
             image={images[4].imageData}
             alt={images[4].name}
+            className={homeImage}
           />
         </div>
         <div className={homeImage5Wrap}>
           <GatsbyImage
             image={images[5].imageData}
             alt={images[5].name}
+            className={homeImage}
           />
         </div>
         <div className={homeImage6Wrap}>
           <GatsbyImage
             image={images[6].imageData}
             alt={images[6].name}
+            className={homeImage}
           />
         </div>
       </div>

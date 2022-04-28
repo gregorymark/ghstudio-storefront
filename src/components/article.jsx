@@ -4,6 +4,7 @@ import {
   article,
   articleContent,
   articleImageWrap,
+  articleImage,
 } from "../styles/modules/article.module.css"
 
 const Article = ({ image, imageAlt, children }) => {
@@ -13,7 +14,11 @@ const Article = ({ image, imageAlt, children }) => {
     <article className={article}>
       <div className={articleContent}>{children}</div>
       <div className={articleImageWrap}>
-        <GatsbyImage image={imageData} alt={imageAlt} />
+        <GatsbyImage
+          image={imageData}
+          alt={imageAlt}
+          className={articleImage}
+        />
       </div>
     </article>
   )
