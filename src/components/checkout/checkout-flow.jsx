@@ -53,7 +53,7 @@ const CheckoutFlow = () => {
   const shippingOptionController = useShippingOptionForm(setState)
 
   if (cart.items.length < 1) {
-    return <p>Your cart is empty. Return to the <Link to="/shop">shop</Link>?</p>
+    return null // Change this to null rather than cart empty as we see it briefly when an order is completed
   }
 
   let steps = [
