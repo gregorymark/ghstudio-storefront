@@ -13,7 +13,7 @@
     "deepmerge": "^4.2.2",
     "embla-carousel-react": "^6.2.0",
     "formik": "^2.2.9",
-    "gatsby": "4.7.2",
+    "gatsby": "^4.13.1",
     "gatsby-plugin-google-gtag": "^4.13.0",
     "gatsby-plugin-image": "^2.0.0",
     "gatsby-plugin-mdx": "^3.3.0",
