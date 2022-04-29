@@ -1,9 +1,9 @@
+.articleImage {
+  width: 100%;
+}
 @media (--mobile-only) {
   .articleContent {
     margin-bottom: var(--mid-spacing);
-  }
-  .articleImage {
-    width: 100%;
   }
 }
 @media (--tablet) {
