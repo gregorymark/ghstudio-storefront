@@ -12,7 +12,6 @@ import CheckoutDelivery from "./checkout-delivery"
 import CheckoutLayout from "./checkout-layout"
 import CheckoutStepContainer from "./checkout-step-container"
 import CheckoutSummary from "./checkout-summary"
-import { Link } from "gatsby"
 
 const CheckoutFlow = () => {
   const {
