@@ -56,7 +56,7 @@ const ProductImages = ({ mainImageUrl, images, mainAlt = "", className }) => {
           className={carouselImage}
           alt=""
           objectFit="contain"
-          objectPosition="center top"
+          objectPosition="center"
         />
       </div>
     )
