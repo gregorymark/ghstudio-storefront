@@ -184,7 +184,7 @@ export const useReturn = (initialValues = null) => {
         )
       }
 
-      navigate("/swap", { state: { swap } })
+      navigate("/swap/", { state: { swap } })
     } else {
       const newReturn = await client.returns
         .create({
@@ -204,7 +204,7 @@ export const useReturn = (initialValues = null) => {
         return
       }
 
-      navigate("/return-confirmed", { state: { confirmedReturn: newReturn } })
+      navigate("/return-confirmed/", { state: { confirmedReturn: newReturn } })
     }
   }, [
     selectedItems,

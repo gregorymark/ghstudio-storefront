@@ -36,7 +36,7 @@ const InjectableCardForm = ({ session }) => {
     }
 
     setProcessing(false)
-    navigate("/shop/order-confirmed", { state: { order } })
+    navigate("/shop/order-confirmed/", { state: { order } })
   }
 
   const handlePayment = async e => {

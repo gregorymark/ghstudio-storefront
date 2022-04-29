@@ -31,7 +31,7 @@ export const useAuth = () => {
         return
       }
 
-      navigate("/shop/account")
+      navigate("/shop/account/")
     },
   })
 
@@ -61,7 +61,7 @@ export const useAuth = () => {
         return
       }
 
-      navigate("/shop/account")
+      navigate("/shop/account/")
     },
   })
 
