@@ -32,7 +32,6 @@ const OrderProduct = ({ product, currencyCode, className }) => {
           {formatPrice(
             product.unit_price,
             currencyCode,
-            product.quantity
           )}
         </div>
       </div>

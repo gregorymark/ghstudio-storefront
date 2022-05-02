@@ -19,7 +19,7 @@ const Totals = ({
 
   const appliedDiscount = discount?.length ? discount[0] : 0
 
-  const totalPrice = shipping ? total + shipping : total + estimatedShipping
+  const totalPrice = total ?? shipping ? subtotal + shipping : subtotal + estimatedShipping
 
   return (
     <div className={totalsWrap}>

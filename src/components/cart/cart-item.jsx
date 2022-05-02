@@ -39,7 +39,7 @@ const CartItem = ({ item, currencyCode, isInteractive = true }) => {
       <div className={itemInfo}>
         <h3>{item.title}</h3>
         <div>{item.description}</div>
-        <div>{formatPrice(item.unit_price, currencyCode, item.quantity)}</div>
+        <div>{formatPrice(item.unit_price, currencyCode)}</div>
         {isInteractive ? (
           <>
             <QuantitySelector
