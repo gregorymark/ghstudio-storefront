@@ -16,7 +16,7 @@ import CartIcon from "../cart/cart-icon"
 import CartTray from "../cart/cart-tray"
 import ShopNav from "./shop-nav"
 
-const Header = ({ showShopNav }) => {
+const Header = ({ showShopNav, isCheckout }) => {
   const [navOpen, setNavOpen] = useState(false)
 
   const handleNavOpen = reqNavOpenState => {
@@ -72,7 +72,9 @@ const Header = ({ showShopNav }) => {
               Shop
             </Link>
           </div>
-          {showShopNav && <ShopNav setNavOpen={handleNavOpen} />}
+          {showShopNav && (
+            <ShopNav setNavOpen={handleNavOpen} isCheckout={isCheckout} />
+          )}
         </nav>
       </header>
       <CartTray />
