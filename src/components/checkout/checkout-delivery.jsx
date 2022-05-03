@@ -3,6 +3,7 @@ import ShippingOptions from "../shipping/shipping-options"
 
 const CheckoutDelivery = ({ controller, options, currencyCode = "eur" }) => {
   const { setSelectedShippingMethod, selectedShippingMethod } = controller
+  
   return (
     <ShippingOptions
       value={selectedShippingMethod}

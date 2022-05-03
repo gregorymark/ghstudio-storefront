@@ -20,7 +20,12 @@ const CheckoutFlow = () => {
   } = useCart()
 
   const { state, setState } = useCheckoutFlow()
-  const [shippingOptions, setShippingOptions] = useState([])
+  const [allShippingOptions, setAllShippingOptions] = useState([])
+  const [availableShippingOptions, setAvailableShippingOptions] = useState([])
+
+  const contactForm = useContactForm(setState)
+  const shippingAddressForm = useShippingAddressForm(setState)
+  const shippingOptionController = useShippingOptionForm(setState)
 
   useEffect(() => {
     const fetchShippingOptions = async () => {
@@ -30,10 +35,10 @@ const CheckoutFlow = () => {
             return
           }
 
-          setShippingOptions(options)
+          setAllShippingOptions(options)
         })
         .catch(_err => {
-          setShippingOptions([])
+          setAllShippingOptions([])
         })
     }
 
@@ -42,14 +47,24 @@ const CheckoutFlow = () => {
     }
 
     return () => {
-      setShippingOptions([])
+      setAllShippingOptions([])
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart.id])
 
-  const contactForm = useContactForm(setState)
-  const shippingAddressForm = useShippingAddressForm(setState)
-  const shippingOptionController = useShippingOptionForm(setState)
+  useEffect(() => {
+    if (
+      shippingAddressForm.values.shipping_address.city !== "Lisbon" &&
+      shippingAddressForm.values.shipping_address.city !== "Lisboa"
+    ) {
+      const optionsNoPickup = allShippingOptions.filter(
+        option => option.name !== "Pick up in Lisbon"
+      )
+      setAvailableShippingOptions(optionsNoPickup)
+    } else {
+      setAvailableShippingOptions(allShippingOptions)
+    }
+  }, [allShippingOptions, shippingAddressForm.values.shipping_address.city])
 
   if (cart.items.length < 1) {
     return null // This should be null rather than "Your cart is empty" as we see it briefly when an order is completed
@@ -80,7 +95,7 @@ const CheckoutFlow = () => {
       children: (
         <CheckoutDelivery
           controller={shippingOptionController}
-          options={shippingOptions}
+          options={availableShippingOptions}
           setState={setState}
         />
       ),
