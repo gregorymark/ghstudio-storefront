@@ -126,6 +126,11 @@ select {
       transform-origin: center;
       opacity: 0;
     }
+    &.checkboxUiDark {
+      background: var(--mid-peach);
+      border: 1px solid var(--pale-slate);
+      box-shadow: none;
+    }
   }
   & input[type="checkbox"] {
     opacity: 0 !important;

@@ -22,7 +22,7 @@ const Checkbox = ({
 
   const handleChange = e => {
     if (typeof onChange === "function") {
-      onChange()
+      onChange(e)
     }
     if (formik && typeof formik.handleChange === "function") {
       formik.handleChange(e)

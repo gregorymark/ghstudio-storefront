@@ -58,6 +58,20 @@
     border-color: var(--pink);
   }
 }
+.checkoutAddress {
+  margin-top: 30px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+  & h4 {
+    margin-bottom: 10px;
+    color: var(--pink);
+  }
+}
+.checkoutAddressToggle {
+  margin: 30px 0;
+}
 .cSummaryDiscount {
   margin-bottom: 20px;
 }

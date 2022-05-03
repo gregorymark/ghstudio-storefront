@@ -6,7 +6,7 @@ import { useContactForm } from "../../hooks/use-contact-form"
 import { useShippingAddressForm } from "../../hooks/use-shipping-address-form"
 import { useShippingOptionForm } from "../../hooks/use-shipping-option-form"
 import Payment from "../payment"
-import CheckoutAddress from "./checkout-address"
+import CheckoutAddressLayout from "./checkout-address-layout"
 import CheckoutContact from "./checkout-contact"
 import CheckoutDelivery from "./checkout-delivery"
 import CheckoutLayout from "./checkout-layout"
@@ -52,7 +52,7 @@ const CheckoutFlow = () => {
   const shippingOptionController = useShippingOptionForm(setState)
 
   if (cart.items.length < 1) {
-    return null // Change this to null rather than cart empty as we see it briefly when an order is completed
+    return null // This should be null rather than "Your cart is empty" as we see it briefly when an order is completed
   }
 
   let steps = [
@@ -69,7 +69,7 @@ const CheckoutFlow = () => {
       key: 1,
       completed: !_.isEmpty(cart?.shipping_address?.address_1),
       controller: shippingAddressForm,
-      children: <CheckoutAddress controller={shippingAddressForm} />,
+      children: <CheckoutAddressLayout controller={shippingAddressForm} />,
       handleSubmit: shippingAddressForm.handleSubmit,
     },
     {

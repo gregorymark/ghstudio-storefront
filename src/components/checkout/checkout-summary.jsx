@@ -5,7 +5,6 @@ import DiscountField from "./discount-field"
 import { cSummaryDiscount } from "../../styles/modules/checkout.module.css"
 
 const CheckoutSummary = ({ cart, shippingOption }) => {
-  console.log(cart)
   return (
     <div>
       <div>

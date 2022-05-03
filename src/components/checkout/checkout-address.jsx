@@ -3,7 +3,12 @@ import { useRegion } from "../../hooks/use-region"
 import Input from "../forms/input"
 import Select from "../forms/select"
 
-const CheckoutAddress = ({ controller }) => {
+const CheckoutAddress = ({
+  controller,
+  addressKey,
+  title = "",
+  className = "",
+}) => {
   const [countries, setCountries] = useState([])
   const { region } = useRegion()
 
@@ -14,41 +19,63 @@ const CheckoutAddress = ({ controller }) => {
   }, [region])
 
   return (
-    <>
+    <div className={className}>
+      {title && <h4>{title}</h4>}
       <Input
         label="First name"
         autocomplete="given_name"
-        name="first_name"
+        name={`${addressKey ? `${addressKey}.` : ""}first_name`}
         formik={controller}
-        value={controller.values.first_name}
+        value={controller.values[addressKey].first_name}
       />
       <Input
         label="Last name"
         autocomplete="family-name"
-        name="last_name"
+        name={`${addressKey ? `${addressKey}.` : ""}last_name`}
         formik={controller}
-        value={controller.values.last_name}
+        value={controller.values[addressKey].last_name}
       />
       <Input
-        label="Address"
+        label="Address line 1"
         autocomplete="address-line1"
-        name="address_1"
+        name={`${addressKey ? `${addressKey}.` : ""}address_1`}
         formik={controller}
-        value={controller.values.address_1}
+        value={controller.values[addressKey].address_1}
       />
       <Input
-        label="Apartment, suite, etc."
+        label="Address line 2 (optional)"
         autocomplete="address-line2"
-        name="address_2"
+        name={`${addressKey ? `${addressKey}.` : ""}address_2`}
         formik={controller}
-        value={controller.values.address_2}
+        value={controller.values[addressKey].address_2}
+      />
+      <Input
+        label="City"
+        autocomplete="city-code"
+        name={`${addressKey ? `${addressKey}.` : ""}city`}
+        formik={controller}
+        value={controller.values[addressKey].city}
+      />
+      <Input
+        label="State / County / Province"
+        autocomplete="address-level1"
+        name={`${addressKey ? `${addressKey}.` : ""}province`}
+        formik={controller}
+        value={controller.values[addressKey].province}
+      />
+      <Input
+        label="ZIP / Post Code"
+        autocomplete="postal-code"
+        name={`${addressKey ? `${addressKey}.` : ""}postal_code`}
+        formik={controller}
+        value={controller.values[addressKey].postal_code}
       />
       <Select
         label="Country"
         autocomplete="country-code"
-        name="country_code"
+        name={`${addressKey ? `${addressKey}.` : ""}country_code`}
         formik={controller}
-        value={controller.values.country_code}
+        value={controller.values[addressKey].country_code}
         options={countries.map(country => ({
           label: country.display_name,
           value: country.iso_2,
@@ -56,34 +83,13 @@ const CheckoutAddress = ({ controller }) => {
         placeholder="Select a country"
       />
       <Input
-        label="City"
-        autocomplete="city-code"
-        name="city"
-        formik={controller}
-        value={controller.values.city}
-      />
-      <Input
-        label="State / County / Province"
-        autocomplete="address-level1"
-        name="province"
-        formik={controller}
-        value={controller.values.province}
-      />
-      <Input
-        label="ZIP / Post Code"
-        autocomplete="postal-code"
-        name="postal_code"
-        formik={controller}
-        value={controller.values.postal_code}
-      />
-      <Input
         label="Phone (optional)"
         autocomplete="tel"
-        name="phone"
+        name={`${addressKey ? `${addressKey}.` : ""}phone`}
         formik={controller}
-        value={controller.values.phone}
+        value={controller.values[addressKey].phone}
       />
-    </>
+    </div>
   )
 }
 

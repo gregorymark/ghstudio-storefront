@@ -14,25 +14,49 @@ export const useShippingAddressForm = setState => {
   const shippingAddressForm = useFormik({
     enableReinitialize: true,
     initialValues: {
-      first_name:
-        cart?.shipping_address?.first_name || customer?.first_name || "",
-      last_name: cart?.shipping_address?.last_name || customer?.last_name || "",
-      address_1: cart?.shipping_address?.address_1 || "",
-      address_2: cart?.shipping_address?.address_2 || "",
-      country_code: cart?.shipping_address?.country_code || "",
-      city: cart?.shipping_address?.city || "",
-      province: cart?.shipping_address?.province || "",
-      postal_code: cart?.shipping_address?.postal_code || "",
-      phone: cart?.shipping_address?.phone || customer?.phone || "",
+      shipping_address: {
+        first_name:
+          cart?.shipping_address?.first_name || customer?.first_name || "",
+        last_name:
+          cart?.shipping_address?.last_name || customer?.last_name || "",
+        address_1: cart?.shipping_address?.address_1 || "",
+        address_2: cart?.shipping_address?.address_2 || "",
+        country_code: cart?.shipping_address?.country_code || "",
+        city: cart?.shipping_address?.city || "",
+        province: cart?.shipping_address?.province || "",
+        postal_code: cart?.shipping_address?.postal_code || "",
+        phone: cart?.shipping_address?.phone || customer?.phone || "",
+      },
+      billing_address: {
+        is_different: false,
+        first_name:
+          cart?.shipping_address?.first_name || customer?.first_name || "",
+        last_name:
+          cart?.shipping_address?.last_name || customer?.last_name || "",
+        address_1: cart?.shipping_address?.address_1 || "",
+        address_2: cart?.shipping_address?.address_2 || "",
+        country_code: cart?.shipping_address?.country_code || "",
+        city: cart?.shipping_address?.city || "",
+        province: cart?.shipping_address?.province || "",
+        postal_code: cart?.shipping_address?.postal_code || "",
+        phone: cart?.shipping_address?.phone || customer?.phone || "",
+      },
     },
-    validationSchema: Validator.checkout.shippingSchema,
+    validationSchema: Validator.checkout.addressSchema,
     onSubmit: async (values, { setSubmitting, setStatus }) => {
       setSubmitting(true)
 
+      let billingAddress
+      if (values.billing_address.is_different) {
+        billingAddress = values.billing_address
+      } else {
+        billingAddress = values.shipping_address
+      }
+
       try {
         const payload = {
-          shipping_address: values,
-          billing_address: values,
+          shipping_address: values.shipping_address,
+          billing_address: billingAddress,
         }
 
         updateCart(payload)
