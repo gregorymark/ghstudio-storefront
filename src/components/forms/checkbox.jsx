@@ -6,6 +6,7 @@ import {
   inputError,
 } from "../../styles/modules/forms.module.css"
 import ErrorMessage from "../forms/error-message"
+import _ from "lodash"
 
 const Checkbox = ({
   label,
@@ -30,8 +31,8 @@ const Checkbox = ({
   }
 
   useEffect(() => {
-    if (formik && formik.touched?.[name]) {
-      setError(formik.errors[name])
+    if (_.get(formik.touched, name)) {
+      setError(_.get(formik.errors, name))
     }
   }, [formik, name])
 
