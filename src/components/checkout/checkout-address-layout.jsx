@@ -14,13 +14,13 @@ const CheckoutAddressLayout = ({ controller }) => {
       />
       <Checkbox
         label="My billing address is different from my shipping address"
-        name="billing_address.is_different"
-        checked={controller.values.billing_address.is_different}
+        name="billing_address_is_different"
+        checked={controller.values.billing_address_is_different}
         formik={controller}
         dark={true}
         className={checkoutAddressToggle}
       />
-      {controller.values.billing_address.is_different && (
+      {controller.values.billing_address_is_different && (
         <CheckoutAddress
           controller={controller}
           addressKey="billing_address"
