@@ -10,7 +10,7 @@ const OrderHistoryEntry = ({ order }) => {
     <div className={orderHistoryEntry}>
       <h2>
         Order <span className="defFont">#</span>
-        {`${order.display_id}`} - {date}
+        {`GHSO_${order.display_id}`} - {date}
       </h2>
       <OrderBulletin order={order} />
       <h3>Order items</h3>
