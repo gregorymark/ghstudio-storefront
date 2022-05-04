@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { formatPrice } from "../../utils/format-price"
 import Radio from "../forms/radio"
 import ErrorMessage from "../forms/error-message"
+import { shippingOptionMessage } from "../../styles/modules/checkout.module.css"
 
 const ShippingOptions = ({
   options = [],
@@ -9,6 +10,7 @@ const ShippingOptions = ({
   onSelect,
   value,
   controller,
+  lisbonPickup = false,
 }) => {
   const defaultSelectedOption = options.find(o => o.id === value?.id)
   const [selectedOption, setSelectedOption] = useState(defaultSelectedOption)
@@ -39,6 +41,12 @@ const ShippingOptions = ({
         )
       })}
       <ErrorMessage error={controller.error} />
+      {lisbonPickup && (
+        <div className={shippingOptionMessage}>
+          N.B. Please make sure that you are able to pick up the print from me in
+          central Lisbon if you select "Pick up in Lisbon".
+        </div>
+      )}
     </div>
   )
 }

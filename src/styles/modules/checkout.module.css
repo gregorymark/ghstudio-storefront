@@ -72,6 +72,12 @@
 .checkoutAddressToggle {
   margin: 30px 0;
 }
+.shippingOptionMessage {
+  line-height: 1.2;
+  margin-top: 20px;
+  font-size: var(--font-size-small);
+  color: var(--pink);
+}
 .cSummaryDiscount {
   margin-bottom: 20px;
 }

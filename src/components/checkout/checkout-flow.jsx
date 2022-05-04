@@ -22,6 +22,7 @@ const CheckoutFlow = () => {
   const { state, setState } = useCheckoutFlow()
   const [allShippingOptions, setAllShippingOptions] = useState([])
   const [availableShippingOptions, setAvailableShippingOptions] = useState([])
+  const [lisbonPickup, setLisbonPickup] = useState(false)
 
   const contactForm = useContactForm(setState)
   const shippingAddressForm = useShippingAddressForm(setState)
@@ -54,17 +55,20 @@ const CheckoutFlow = () => {
 
   useEffect(() => {
     if (
-      shippingAddressForm.values.shipping_address.city !== "Lisbon" &&
-      shippingAddressForm.values.shipping_address.city !== "Lisboa"
+      shippingAddressForm.values.shipping_address.country_code === "pt" &&
+      (shippingAddressForm.values.shipping_address.city === "Lisbon" ||
+        shippingAddressForm.values.shipping_address.city === "Lisboa")
     ) {
+      setLisbonPickup(true)
+      setAvailableShippingOptions(allShippingOptions)
+    } else {
       const optionsNoPickup = allShippingOptions.filter(
         option => option.name !== "Pick up in Lisbon"
       )
+      setLisbonPickup(false)
       setAvailableShippingOptions(optionsNoPickup)
-    } else {
-      setAvailableShippingOptions(allShippingOptions)
     }
-  }, [allShippingOptions, shippingAddressForm.values.shipping_address.city])
+  }, [allShippingOptions, shippingAddressForm.values.shipping_address.city, shippingAddressForm.values.shipping_address.country_code])
 
   if (cart.items.length < 1) {
     return null // This should be null rather than "Your cart is empty" as we see it briefly when an order is completed
@@ -97,6 +101,7 @@ const CheckoutFlow = () => {
           controller={shippingOptionController}
           options={availableShippingOptions}
           setState={setState}
+          lisbonPickup={lisbonPickup}
         />
       ),
       handleSubmit: shippingOptionController.handleSubmit,
