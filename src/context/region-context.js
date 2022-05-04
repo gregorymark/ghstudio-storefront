@@ -1,6 +1,8 @@
 import { graphql, useStaticQuery } from "gatsby"
 import React, { createContext, useEffect, useReducer } from "react"
 
+const EXTREME_IP_API_KEY = process.env.EXTREME_IP_API_KEY || ""
+
 const defaultRegionContext = {
   region: undefined,
   /**
@@ -74,7 +76,30 @@ export const RegionProvider = props => {
           const country = JSON.parse(countryJSON)
           updateRegion(region, country)
         } else {
-          updateRegion(regions[0], regions[0].countries[0].display_name)
+          // Get location from IP address. Set to EU by default.
+          let ipCountryCodeIsUk = false
+          getIpCountryCode()
+            .then(countryCode => {
+              if (countryCode && countryCode === "UK") {
+                ipCountryCodeIsUk = true
+              }
+            })
+            .finally(() => {
+              let reqRegion
+              let euRegion
+              regions.forEach(region => {
+                if (ipCountryCodeIsUk && region.name === "UK") {
+                  reqRegion = region
+                }
+                if (region.name === "EU") {
+                  euRegion = region
+                }
+              })
+              if (!reqRegion) {
+                reqRegion = euRegion
+              }
+              updateRegion(reqRegion, reqRegion.countries[0].display_name)
+            })
         }
       }
     }
@@ -90,6 +115,20 @@ export const RegionProvider = props => {
       type: ACTIONS.UPDATE_REGION,
       payload: { region: region, country: country },
     })
+  }
+
+  const getIpCountryCode = async () => {
+    if (!EXTREME_IP_API_KEY) {
+      return null
+    }
+
+    const resJson = await fetch(
+      `https://extreme-ip-lookup.com/json/?key=${EXTREME_IP_API_KEY}`
+    )
+      .then(res => res.json())
+      .catch(err => null)
+
+    return resJson.status === "fail" ? null : resJson.countryCode
   }
 
   return (
