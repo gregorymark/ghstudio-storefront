@@ -33,9 +33,9 @@ const Validator = {
         postal_code: Yup.string().required(ERRORS.REQUIRED),
         phone: Yup.string().optional(),
       }),
-      billing_address_is_different: Yup.boolean().optional(),
+      billing_address_is_different: Yup.string().nullable(true).optional(),
       billing_address: Yup.object().when("billing_address_is_different", {
-        is: true,
+        is: "true",
         then: Yup.object({
           first_name: Yup.string().required(ERRORS.REQUIRED),
           last_name: Yup.string().required(ERRORS.REQUIRED),
