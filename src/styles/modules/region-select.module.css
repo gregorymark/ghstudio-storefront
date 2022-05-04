@@ -1,0 +1,13 @@
+.regionSelect {
+  margin-bottom: 0;
+  padding: 3px 5px;
+  background: var(--peach);
+  border-radius: var(--small-round-corner);
+
+  & select {
+    border: 0;
+    padding: 0 20px 0 0;
+    background-size: 15px;
+    background-position: right 4px;
+  }
+}

@@ -9,14 +9,26 @@ const Select = ({
   autocomplete = "on",
   formik,
   value,
+  defaultValue,
   options,
   placeholder = "",
   className,
+  onChange,
+  canBeNull = true,
 }) => {
   const [error, setError] = useState(null)
 
+  const handleChange = e => {
+    if (typeof onChange === "function") {
+      onChange(e)
+    }
+    if (formik && typeof formik.handleChange === "function") {
+      formik.handleChange(e)
+    }
+  }
+
   useEffect(() => {
-    if (_.get(formik.touched, name)) {
+    if (_.get(formik?.touched, name)) {
       setError(_.get(formik.errors, name))
     }
   }, [formik, name])
@@ -28,10 +40,11 @@ const Select = ({
         name={name}
         autoComplete={autocomplete}
         value={value}
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
+        onChange={handleChange}
+        onBlur={formik?.handleBlur}
+        defaultValue={defaultValue}
       >
-        <option value="">{placeholder}</option>
+        {canBeNull && <option value="">{placeholder}</option>}
         {options.map((option, i) => {
           return (
             <option key={i} value={option.value}>

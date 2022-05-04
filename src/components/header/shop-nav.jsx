@@ -1,8 +1,9 @@
 import React from "react"
 import { Link } from "gatsby"
 import { useCustomer } from "../../hooks/use-customer"
-import { shopNav, cartIcon } from "../../styles/modules/header.module.css"
+import { shopNav, cartIcon, regionSelect } from "../../styles/modules/header.module.css"
 import CartIcon from "../cart/cart-icon"
+import RegionSelect from "./region-select"
 
 const ShopNav = ({ setNavOpen, isCheckout }) => {
   const { loading, customer } = useCustomer()
@@ -21,6 +22,7 @@ const ShopNav = ({ setNavOpen, isCheckout }) => {
           </Link>
         </>
       )}
+      <RegionSelect className={regionSelect} />
       {!isCheckout && <CartIcon className={cartIcon} />}
     </div>
   )

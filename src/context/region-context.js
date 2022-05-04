@@ -1,5 +1,6 @@
+import React, { createContext, useEffect, useReducer, useState } from "react"
 import { graphql, useStaticQuery } from "gatsby"
-import React, { createContext, useEffect, useReducer } from "react"
+import _ from "lodash"
 
 const EXTREME_IP_API_KEY = process.env.EXTREME_IP_API_KEY || ""
 
@@ -10,6 +11,7 @@ const defaultRegionContext = {
    */
   country: undefined,
   regions: [],
+  initialised: false,
   updateRegion: () => {},
 }
 
@@ -38,6 +40,9 @@ const COUNTRY = "medusa_country"
 
 export const RegionProvider = props => {
   const [state, dispatch] = useReducer(reducer, defaultRegionContext)
+  const [initialised, setInitialised] = useState(
+    defaultRegionContext.initialised
+  )
 
   const data = useStaticQuery(graphql`
     {
@@ -75,6 +80,7 @@ export const RegionProvider = props => {
           const region = JSON.parse(regionJSON)
           const country = JSON.parse(countryJSON)
           updateRegion(region, country)
+          setInitialised(true)
         } else {
           // Get location from IP address. Set to EU by default.
           let ipCountryCodeIsUk = false
@@ -86,19 +92,13 @@ export const RegionProvider = props => {
             })
             .finally(() => {
               let reqRegion
-              let euRegion
-              regions.forEach(region => {
-                if (ipCountryCodeIsUk && region.name === "UK") {
-                  reqRegion = region
-                }
-                if (region.name === "EU") {
-                  euRegion = region
-                }
-              })
-              if (!reqRegion) {
-                reqRegion = euRegion
+              if (ipCountryCodeIsUk) {
+                reqRegion = _.find(regions, region => region.name === "UK")
+              } else {
+                reqRegion = _.find(regions, region => region.name !== "UK")
               }
               updateRegion(reqRegion, reqRegion.countries[0].display_name)
+              setInitialised(true)
             })
         }
       }
@@ -134,7 +134,7 @@ export const RegionProvider = props => {
   return (
     <RegionContext.Provider
       {...props}
-      value={{ ...state, regions, updateRegion }}
+      value={{ ...state, regions, initialised, updateRegion }}
     />
   )
 }

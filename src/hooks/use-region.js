@@ -14,6 +14,7 @@ export const useRegion = () => {
     region: context.region,
     country: context.country,
     regions: context.regions,
+    initialised: context.initialised,
     actions: { updateRegion: context.updateRegion },
   }
 }
