@@ -149,6 +149,9 @@
   .cartIcon {
     display: none;
   }
+  .regionSelect {
+    margin-top: 10px;
+  }
   .logoutButton {
     margin-top: 5px;
   }
