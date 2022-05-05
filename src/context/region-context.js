@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useReducer, useState } from "react"
 import { graphql, useStaticQuery } from "gatsby"
 import _ from "lodash"
 
-const EXTREME_IP_API_KEY = process.env.EXTREME_IP_API_KEY || ""
+const IP_LOOKUP_API_KEY = process.env.IP_LOOKUP_API_KEY || ""
 
 const defaultRegionContext = {
   region: undefined,
@@ -86,7 +86,7 @@ export const RegionProvider = props => {
           let ipCountryCodeIsUk = false
           getIpCountryCode()
             .then(countryCode => {
-              if (countryCode && countryCode === "UK") {
+              if (countryCode && countryCode === "GB") {
                 ipCountryCodeIsUk = true
               }
             })
@@ -118,17 +118,21 @@ export const RegionProvider = props => {
   }
 
   const getIpCountryCode = async () => {
-    if (!EXTREME_IP_API_KEY) {
+    if (!IP_LOOKUP_API_KEY) {
       return null
     }
 
-    const resJson = await fetch(
-      `https://extreme-ip-lookup.com/json/?key=${EXTREME_IP_API_KEY}`
-    )
+    const resJson = await fetch(`https://ipinfo.io?token=${IP_LOOKUP_API_KEY}`)
       .then(res => res.json())
-      .catch(err => null)
+      .catch(err => console.log(err))
 
-    return resJson.status === "fail" ? null : resJson.countryCode
+    if (resJson.error) {
+      console.log(`${resJson.error.title}: ${resJson.error.message}`)
+
+      return null
+    }
+
+    return resJson.country
   }
 
   return (
