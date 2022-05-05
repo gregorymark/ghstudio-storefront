@@ -122,7 +122,7 @@ export const CartProvider = props => {
       setLoading(false)
     }
 
-    if (cart.id) {
+    if (cart.id && region?.id) {
       updateCartRegion()
     }
   }, [cart.id, cart.region, region?.id, client.carts])
