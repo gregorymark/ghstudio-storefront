@@ -97,6 +97,7 @@ select {
     cursor: pointer;
     position: relative;
     padding-left: 30px;
+    line-height: 1;
   }
   & input[type="checkbox"] {
     margin-right: 10px;
@@ -153,6 +154,7 @@ select {
     cursor: pointer;
     position: relative;
     padding-left: 30px;
+    line-height: 1;
   }
   & input[type="radio"] {
     margin-right: 10px;
