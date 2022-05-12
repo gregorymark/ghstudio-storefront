@@ -31,7 +31,7 @@ const ProductListItem = ({ product, rowHeight = null, screenWidth = null }) => {
       )
       setGridRowEnd("span " + rowSpan)
     }
-  }, [rowHeight, screenWidth, itemContentEl.current])
+  }, [rowHeight, screenWidth])
 
   useEffect(() => {
     updateGridRowEnd()

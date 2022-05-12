@@ -4,7 +4,6 @@ import React, { useState } from "react"
 import { useCart } from "../../../hooks/use-cart"
 import ErrorMessage from "../../forms/error-message"
 import {
-  stripeCardForm,
   stripeCardElementWrap,
   stripeCardFormSubmit,
 } from "../../../styles/modules/forms.module.css"
@@ -115,7 +114,7 @@ const InjectableCardForm = ({ session }) => {
   }
 
   return (
-    <div className={stripeCardForm}>
+    <div>
       <div className={stripeCardElementWrap}>
         <CardElement options={CARD_OPTIONS} />
       </div>
