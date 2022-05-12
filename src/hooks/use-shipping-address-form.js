@@ -27,7 +27,7 @@ export const useShippingAddressForm = setState => {
         postal_code: cart?.shipping_address?.postal_code || "",
         phone: cart?.shipping_address?.phone || customer?.phone || "",
       },
-      billing_address_is_different: cart?.billing_address_id,
+      billing_address_is_different: cart?.billing_address_id && cart?.shipping_address?.address_1 !== cart?.billing_address?.address_1 && cart?.shipping_address?.postal_code !== cart?.billing_address?.postal_code,
       billing_address: {
         first_name:
           cart?.billing_address?.first_name || customer?.first_name || "",
