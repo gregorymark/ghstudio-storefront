@@ -35,6 +35,7 @@ export const CartProvider = props => {
   const [open, setOpen] = useState(false)
   const [cart, setCart] = useState(defaultCartContext.cart)
   const [loading, setLoading] = useState(defaultCartContext.loading)
+  const [creatingPaymentSession, setCreatingPaymentSession] = useState(false)
   const [products, setProducts] = useState([])
   const [inventory, setInventory] = useState(defaultCartContext.inventory)
   const client = useMedusa()
@@ -154,7 +155,10 @@ export const CartProvider = props => {
         return true
       })
       .catch(err => {
-        console.log("ERROR: Could not add to cart. Someone might have bought the product elsewhere.", err.message)
+        console.log(
+          "ERROR: Could not add to cart. Someone might have bought the product elsewhere.",
+          err.message
+        )
         updateInventory()
 
         return false
@@ -197,7 +201,10 @@ export const CartProvider = props => {
         return true
       })
       .catch(err => {
-        console.log("ERROR: Couldn't change quantity. If you were trying to add another item, someone else might have bought the last of the product.", err.message)
+        console.log(
+          "ERROR: Couldn't change quantity. If you were trying to add another item, someone else might have bought the last of the product.",
+          err.message
+        )
         updateInventory()
 
         return false
@@ -262,17 +269,23 @@ export const CartProvider = props => {
   }
 
   const createPaymentSession = async (providedCartId = null) => {
-    setLoading(true)
+    if (!creatingPaymentSession) {
+      setLoading(true)
+      setCreatingPaymentSession(true)
 
-    const cartId = providedCartId ?? cart.id
+      const cartId = providedCartId ?? cart.id
 
-    return client.carts
-      .createPaymentSessions(cartId)
-      .then(({ cart }) => {
-        setCart(cart)
-        setLoading(false)
-      })
-      .catch(err => console.log(err.message))
+      return client.carts
+        .createPaymentSessions(cartId)
+        .then(({ cart }) => {
+          setCart(cart)
+          setLoading(false)
+        })
+        .catch(err => console.log(err.message))
+        .finally(() => {
+          setCreatingPaymentSession(false)
+        })
+    }
   }
 
   const setPaymentSession = async (providerId, providedCartId = null) => {
