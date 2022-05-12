@@ -68,7 +68,16 @@ export const RegionProvider = props => {
     }
   `)
 
-  const regions = data.allMedusaRegions.edges.map(edge => edge.node)
+  const regions = data.allMedusaRegions.edges.map(edge => {
+    edge.node.countries.sort((a, b) => {
+      const aNameText = a.display_name.toLowerCase()
+      const bNameText = b.display_name.toLowerCase()
+
+      return aNameText.localeCompare(bNameText)
+    })
+
+    return edge.node
+  })
 
   useEffect(() => {
     const initRegion = () => {
