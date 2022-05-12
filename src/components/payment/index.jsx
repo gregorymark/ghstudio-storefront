@@ -16,8 +16,7 @@ const Payment = ({ cartId = null }) => {
     if (cartIdentifier && !cart.payment_sessions?.length > 0) {
       return createPaymentSession(cartId)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cart, cartId])
+  }, [cart, cartId, createPaymentSession])
 
   return (
     <>
