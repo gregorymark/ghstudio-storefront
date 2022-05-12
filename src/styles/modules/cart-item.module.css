@@ -1,6 +1,7 @@
 .thumbWrap {
   width: 120px;
   margin-right: 20px;
+  flex-shrink: 0;
 
   & img {
     display: block;
