@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useReducer, useState } from "react"
 import { graphql, useStaticQuery } from "gatsby"
 import _ from "lodash"
 
-const IP_LOOKUP_API_KEY = process.env.IP_LOOKUP_API_KEY || ""
+const IP_LOOKUP_API_KEY = process.env.GATSBY_IP_LOOKUP_API_KEY || ""
 
 const defaultRegionContext = {
   region: undefined,
