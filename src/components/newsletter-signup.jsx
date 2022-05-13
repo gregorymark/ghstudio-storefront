@@ -36,6 +36,7 @@ const NewsletterSignup = () => {
             last_name: values.last_name,
           },
         ],
+        list_ids: ["8400711a-65c2-4993-86a7-850a35c71957"],
       }
 
       const request = {
@@ -71,7 +72,10 @@ const NewsletterSignup = () => {
   return (
     <div className={newsletterSignup}>
       <h2>Newsletter</h2>
-      <p className={info}>Enter your name and email address for occasional information from me about my art practice, upcoming shows and news from the shop.</p>
+      <p className={info}>
+        Enter your name and email address for occasional information from me
+        about my art practice, upcoming shows and news from the shop.
+      </p>
       <SplitFieldset>
         <Input
           name="first_name"
