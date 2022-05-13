@@ -8,7 +8,7 @@ import ErrorMessage from "../forms/error-message"
 import _ from "lodash"
 
 const Input = ({
-  label,
+  label = "",
   name,
   type = "text",
   placeholder = "",
@@ -16,15 +16,25 @@ const Input = ({
   formik,
   value,
   className,
+  onChange,
   solidBg = false,
 }) => {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    if (_.get(formik.touched, name)) {
+    if (_.get(formik?.touched, name)) {
       setError(_.get(formik.errors, name))
     }
   }, [formik, name])
+
+  const handleChange = e => {
+    if (typeof onChange === "function") {
+      onChange(e)
+    }
+    if (formik && typeof formik.handleChange === "function") {
+      formik.handleChange(e)
+    }
+  }
 
   return (
     <div
@@ -39,8 +49,8 @@ const Input = ({
         autoComplete={autocomplete}
         placeholder={placeholder}
         value={value}
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
+        onChange={handleChange}
+        onBlur={formik?.handleBlur}
       />
       {error && <ErrorMessage error={error} />}
     </div>

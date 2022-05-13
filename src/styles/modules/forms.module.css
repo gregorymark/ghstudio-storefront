@@ -75,7 +75,8 @@ select {
   cursor: pointer;
 }
 .inputWrap,
-.selectWrap {
+.selectWrap,
+.splitFieldset {
   margin-bottom: 20px;
 
   &:last-child {
@@ -267,6 +268,9 @@ select {
     margin-left: -10px;
     margin-right: -10px;
 
+    & .inputWrap {
+      margin-bottom: 0;
+    }
     & > * {
       padding: 0 10px;
       width: 50%;

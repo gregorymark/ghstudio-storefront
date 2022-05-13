@@ -53,6 +53,13 @@ const Validator = {
       option_id: Yup.string().required(ERRORS.REQUIRED),
     }).required(),
   },
+  newsletterSignupSchema: Yup.object({
+    email_address: Yup.string()
+      .email(ERRORS.INVALID_EMAIL)
+      .required(ERRORS.REQUIRED),
+    first_name: Yup.string().required(ERRORS.REQUIRED),
+    last_name: Yup.string().optional(),
+  }).required(ERRORS.REQUIRED),
 }
 
 export default Validator

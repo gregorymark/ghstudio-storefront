@@ -107,7 +107,8 @@ exports.createPages = async function ({ actions, graphql }) {
       const productHandle = node.handle
 
       // Getting previous and next products from the same collection
-      const prevIndex = index - 1 < 0 ? productsInCollection.length - 1 : index - 1
+      const prevIndex =
+        index - 1 < 0 ? productsInCollection.length - 1 : index - 1
       const nextIndex = index + 1 >= productsInCollection.length ? 0 : index + 1
       const prevProductHandle = productsInCollection[prevIndex].handle
       const nextProductHandle = productsInCollection[nextIndex].handle
@@ -139,4 +140,15 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       value: `/${relativePath}`,
     })
   }
+}
+
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    resolve: {
+      fallback: {
+        fs: false,
+        path: false,
+      },
+    },
+  })
 }
