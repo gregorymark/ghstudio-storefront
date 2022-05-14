@@ -13,7 +13,7 @@ import {
 } from "../styles/modules/newsletter-signup.module.css"
 
 const NewsletterSignup = () => {
-  SendGrid.setApiKey(process.env.SENDGRID_API_KEY)
+  SendGrid.setApiKey(process.env.GATSBY_SENDGRID_API_KEY)
 
   const [successMessage, setSuccessMessage] = useState("")
   const [errorMessage, setErrorMessage] = useState("")
