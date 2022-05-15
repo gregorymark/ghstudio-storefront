@@ -1,15 +1,17 @@
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 import SendGrid from "@sendgrid/client"
 import Input from "./forms/input"
 import SplitFieldset from "./forms/split-fieldset"
 import { useFormik } from "formik"
 import Validator from "../utils/validator"
+import ReCAPTCHA from "./recaptcha"
 import {
   newsletterSignup,
   info,
   successMessageEl,
   errorMessageEl,
   submit,
+  reCaptcha,
 } from "../styles/modules/newsletter-signup.module.css"
 
 const NewsletterSignup = () => {
@@ -17,6 +19,8 @@ const NewsletterSignup = () => {
 
   const [successMessage, setSuccessMessage] = useState("")
   const [errorMessage, setErrorMessage] = useState("")
+
+  const recaptchaEl = useRef()
 
   const newsletterForm = useFormik({
     initialValues: {
@@ -27,6 +31,10 @@ const NewsletterSignup = () => {
     validationSchema: Validator.newsletterSignupSchema,
     onSubmit: async (values, { setSubmitting, setStatus, resetForm }) => {
       setSubmitting(true)
+
+      recaptchaEl.current.verifyCaptcha()
+
+      return false
 
       const contactData = {
         contacts: [
@@ -97,6 +105,7 @@ const NewsletterSignup = () => {
         value={newsletterForm.values.email_address}
         placeholder="Email address"
       />
+      <ReCAPTCHA className={reCaptcha} ref={recaptchaEl} />
       <button
         type="submit"
         onClick={newsletterForm.handleSubmit}

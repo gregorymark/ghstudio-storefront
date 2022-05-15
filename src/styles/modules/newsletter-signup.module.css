@@ -22,3 +22,9 @@
 .submit {
   composes: button from "../modules/forms.module.css"
 }
+.reCaptcha {
+  margin-bottom: 20px;
+}
+:global(.grecaptcha-badge) {
+  visibility: hidden;
+}
