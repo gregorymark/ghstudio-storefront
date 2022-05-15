@@ -28,26 +28,15 @@ const NewsletterSignup = () => {
     onSubmit: async (values, { setSubmitting, setStatus, resetForm }) => {
       setSubmitting(true)
 
-      const contactData = {
-        contacts: [
-          {
-            email: values.email_address,
-            first_name: values.first_name,
-            last_name: values.last_name,
-          },
-        ],
-        list_ids: ["8400711a-65c2-4993-86a7-850a35c71957"],
-      }
-
-      const request = {
-        method: "PUT",
-        url: "/v3/marketing/contacts",
-        body: contactData,
-      }
-
-      SendGrid.request(request)
-        .then(([response]) => {
-          if (response.statusCode === 202) {
+      fetch(`/api/add-contact`, {
+        method: `POST`,
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(values),
+      })
+        .then(res => {
+          if (res.status === 202) {
             setSuccessMessage(
               "Thanks! You have been added to the newsletter list."
             )
