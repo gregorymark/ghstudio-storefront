@@ -1,7 +1,7 @@
 import SendGrid from "@sendgrid/client"
 
 export default function handler(req, res) {
-  res.setHeader("Access-Control-Allow-Origin", "https://google.com")
+  res.setHeader("Access-Control-Allow-Origin", "https://ghstudio-uat.netlify.app")
 
   SendGrid.setApiKey(process.env.SENDGRID_API_KEY)
 
