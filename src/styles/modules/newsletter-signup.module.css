@@ -16,7 +16,7 @@
 }
 .successMessageEl,
 .errorMessageEl {
-  margin-top: 10px;
+  margin-top: 15px;
   margin-bottom: 0;
 }
 .submit {
@@ -24,6 +24,7 @@
 }
 .reCaptcha {
   margin-bottom: 20px;
+  line-height: 1.2;
 }
 :global(.grecaptcha-badge) {
   visibility: hidden;

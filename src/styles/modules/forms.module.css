@@ -227,6 +227,7 @@ select {
   font-size: 0.9em;
   color: var(--success-colour);
   margin-bottom: 10px;
+  line-height: 1.2;
 }
 .stripeCardElementWrap {
   padding-bottom: 5px;
