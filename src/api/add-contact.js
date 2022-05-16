@@ -1,6 +1,8 @@
 import SendGrid from "@sendgrid/client"
 
 export default function handler(req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "https://google.com")
+
   SendGrid.setApiKey(process.env.SENDGRID_API_KEY)
 
   const contactData = {

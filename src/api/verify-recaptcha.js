@@ -1,6 +1,8 @@
 import fetch from "node-fetch"
 
 export default function handler(req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "https://google.com")
+
   if (!req.body.token) {
     res.status(400).json({ error: "Token required for captcha validation" })
   }
