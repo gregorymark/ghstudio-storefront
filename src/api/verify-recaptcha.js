@@ -1,7 +1,11 @@
 import fetch from "node-fetch"
 
 export default function handler(req, res) {
-  if (!req.body.token) {
+  if (req.method !== "POST") {
+    res.status(400).json({ error: "Incorrect request" })
+  }
+
+  if (!req.body?.token) {
     res.status(400).json({ error: "Token required for captcha validation" })
   }
 

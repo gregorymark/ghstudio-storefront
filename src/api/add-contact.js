@@ -1,6 +1,16 @@
 import SendGrid from "@sendgrid/client"
 
 export default function handler(req, res) {
+  if (req.method !== "POST") {
+    res.status(400).json({ error: "Incorrect request" })
+  }
+
+  if (!req.body?.email_address) {
+    res
+      .status(400)
+      .json({ error: "An email address is required to add a contact" })
+  }
+
   SendGrid.setApiKey(process.env.SENDGRID_API_KEY)
 
   const contactData = {
