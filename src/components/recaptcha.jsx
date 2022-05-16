@@ -4,6 +4,8 @@ const RECAPTCHA_SITEKEY = process.env.GATSBY_RECAPTCHA_SITEKEY || ""
 
 const ReCAPTCHA = forwardRef(({ siteKey, className, onCaptchaLoaded }, ref) => {
   const scriptId = "recaptchaScript"
+  const errorMessage =
+    "Unfortunately there was a problem verifying you're human."
 
   useImperativeHandle(ref, () => ({
     verify() {
@@ -28,12 +30,16 @@ const ReCAPTCHA = forwardRef(({ siteKey, className, onCaptchaLoaded }, ref) => {
                 if (result.success) {
                   res()
                 } else {
-                  throw new Error()
+                  rej(errorMessage)
                 }
+              })
+              .catch(err => {
+                console.log(err)
+                rej(errorMessage)
               })
           })
         } catch (err) {
-          rej("Unfortunately there was a problem verifying you're human.")
+          rej(errorMessage)
         }
       })
     },
