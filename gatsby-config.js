@@ -37,13 +37,6 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-postcss`,
-    {
-      resolve: `gatsby-source-medusa`,
-      options: {
-        storeUrl:
-          process.env.GATSBY_MEDUSA_BACKEND_URL || `http://localhost:9000`,
-      },
-    },
     `gatsby-plugin-netlify`,
     {
       resolve: `gatsby-plugin-google-gtag`,
