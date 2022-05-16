@@ -1,34 +1,22 @@
 import React, { useEffect, useState } from "react"
 
-const RECAPTCHA_SITEKEY = process.env.GATSBY_RECAPTCHA_SITEKEY || ""
-
-const ReCAPTCHA = ({ className }) => {
-  const [loaded, setLoaded] = useState(false)
-
+const ReCAPTCHA = ({ siteKey, className, onCaptchaLoaded }) => {
   const scriptId = "recaptchaScript"
   let script
 
-  const verifyCaptcha = () => {
-    console.log('verifying captcha')
-    window.grecaptcha.ready(_ => {
-      window.grecaptcha
-        .execute(RECAPTCHA_SITEKEY, { action: "newsletter" })
-        .then(token => {
-          console.log(token)
-        })
-    })
+  const handleScriptLoaded = () => {
+    if (typeof onCaptchaLoaded === "function") {
+      onCaptchaLoaded()
+    }
   }
 
   useEffect(() => {
-    if (RECAPTCHA_SITEKEY) {
+    if (siteKey) {
       if (!document.getElementById(scriptId)) {
-        console.log("Adding reCAPTCHA script")
         script = document.createElement("script")
         script.id = scriptId
-        script.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITEKEY}`
-        script.addEventListener("load", () => {
-          setLoaded(true)
-        })
+        script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`
+        script.addEventListener("load", handleScriptLoaded())
         document.body.appendChild(script)
       }
     }
@@ -39,7 +27,7 @@ const ReCAPTCHA = ({ className }) => {
       <div
         className={`g-recaptcha`}
         data-size="invisible"
-        data-sitekey={RECAPTCHA_SITEKEY}
+        data-sitekey={siteKey}
       ></div>
       <small>
         This site is protected by reCAPTCHA and the Google{" "}

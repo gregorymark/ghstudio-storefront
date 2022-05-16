@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react"
-import SendGrid from "@sendgrid/client"
 import Input from "./forms/input"
 import SplitFieldset from "./forms/split-fieldset"
 import { useFormik } from "formik"
@@ -14,13 +13,12 @@ import {
   reCaptcha,
 } from "../styles/modules/newsletter-signup.module.css"
 
-const NewsletterSignup = () => {
-  SendGrid.setApiKey(process.env.GATSBY_SENDGRID_API_KEY)
+const RECAPTCHA_SITEKEY = process.env.GATSBY_RECAPTCHA_SITEKEY || ""
 
+const NewsletterSignup = () => {
   const [successMessage, setSuccessMessage] = useState("")
   const [errorMessage, setErrorMessage] = useState("")
-
-  const recaptchaEl = useRef()
+  const [captchaReady, setCaptchaReady] = useState(false)
 
   const newsletterForm = useFormik({
     initialValues: {
@@ -32,48 +30,70 @@ const NewsletterSignup = () => {
     onSubmit: async (values, { setSubmitting, setStatus, resetForm }) => {
       setSubmitting(true)
 
-      recaptchaEl.current.verifyCaptcha()
-
-      return false
-
-      const contactData = {
-        contacts: [
-          {
-            email: values.email_address,
-            first_name: values.first_name,
-            last_name: values.last_name,
-          },
-        ],
-        list_ids: ["8400711a-65c2-4993-86a7-850a35c71957"],
+      if (!captchaReady) {
+        setErrorMessage(
+          "Human verification is still loading, please wait to submit."
+        )
+        setSuccessMessage("")
+      } else {
+        window.grecaptcha.ready(_ => {
+          window.grecaptcha
+            .execute(RECAPTCHA_SITEKEY, { action: "newsletter" })
+            .then(token => {
+              fetch(`/api/verify-recaptcha`, {
+                method: `POST`,
+                headers: {
+                  "content-type": "application/json",
+                },
+                body: JSON.stringify({ token }),
+              })
+                .then(res => res.json())
+                .then(result => {
+                  if (result.success) {
+                    fetch(`/api/add-contact`, {
+                      method: `POST`,
+                      headers: {
+                        "content-type": "application/json",
+                      },
+                      body: JSON.stringify(values),
+                    })
+                      .then(res => {
+                        if (res.status === 202) {
+                          setSuccessMessage(
+                            "Thanks! You have been added to the newsletter list."
+                          )
+                          setErrorMessage("")
+                          setStatus({ success: "Address info updated." })
+                          resetForm()
+                        } else {
+                          throw Error()
+                        }
+                      })
+                      .catch(err => {
+                        setErrorMessage(
+                          "Something went wrong. Please try again."
+                        )
+                        setSuccessMessage("")
+                        setStatus({
+                          error: "An error has occurred, please try again.",
+                        })
+                      })
+                      .finally(() => {
+                        setSubmitting(false)
+                      })
+                  } else {
+                    setErrorMessage(
+                      "There was a problem with the human verification, pelase try again."
+                    )
+                    setSuccessMessage("")
+                    setStatus({
+                      error: result.error,
+                    })
+                  }
+                })
+            })
+        })
       }
-
-      const request = {
-        method: "PUT",
-        url: "/v3/marketing/contacts",
-        body: contactData,
-      }
-
-      SendGrid.request(request)
-        .then(([response]) => {
-          if (response.statusCode === 202) {
-            setSuccessMessage(
-              "Thanks! You have been added to the newsletter list."
-            )
-            setErrorMessage("")
-            setStatus({ success: "Address info updated." })
-            resetForm()
-          } else {
-            throw Error()
-          }
-        })
-        .catch(err => {
-          setErrorMessage("Something went wrong. Please try again.")
-          setSuccessMessage("")
-          setStatus({ error: "An error has occurred, please try again." })
-        })
-        .finally(() => {
-          setSubmitting(false)
-        })
     },
   })
 
@@ -105,7 +125,11 @@ const NewsletterSignup = () => {
         value={newsletterForm.values.email_address}
         placeholder="Email address"
       />
-      <ReCAPTCHA className={reCaptcha} ref={recaptchaEl} />
+      <ReCAPTCHA
+        siteKey={RECAPTCHA_SITEKEY}
+        className={reCaptcha}
+        onCaptchaLoaded={() => setCaptchaReady(true)}
+      />
       <button
         type="submit"
         onClick={newsletterForm.handleSubmit}
