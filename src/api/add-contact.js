@@ -24,7 +24,11 @@ export default function handler(req, res) {
     .then(([response]) => {
       res.status(response.statusCode).json(response.body)
     })
-    .catch(err => {
-      res.status(400).json({ error: "Something went wrong" })
+    .catch(() => {
+      res
+        .status(400)
+        .send(
+          new Error("There was a problem adding you to the newsletter list.")
+        )
     })
 }

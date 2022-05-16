@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 import Input from "./forms/input"
 import SplitFieldset from "./forms/split-fieldset"
 import { useFormik } from "formik"
@@ -13,12 +13,21 @@ import {
   reCaptcha,
 } from "../styles/modules/newsletter-signup.module.css"
 
-const RECAPTCHA_SITEKEY = process.env.GATSBY_RECAPTCHA_SITEKEY || ""
-
 const NewsletterSignup = () => {
   const [successMessage, setSuccessMessage] = useState("")
   const [errorMessage, setErrorMessage] = useState("")
-  const [captchaReady, setCaptchaReady] = useState(false)
+
+  const recaptcha = useRef()
+
+  const displayError = message => {
+    setSuccessMessage("")
+    setErrorMessage(message)
+  }
+
+  const displaySuccess = message => {
+    setErrorMessage("")
+    setSuccessMessage(message)
+  }
 
   const newsletterForm = useFormik({
     initialValues: {
@@ -27,73 +36,38 @@ const NewsletterSignup = () => {
       last_name: "",
     },
     validationSchema: Validator.newsletterSignupSchema,
-    onSubmit: async (values, { setSubmitting, setStatus, resetForm }) => {
+    onSubmit: async (values, { setSubmitting, resetForm }) => {
       setSubmitting(true)
 
-      if (!captchaReady) {
-        setErrorMessage(
-          "Human verification is still loading, please wait to submit."
+      recaptcha.current
+        .verify()
+        .then(() =>
+          fetch(`/api/add-contact`, {
+            method: `POST`,
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(values),
+          })
         )
-        setSuccessMessage("")
-      } else {
-        window.grecaptcha.ready(_ => {
-          window.grecaptcha
-            .execute(RECAPTCHA_SITEKEY, { action: "newsletter" })
-            .then(token => {
-              fetch(`/api/verify-recaptcha`, {
-                method: `POST`,
-                headers: {
-                  "content-type": "application/json",
-                },
-                body: JSON.stringify({ token }),
-              })
-                .then(res => res.json())
-                .then(result => {
-                  if (result.success) {
-                    fetch(`/api/add-contact`, {
-                      method: `POST`,
-                      headers: {
-                        "content-type": "application/json",
-                      },
-                      body: JSON.stringify(values),
-                    })
-                      .then(res => {
-                        if (res.status === 202) {
-                          setSuccessMessage(
-                            "Thanks! You have been added to the newsletter list."
-                          )
-                          setErrorMessage("")
-                          setStatus({ success: "Address info updated." })
-                          resetForm()
-                        } else {
-                          throw Error()
-                        }
-                      })
-                      .catch(err => {
-                        setErrorMessage(
-                          "Something went wrong. Please try again."
-                        )
-                        setSuccessMessage("")
-                        setStatus({
-                          error: "An error has occurred, please try again.",
-                        })
-                      })
-                      .finally(() => {
-                        setSubmitting(false)
-                      })
-                  } else {
-                    setErrorMessage(
-                      "There was a problem with the human verification, pelase try again."
-                    )
-                    setSuccessMessage("")
-                    setStatus({
-                      error: result.error,
-                    })
-                  }
-                })
-            })
+        .then(addContactRes => {
+          if (addContactRes.status === 202) {
+            displaySuccess(
+              "Thanks! You have been added to the newsletter list."
+            )
+            resetForm()
+          } else {
+            throw new Error(
+              "There was a problem adding you to the newsletter list."
+            )
+          }
         })
-      }
+        .catch(err => {
+          displayError(err.message)
+        })
+        .finally(() => {
+          setSubmitting(false)
+        })
     },
   })
 
@@ -125,11 +99,7 @@ const NewsletterSignup = () => {
         value={newsletterForm.values.email_address}
         placeholder="Email address"
       />
-      <ReCAPTCHA
-        siteKey={RECAPTCHA_SITEKEY}
-        className={reCaptcha}
-        onCaptchaLoaded={() => setCaptchaReady(true)}
-      />
+      <ReCAPTCHA className={reCaptcha} ref={recaptcha} />
       <button
         type="submit"
         onClick={newsletterForm.handleSubmit}
