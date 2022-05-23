@@ -7,6 +7,16 @@
     padding-top: 0;
   }
 }
+.orderHeader {
+  display: flex;
+  margin-bottom: 30px;
+  align-items: center;
+
+  & h2 {
+    margin-right: 30px;
+    margin-bottom: 0;
+  }
+}
 .orderBulletin {
   display: flex;
   flex-wrap: wrap;
@@ -18,4 +28,8 @@
 }
 .imageWrap {
   margin-right: 20px;
+}
+.orderQueryLink {
+  composes: button from "./forms.module.css";
+  padding: 0.6em 0.8em;
 }
