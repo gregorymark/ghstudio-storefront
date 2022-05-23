@@ -17,6 +17,15 @@
     font-size: var(--font-size-small);
   }
 }
+.currentCode {
+  height: 37px;
+  font-size: 0.9em;
+  background: var(--peach);
+  color: var(--success-colour);
+  padding: 5px;
+  flex-grow: 1;
+  line-height: 27px;
+}
 .applyButton {
   composes: button from "../modules/forms.module.css";
   font-size: 0.5em;

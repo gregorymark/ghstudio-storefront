@@ -10,16 +10,20 @@ import {
 const Totals = ({
   subtotal = 0,
   shipping = null,
-  discount = null,
+  discounts = null,
+  discountTotal = 0,
   total = 0,
   currencyCode = "eur",
   cartId = null,
 }) => {
   const { estimatedShipping } = useEstimatedShipping(cartId)
 
-  const appliedDiscount = discount?.length ? discount[0] : 0
+  const appliedDiscount = discounts?.length ? discounts[0] : 0
 
-  const totalPrice = total ?? shipping ? subtotal + shipping : subtotal + estimatedShipping
+  const totalPrice =
+    total ?? shipping
+      ? subtotal + shipping - discountTotal
+      : subtotal + estimatedShipping - discountTotal
 
   return (
     <div className={totalsWrap}>
@@ -40,12 +44,9 @@ const Totals = ({
         </div>
       )}
       {appliedDiscount ? (
-        <div>
-          <div>
-            <h4>Discount</h4>
-            <span>{discount.code}</span>
-          </div>
-          <div>{formatPrice(discount.amount, currencyCode)}</div>
+        <div className={subtotalStep}>
+          <h4>Discount</h4>
+          <div>{formatPrice(discountTotal, currencyCode)}</div>
         </div>
       ) : null}
       <div className={finalTotal}>

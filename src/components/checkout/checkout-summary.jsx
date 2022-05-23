@@ -26,7 +26,8 @@ const CheckoutSummary = ({ cart, shippingOption }) => {
         cartId={cart.id}
         shipping={shippingOption?.amount}
         currencyCode={cart.region?.currency_code}
-        discount={cart.discount}
+        discounts={cart.discounts}
+        discountTotal={cart.discount_total}
       />
     </div>
   )

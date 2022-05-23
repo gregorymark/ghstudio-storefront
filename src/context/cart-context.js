@@ -10,6 +10,7 @@ const defaultCartContext = {
     items: [],
   },
   loading: false,
+  discountCode: null,
   actions: {
     updateCart: () => {},
     resetCart: () => {},
@@ -17,6 +18,7 @@ const defaultCartContext = {
     removeItem: async () => {},
     updateQuantity: async () => {},
     addDiscount: async () => {},
+    removeDiscount: async () => {},
     createPaymentSession: async () => {},
     setPaymentSession: async () => {},
     completeCart: async () => {},
@@ -40,6 +42,9 @@ export const CartProvider = props => {
   const [inventory, setInventory] = useState(defaultCartContext.inventory)
   const client = useMedusa()
   const { region } = useRegion()
+  const [discountCode, setDiscountCode] = useState(
+    defaultCartContext.discountCode
+  )
 
   const thumbData = useStaticQuery(graphql`
     {
@@ -132,6 +137,18 @@ export const CartProvider = props => {
     cart.items.sort((a, b) => (a.created_at > b.created_at ? 1 : -1))
   }, [cart.items])
 
+  useEffect(() => {
+    if (cart.discounts?.length) {
+      const code = cart.discounts[0].code
+
+      if (code) {
+        setDiscountCode(code)
+      }
+    } else {
+      setDiscountCode(null)
+    }
+  }, [cart.discounts])
+
   const addItem = async item => {
     setLoading(true)
 
@@ -219,6 +236,23 @@ export const CartProvider = props => {
 
     return client.carts
       .update(cartId, { discounts: [{ code: discount }] })
+      .then(({ cart }) => {
+        setCart(cart)
+      })
+      .finally(() => setLoading(false))
+  }
+
+  const removeDiscount = async () => {
+    if (!discountCode) {
+      return false
+    }
+
+    setLoading(true)
+
+    const cartId = cart.id
+
+    return client.carts
+      .deleteDiscount(cartId, discountCode)
       .then(({ cart }) => {
         setCart(cart)
       })
@@ -398,11 +432,13 @@ export const CartProvider = props => {
         cart,
         open,
         prodThumbImages,
+        discountCode,
         actions: {
           addItem,
           removeItem,
           updateQuantity,
           addDiscount,
+          removeDiscount,
           createPaymentSession,
           setPaymentSession,
           completeCart,

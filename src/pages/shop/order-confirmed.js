@@ -42,7 +42,8 @@ const OrderConfirmed = ({ location }) => {
           subtotal={order.subtotal}
           shipping={order.shipping_total}
           total={order.total}
-          discount={order.discounts}
+          discounts={order.discounts}
+          discountTotal={order.discount_total}
         />
       </div>
     </>

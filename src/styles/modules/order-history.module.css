@@ -33,3 +33,6 @@
   composes: button from "./forms.module.css";
   padding: 0.6em 0.8em;
 }
+.infoHidden {
+  visibility: hidden;
+}

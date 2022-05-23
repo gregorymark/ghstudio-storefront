@@ -6,15 +6,14 @@ import Input from "../forms/input"
 import {
   discountFieldset,
   discountInput,
+  currentCode,
   applyButton,
 } from "../../styles/modules/discount-field.module.css"
 
 const DiscountField = ({ className }) => {
-  const [code, setCode] = useState()
-
   const {
-    cart,
-    actions: { addDiscount },
+    discountCode,
+    actions: { addDiscount, removeDiscount },
   } = useCart()
 
   const discountForm = useFormik({
@@ -25,25 +24,23 @@ const DiscountField = ({ className }) => {
       discount_code: Yup.string().required("Discount code can't be empty"),
     }),
     onSubmit: async (values, { setErrors }) => {
-      await addDiscount(values.discount_code)
-        .then(() => {
-          setCode(values.discount_code)
-        })
-        .catch(_ => {
-          setErrors({ discount_code: "Invalid code" })
-        })
+      await addDiscount(values.discount_code).catch(_ => {
+        setErrors({ discount_code: "Invalid code" })
+      })
     },
   })
 
-  useEffect(() => {
-    if (cart && cart.discounts?.length) {
-      const code = cart.discounts[0].code
-
-      if (code) {
-        setCode(code)
-      }
-    }
-  }, [cart])
+  const handleRemoveDiscount = () => {
+    removeDiscount()
+      .then(() => {
+        discountForm.resetForm()
+      })
+      .catch(_ => {
+        discountForm.setErrors({
+          discount_code: "There was a problem removing the discount code",
+        })
+      })
+  }
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -54,7 +51,7 @@ const DiscountField = ({ className }) => {
     <div className={`${className}`}>
       <h4>Discount code</h4>
       <fieldset className={discountFieldset}>
-        {!code ? (
+        {!discountCode ? (
           <>
             <Input
               name={"discount_code"}
@@ -73,14 +70,12 @@ const DiscountField = ({ className }) => {
           </>
         ) : (
           <>
-            <Input
-              name={"discount_code"}
-              value={code}
-              formik={discountForm}
-              solidBg={true}
-              className={discountInput}
-            />
-            <button className={applyButton} onClick={handleSubmit}>
+            <div className={currentCode}>{discountCode}</div>
+            <button
+              className={applyButton}
+              onClick={() => handleRemoveDiscount()}
+              type="submit"
+            >
               Remove
             </button>
           </>

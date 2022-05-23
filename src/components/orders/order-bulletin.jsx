@@ -2,7 +2,7 @@ import React from "react"
 import { capitalize } from "../../utils/capitalize"
 import { formatPrice } from "../../utils/format-price"
 import OrderBulletinInfo from "./order-bulletin-info"
-import { orderBulletin } from "../../styles/modules/order-history.module.css"
+import { orderBulletin, infoHidden } from "../../styles/modules/order-history.module.css"
 
 const OrderBulletin = ({ order }) => {
   return (
@@ -14,6 +14,11 @@ const OrderBulletin = ({ order }) => {
       <OrderBulletinInfo
         label="Shipping"
         info={formatPrice(order.shipping_total, order.currency_code)}
+      />
+      <OrderBulletinInfo
+        label="Discount"
+        info={formatPrice(order.discount_total, order.currency_code)}
+        className={order.discount_total === 0 ? infoHidden : ""}
       />
       <OrderBulletinInfo
         label="Total"
