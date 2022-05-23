@@ -17,10 +17,12 @@ const SignUp = () => {
       <SearchEngineOptimization title="Sign Up" />
       <AuthLayout>
         <div>
-          <h1>Create account</h1>
+          <h1>Create an account</h1>
           <p>
-            Already have an account?{" "}
-            <Link to="/shop/account/sign-in/">Sign in</Link>
+            Create an account to manage orders you have made. Once you've made
+            an order, create an account using the same email address to see your
+            past orders. Already have an account?{" "}
+            <Link to="/shop/account/sign-in/">Sign in</Link>.
           </p>
         </div>
         <form

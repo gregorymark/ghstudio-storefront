@@ -19,8 +19,9 @@ const SignIn = () => {
         <div>
           <h1>Welcome back</h1>
           <p>
-            Don't have an account?{" "}
-            <Link to="/shop/account/sign-up/">Sign up</Link>
+            If you've made an order but haven't yet set up an account,{" "}
+            <Link to="/shop/account/sign-up/">sign up</Link> with the same email
+            address to see your orders.
           </p>
         </div>
         <form
