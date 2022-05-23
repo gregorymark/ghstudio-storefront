@@ -13,6 +13,8 @@ import {
   cartIconMobile,
 } from "../../styles/modules/header.module.css"
 import CartIcon from "../cart/cart-icon"
+import CartTray from "../cart/cart-tray"
+import ShopNav from "./shop-nav"
 
 const Header = ({ showShopNav, isCheckout }) => {
   const [navOpen, setNavOpen] = useState(false)
@@ -62,15 +64,20 @@ const Header = ({ showShopNav, isCheckout }) => {
               Contact
             </Link>
             <Link
-              to="/commissions/"
+              to="/shop/"
               onClick={() => handleNavOpen(false)}
               activeClassName={navLinkActive}
+              partiallyActive={true}
             >
-              Commissions
+              Shop
             </Link>
           </div>
+          {showShopNav && (
+            <ShopNav setNavOpen={handleNavOpen} isCheckout={isCheckout} />
+          )}
         </nav>
       </header>
+      <CartTray />
     </>
   )
 }
