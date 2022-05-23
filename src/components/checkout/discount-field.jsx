@@ -1,5 +1,5 @@
 import { useFormik } from "formik"
-import React, { useEffect, useState } from "react"
+import React from "react"
 import * as Yup from "yup"
 import { useCart } from "../../hooks/use-cart"
 import Input from "../forms/input"
