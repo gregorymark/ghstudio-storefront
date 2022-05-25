@@ -15,7 +15,7 @@ a {
   outline: none;
   -webkit-tap-highlight-color: transparent;
 }
-p {
+p, address {
   margin-bottom: 1em;
 
   &:last-child {
@@ -72,6 +72,9 @@ button {
   cursor: pointer;
   line-height: inherit;
   background: transparent;
+}
+address {
+  line-height: 1.2;
 }
 .crossButton {
   position: relative;

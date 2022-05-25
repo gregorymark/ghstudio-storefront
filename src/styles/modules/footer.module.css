@@ -1,8 +1,19 @@
 .footer {
+  text-align: center;
   max-width: var(--max-site-width);
   margin: 0 auto;
-  margin-top: var(--large-spacing);
-  border-top: 1px solid var(--border-slate);
-  padding-top: 5px;
-  font-size: 16px;
+  margin-top: 80px;
+  border-top: 1px solid var(--peach);
+  padding-top: 30px;
+  line-height: 1.2;
+  
+  & a {
+    font-size: 16px;
+    display: block;
+    text-decoration: none;
+  }
+}
+.regionSelect {
+  width: 80px;
+  margin: 0 auto 10px;
 }

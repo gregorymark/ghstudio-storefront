@@ -22,7 +22,6 @@ const ShopNav = ({ setNavOpen, isCheckout }) => {
           </Link>
         </>
       )}
-      <RegionSelect className={regionSelect} />
       {!isCheckout && <CartIcon className={cartIcon} />}
     </div>
   )
