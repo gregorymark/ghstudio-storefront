@@ -6,6 +6,8 @@ import ProductLink from "../product-link"
 import {
   productListItem,
   productListItemContent,
+  productImageWrap,
+  productImage,
   productInfo,
   productLink,
   productPrice,
@@ -17,6 +19,7 @@ const ProductListItem = ({ product, rowHeight = null, screenWidth = null }) => {
   } = usePrice()
 
   const [gridRowEnd, setGridRowEnd] = useState()
+  const [imageWrapPadBottom, setImageWrapPadBottom] = useState(0)
 
   const itemContentEl = useRef()
 
@@ -34,8 +37,13 @@ const ProductListItem = ({ product, rowHeight = null, screenWidth = null }) => {
   }, [rowHeight, screenWidth])
 
   useEffect(() => {
-    updateGridRowEnd()
-  }, [updateGridRowEnd])
+    if (imageData.width && imageData.height) {
+      const imagePadBottom = (100 * imageData.height) / imageData.width
+
+      setImageWrapPadBottom(imagePadBottom.toFixed(2))
+      updateGridRowEnd()
+    }
+  }, [imageData.width, imageData.height, updateGridRowEnd])
 
   const fromPrice = useMemo(() => {
     return getFromPrice(product, region?.currency_code)
@@ -45,11 +53,18 @@ const ProductListItem = ({ product, rowHeight = null, screenWidth = null }) => {
     <div className={productListItem} style={{ gridRowEnd }}>
       <div>
         <div className={productListItemContent} ref={itemContentEl}>
-          <GatsbyImage
-            image={imageData}
-            alt={product.title}
-            onStartLoad={updateGridRowEnd}
-          />
+          <div
+            className={productImageWrap}
+            style={{
+              paddingBottom: `${imageWrapPadBottom}%`,
+            }}
+          >
+            <GatsbyImage
+              image={imageData}
+              className={productImage}
+              alt={product.title}
+            />
+          </div>
           <div className={productInfo}>
             <h3>
               <ProductLink product={product} className={productLink}>
