@@ -63,6 +63,9 @@ const ProductListItem = ({ product, rowHeight = null, screenWidth = null }) => {
               image={imageData}
               className={productImage}
               alt={product.title}
+              style={{
+                position: "absolute",
+              }}
             />
           </div>
           <div className={productInfo}>
