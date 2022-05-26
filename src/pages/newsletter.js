@@ -1,5 +1,5 @@
 import React from "react"
-import NewsletterSignup from "../components/newsletter-signup"
+import NewsletterSignup from "../components/newsletter/newsletter-signup"
 
 const NewsletterPage = () => {
   return <NewsletterSignup />

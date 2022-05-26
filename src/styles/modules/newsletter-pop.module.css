@@ -1,0 +1,46 @@
+@keyframes bounce {
+  0% {
+    transform: translateY(15px);
+  }
+  25% {
+    transform: translateY(5px);
+  }
+  50% {
+    transform: translateY(15px);
+  }
+  75% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(15px);
+  }
+}
+.newsletterPop {
+  line-height: 1;
+  transform: rotate(-90deg);
+  transform-origin: left bottom;
+  position: fixed;
+  left: 100%;
+  bottom: 80px;
+
+  & a {
+    display: block;
+    padding: 5px 15px 20px;
+    background: var(--pale-peach);
+    border-radius: var(--small-round-corner) var(--small-round-corner) 0 0;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    transform: translateY(100%);
+    animation: bounce 0.75s 5s 1 forwards;
+  }
+}
+@media (--desktop) {
+  .newsletterPop {
+    & a {
+      transition: transform 0.3s;
+
+      &:hover {
+        transform: translateY(0);
+      }
+    }
+  }
+}

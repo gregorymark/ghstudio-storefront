@@ -15,7 +15,7 @@
     margin-bottom: 30px;
   }
   .homeImage3Wrap,
-  .homeImage5Wrap {
+  .homeImage6Wrap {
     margin: 0 5% 30px;
   }
 }
@@ -54,15 +54,18 @@
     width: 45%;
     margin-top: -8vw;
   }
-  .homeImage5Wrap {
+  .text03 {
     width: 42%;
     margin-left: auto;
-    padding-top: 40%;
-    padding-right: 6%;
+    padding-top: 15%;
+  }
+  .homeImage5Wrap {
+    width: 35%;
+    padding: 34% 0 0 6%;
   }
   .homeImage6Wrap {
     width: 50%;
-    margin-left: 20%;
+    margin-left: auto;
     padding-top: 12%;
   }
 }

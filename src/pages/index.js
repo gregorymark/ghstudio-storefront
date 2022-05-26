@@ -5,6 +5,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import {
   text01,
   text02,
+  text03,
   homeImages,
   homeImage,
   homeImage0Wrap,
@@ -50,7 +51,8 @@ const IndexPage = ({ data }) => {
           />
         </div>
         <blockquote className={text02}>
-          I also enjoy <em>commissions</em>, you can find out more <Link to="/commissions/">here</Link>.
+          I also love taking <em>commissions</em>, you can find out more{" "}
+          <Link to="/commissions/">here</Link>.
         </blockquote>
         <div className={homeImage2Wrap}>
           <GatsbyImage
@@ -73,6 +75,11 @@ const IndexPage = ({ data }) => {
             className={homeImage}
           />
         </div>
+        <blockquote className={text03}>
+          If you want to hear about my projects and the prints and originals I
+          have for sale, I send an occasional newsletter that you can sign up to{" "}
+          <Link to="/newsletter">here</Link>.
+        </blockquote>
         <div className={homeImage5Wrap}>
           <GatsbyImage
             image={images[5].imageData}

@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react"
-import Input from "./forms/input"
-import SplitFieldset from "./forms/split-fieldset"
+import Input from "../forms/input"
+import SplitFieldset from "../forms/split-fieldset"
 import { useFormik } from "formik"
-import Validator from "../utils/validator"
-import ReCAPTCHA from "./recaptcha"
+import Validator from "../../utils/validator"
+import ReCAPTCHA from "../recaptcha"
 import {
   newsletterSignup,
   info,
@@ -11,7 +11,7 @@ import {
   errorMessageEl,
   submit,
   reCaptcha,
-} from "../styles/modules/newsletter-signup.module.css"
+} from "../../styles/modules/newsletter-signup.module.css"
 
 const NewsletterSignup = () => {
   const [successMessage, setSuccessMessage] = useState("")
@@ -73,7 +73,7 @@ const NewsletterSignup = () => {
 
   return (
     <div className={newsletterSignup}>
-      <h2>Newsletter</h2>
+      <h1>Newsletter</h1>
       <p className={info}>
         Enter your name and email address for occasional information from me
         about my art practice, upcoming shows and news from the shop.
