@@ -22,7 +22,6 @@ const CheckoutSummary = ({ cart, shippingOption }) => {
       <DiscountField cartId={cart.id} className={cSummaryDiscount} />
       <Totals
         subtotal={cart.subtotal}
-        total={cart.total}
         cartId={cart.id}
         shipping={shippingOption?.amount}
         currencyCode={cart.region?.currency_code}
