@@ -46,7 +46,7 @@ export const useShippingOptionForm = setState => {
     }
 
     try {
-      addShippingMethod(payload)
+      await addShippingMethod(payload)
     } catch (error) {
       setError("An error has occurred, please try again.")
       setIsSubmitting(false)
