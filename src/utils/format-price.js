@@ -8,7 +8,11 @@ import { getCurrencySymbol } from "./currency-symbol"
  */
 export const formatPrice = (amount, currencyCode, quantity = 1) => {
   const currencySymbol = getCurrencySymbol(currencyCode)
-  const price = parseFloat(((amount / 100) * quantity * 1).toFixed(2))
+  let price = parseFloat((amount / 100) * quantity * 1)
+
+  if (!Number.isInteger(price)) {
+    price = price.toFixed(2)
+  }
 
   return currencySymbol + price
 }
