@@ -10,11 +10,19 @@ const CheckoutAddress = ({
   className = "",
 }) => {
   const [countries, setCountries] = useState([])
+  const [stateText, setStateText] = useState("")
   const { region } = useRegion()
 
   useEffect(() => {
     if (region) {
       setCountries(region.countries)
+    }
+  }, [region])
+
+  useEffect(() => {
+    if (region) {
+      const stateType = region.name === "UK" ? "County" : "State / Province"
+      setStateText(stateType)
     }
   }, [region])
 
@@ -57,14 +65,14 @@ const CheckoutAddress = ({
         value={controller.values[addressKey].city}
       />
       <Input
-        label="State / County / Province"
+        label={stateText}
         autocomplete="address-level1"
         name={`${addressKey ? `${addressKey}.` : ""}province`}
         formik={controller}
         value={controller.values[addressKey].province}
       />
       <Input
-        label="ZIP / Post Code"
+        label="Post Code"
         autocomplete="postal-code"
         name={`${addressKey ? `${addressKey}.` : ""}postal_code`}
         formik={controller}
