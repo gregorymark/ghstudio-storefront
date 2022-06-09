@@ -9,6 +9,7 @@
 }
 .productDescription {
   margin: var(--mid-spacing) 0;
+  white-space: pre-wrap;
 }
 .subTotal {
   margin-top: 20px;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, Fragment } from "react"
 import { graphql, Link } from "gatsby"
 import ProductImages from "../components/products/product-images"
 import ProductOptionSelector from "../components/products/product-option-selector"
@@ -8,6 +8,7 @@ import { useCart } from "../hooks/use-cart"
 import { useProduct } from "../hooks/use-product"
 import { formatPrice } from "../utils/format-price"
 import { useRegion } from "../hooks/use-region"
+import { formatNewlines } from "../utils/format-newlines"
 import {
   productWrap,
   productImagesWrap,
@@ -22,6 +23,9 @@ import {
 const Product = ({ data, pageContext }) => {
   const [price, setPrice] = useState()
   const { product } = data
+  const [formattedDescription, setFormattedDescription] = useState(
+    product.description
+  )
   const { prevPath, nextPath } = pageContext
   const { region } = useRegion()
   const {
@@ -51,6 +55,12 @@ const Product = ({ data, pageContext }) => {
 
     setPrice(currentPrice)
   }, [currentVariant, region])
+
+  useEffect(() => {
+    const formattedDescriptionString = formatNewlines(product.description)
+
+    setFormattedDescription(formattedDescriptionString)
+  }, [product.description])
 
   const handleAddToCart = async () => {
     addItem({ variant_id: currentVariant.id, quantity }).then(success => {
@@ -84,7 +94,7 @@ const Product = ({ data, pageContext }) => {
             {product.collection.metadata?.prodinfo && (
               <p>{product.collection.metadata?.prodinfo}</p>
             )}
-            <p>{product.description}</p>
+            <div dangerouslySetInnerHTML={{ __html: formattedDescription }} />
           </div>
           {product.options.map((option, index) => {
             return (
