@@ -12,14 +12,14 @@ const Collection = ({ data, pageContext }) => {
   const { products } = pageContext
 
   const collection = data ? data.collection : null
-  const collectionTitle = collection ? `${collection.title.toLowerCase()} shop` : "shop"
+  const collectionTitle = collection ? `${collection.title} shop` : "shop"
 
   return (
     <>
       <SearchEngineOptimization title={collectionTitle} />
       <div className={collectionIntro}>
         <h1>
-          Welcome to the <em>{collectionTitle}</em>.
+          Welcome to the <em>{collectionTitle.toLowerCase()}</em>.
         </h1>
         <p>
           {collection?.metadata?.description ? (
