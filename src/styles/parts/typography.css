@@ -14,8 +14,10 @@ a {
   text-underline-offset: 0.1em;
   outline: none;
   -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
 }
-p, address {
+p,
+address {
   margin-bottom: 1em;
 
   &:last-child {

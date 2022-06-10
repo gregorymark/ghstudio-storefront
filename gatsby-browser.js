@@ -15,3 +15,8 @@ export const wrapPageElement = ({ element, props }) => {
 export const wrapRootElement = ({ element }) => {
   return <MedusaProvider client={medusaClient}>{element}</MedusaProvider>
 }
+
+export const shouldUpdateScroll = ({ routerProps }) => {
+  const { disableScrollUpdate } = routerProps.location.state
+  return !disableScrollUpdate
+}

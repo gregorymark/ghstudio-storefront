@@ -8,3 +8,6 @@
     max-width: var(--content-width);
   }
 }
+.collectionFilter {
+  margin-bottom: var(--mid-spacing);
+}

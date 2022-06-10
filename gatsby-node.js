@@ -60,7 +60,6 @@ exports.createPages = async function ({ actions, graphql }) {
           node {
             handle
             id
-            title
           }
         }
       }
@@ -77,7 +76,7 @@ exports.createPages = async function ({ actions, graphql }) {
 
   data.allMdx.edges.forEach(({ node }) => {
     actions.createPage({
-      path: `/${node.slug}`,
+      path: `/${node.slug}/`,
       component: require.resolve(`./src/templates/mdx.js`),
       context: { id: node.id },
     })
@@ -86,7 +85,7 @@ exports.createPages = async function ({ actions, graphql }) {
   const products = data.allMedusaProducts.edges.map(({ node }) => node)
 
   actions.createPage({
-    path: "/shop",
+    path: "/shop/",
     component: require.resolve(`./src/templates/collection.js`),
     context: {
       title: "Shop",
@@ -102,6 +101,19 @@ exports.createPages = async function ({ actions, graphql }) {
       product => product.collection_id === id
     )
 
+    // Only create separate collections pages if we have more than one
+    if (data.allMedusaCollections.edges.length > 1) {
+      actions.createPage({
+        path: `/shop/${collectionHandle}/`,
+        component: require.resolve(`./src/templates/collection.js`),
+        context: {
+          handle: collectionHandle,
+          products: productsInCollection,
+          filterables: getFilterables(productsInCollection),
+        },
+      })
+    }
+
     productsInCollection.forEach((node, index) => {
       const productHandle = node.handle
 
@@ -113,12 +125,12 @@ exports.createPages = async function ({ actions, graphql }) {
       const nextProductHandle = productsInCollection[nextIndex].handle
 
       actions.createPage({
-        path: `/shop/${collectionHandle}/${productHandle}`,
+        path: `/shop/${collectionHandle}/${productHandle}/`,
         component: require.resolve(`./src/templates/product.js`),
         context: {
           handle: productHandle,
-          prevPath: `/shop/${collectionHandle}/${prevProductHandle}`,
-          nextPath: `/shop/${collectionHandle}/${nextProductHandle}`,
+          prevPath: `/shop/${collectionHandle}/${prevProductHandle}/`,
+          nextPath: `/shop/${collectionHandle}/${nextProductHandle}/`,
         },
       })
     })
@@ -136,7 +148,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     createNodeField({
       node,
       name: "slug",
-      value: `/${relativePath}`,
+      value: `/${relativePath}/`,
     })
   }
 }

@@ -1,29 +1,54 @@
 import React from "react"
 import SearchEngineOptimization from "../components/seo"
 import ProductList from "../components/products/product-list"
-import { collectionIntro } from "../styles/modules/collection.module.css"
-import { Link } from "gatsby"
+import {
+  collectionIntro,
+  collectionFilter,
+} from "../styles/modules/collection.module.css"
+import { graphql, Link } from "gatsby"
+import CollectionFilter from "../components/products/collection-filter"
 
-const Collection = ({ pageContext }) => {
-  const { title, products } = pageContext
+const Collection = ({ data, pageContext }) => {
+  const { products } = pageContext
+
+  const collection = data ? data.collection : null
+  const collectionTitle = collection ? `${collection.title.toLowerCase()} shop` : "shop"
 
   return (
     <>
-      <SearchEngineOptimization title={title} />
+      <SearchEngineOptimization title={collectionTitle} />
       <div className={collectionIntro}>
         <h1>
-          Welcome to the <em>print shop</em>.
+          Welcome to the <em>{collectionTitle}</em>.
         </h1>
         <p>
-          Prints are available in <em>A4</em>, <em>A3</em> and <em>A2</em>{" "}
-          sizes. Please <Link to="/contact/">get in touch</Link> if you want to
-          order a larger print, an original painting or if you would like to{" "}
-          <Link to="/commissions/">commission</Link> an original work.
+          {collection?.metadata?.description ? (
+            collection.metadata?.description
+          ) : (
+            <>
+              I currently offer prints and original works on paper through the
+              site. Please <Link to="/contact/">get in touch</Link> if you want
+              to purchase an original painting or if you would like to{" "}
+              <Link to="/commissions/">commission</Link> an original work.
+            </>
+          )}
         </p>
       </div>
+      <CollectionFilter className={collectionFilter} />
       <ProductList products={products} />
     </>
   )
 }
+
+export const query = graphql`
+  query ($handle: String) {
+    collection: medusaCollections(handle: { eq: $handle }) {
+      title
+      metadata {
+        description
+      }
+    }
+  }
+`
 
 export default Collection

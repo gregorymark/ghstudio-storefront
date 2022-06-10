@@ -1,0 +1,45 @@
+.collectionFilter {
+  font-family: var(--display-2-font-stack);
+  color: var(--pink);
+  line-height: 1;
+
+  & span,
+  & a {
+    display: inline-block;
+    padding: 2px 15px 6px;
+  }
+  & span {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  & a {
+    text-decoration: none;
+    color: var(--pink);
+    background: var(--mid-peach);
+    border-radius: var(--small-round-corner);
+    margin-right: 10px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+    &.activeFilter {
+      background: var(--high-peach);
+    }
+  }
+}
+@media (--mobile-only) {
+  .collectionLinks {
+    & a {
+      margin-top: 10px;
+    }
+  }
+}
+@media (--tablet) {
+  .collectionFilter {
+    font-size: 26px;
+    display: flex;
+  }
+  .collectionLinks {
+    margin-left: 10px;
+  }
+}
